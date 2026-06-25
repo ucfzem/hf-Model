@@ -2257,7 +2257,7 @@
             const to = encodeURIComponent('hafidaaffaki1@gmail.com');
             const su = encodeURIComponent('Contact H.A. Models - ' + name);
             const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg);
-            window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + su + '&body=' + body, '_blank');
+            window.location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + su + '&body=' + body;
             setTimeout(() => { btn.textContent = orig; }, 3000);
         });
 
