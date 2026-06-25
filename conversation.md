@@ -82,7 +82,7 @@
 - All sections fully translated in FR/EN/SP/AR
 - Nav updated with Accessoires, Contact, FAQ links
 - Smooth scroll offset for fixed header (scroll-padding-top)
-- Contact form sends to hafidaaffaki1@gmail.com via mailto
+- Contact form sends to hafidaaffaki1@gmail.com via Gmail compose URL (no SMTP needed)
 - Pinterest → WhatsApp icon with +212 641-904359 in footer
 - All footer navigation buttons linked to their respective sections
 - Caftans/Djellabas nav links now trigger product filtering + scroll
