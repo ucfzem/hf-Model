@@ -1710,10 +1710,10 @@
         <h2 class="section-title" data-i18n="contact-title">Get in Touch</h2>
         <div class="divider"></div>
         <p class="section-desc" data-i18n="contact-desc">A question, a special request? Our team in Tangier is here for you.</p>
-        <form class="contact-form">
-            <input type="text" data-i18n="contact-name" placeholder="Your name">
-            <input type="email" data-i18n="contact-email" placeholder="Your email">
-            <textarea data-i18n="contact-msg" placeholder="Your message"></textarea>
+        <form class="contact-form" action="mailto:hafidaaffaki1@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="name" data-i18n="contact-name" placeholder="Your name">
+            <input type="email" name="email" data-i18n="contact-email" placeholder="Your email">
+            <textarea name="message" data-i18n="contact-msg" placeholder="Your message"></textarea>
             <button type="submit" data-i18n="contact-send">Send</button>
         </form>
     </section>
@@ -2242,8 +2242,15 @@
             answer.classList.toggle('open');
         }
 
-        document.querySelectorAll('.contact-form').forEach(form => {
-            form.addEventListener('submit', e => e.preventDefault());
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.querySelector('[name="name"]').value.trim();
+            const email = this.querySelector('[name="email"]').value.trim();
+            const msg = this.querySelector('[name="message"]').value.trim();
+            if (!name || !email || !msg) return;
+            const subject = encodeURIComponent('Contact H.A. Models - ' + name);
+            const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg);
+            window.open('mailto:hafidaaffaki1@gmail.com?subject=' + subject + '&body=' + body);
         });
 
         // ===== SMOOTH SCROLL =====
