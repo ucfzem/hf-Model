@@ -1,8 +1,10 @@
-# Maison Zahra — hf-Model Project
+# H.A. Models — hf-Model Project
 
 ## Links
-- **Live site:** https://ucfzem.github.io/hf-Model/
+- **Vercel (primary):** https://hf-model.vercel.app
+- **GitHub Pages:** https://ucfzem.github.io/hf-Model/
 - **Repository:** https://github.com/ucfzem/hf-Model
+- **Conversation backup:** This file
 
 ## Changes Made
 
@@ -19,3 +21,13 @@
   - **Hero mannequins:** img-01 → img-04
   - **Product grid:** img-01 → img-08
   - **Mother & Daughter section:** img-09 → img-12 (unique images, not reused)
+
+### Migration to Vercel
+- Installed Vercel CLI and deployed project
+- Connected GitHub repo for auto-deployments
+- Production URL: https://hf-model.vercel.app
+- GitHub Pages kept as backup
+
+### Rebrand
+- "Maison Zahra" → "H.A. Models" throughout the site
+- Title, logo, footer, and newsletter heading updated
