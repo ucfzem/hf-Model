@@ -32,7 +32,12 @@
 - "Maison Zahra" → "H.A. Models" throughout the site
 - Title, logo, footer, and newsletter heading updated
 
-### SEO setup (June 25, 2026)
+### Status / spy page (June 25, 2026)
+- `api/status.js` — serverless function exposing Vercel system env vars (commit SHA, branch, author, URL, etc.) — no secrets exposed
+- `status.html` — UI page that fetches from `/api/status` and renders deployment metadata
+- `vercel.json` — config for function memory/ timeout + no-cache header on API
+- Set to `noindex` so it doesn't appear in search results
+- URL: https://hf-model.vercel.app/status
 - `robots.txt` — allows all crawlers, points to sitemap
 - `sitemap.xml` — single URL with xhtml:alternate for all 4 languages (fr, en, es, ar) + x-default
 - Updated HTML `<head>` with:
