@@ -137,6 +137,32 @@
             align-items: center;
         }
 
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            margin-right: 8px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid transparent;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--soft-gold);
+        }
+
+        .lang-btn.active {
+            border-color: var(--soft-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
 
         .header-icons a {
             color: var(--charcoal);
@@ -1092,10 +1118,28 @@
                 grid-template-columns: 1fr;
             }
         }
+        [dir="rtl"] .nav,
+        [dir="rtl"] .header-icons,
+        [dir="rtl"] .hero-content,
+        [dir="rtl"] .mom-daughter-text,
+        [dir="rtl"] .footer-inner,
+        [dir="rtl"] .footer-bottom,
+        [dir="rtl"] .feature-list li,
+        [dir="rtl"] .filter-tabs {
+            direction: rtl;
+        }
+
+        [dir="rtl"] .hero-cta i,
+        [dir="rtl"] .btn-outline i {
+            transform: scaleX(-1);
+        }
+
+        [dir="rtl"] .hero-title span {
+            font-family: 'Cormorant Garamond', serif;
+        }
     </style>
 </head>
 <body>
-
 
     <!-- HEADER -->
     <header class="header" id="header">
@@ -1103,14 +1147,20 @@
             <a href="#" class="logo">H.A. Models</a>
             <nav>
                 <ul class="nav">
-                    <li><a href="#collection">Collection</a></li>
-                    <li><a href="#caftans">Caftans</a></li>
-                    <li><a href="#djellabas">Djellabas</a></li>
-                    <li><a href="#mother-daughter">Mother & Daughter</a></li>
-                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#collection" data-i18n="nav-collection">Collection</a></li>
+                    <li><a href="#caftans" data-i18n="nav-caftans">Caftans</a></li>
+                    <li><a href="#djellabas" data-i18n="nav-djellabas">Djellabas</a></li>
+                    <li><a href="#mother-daughter" data-i18n="nav-mother-daughter">Mother & Daughter</a></li>
+                    <li><a href="#about" data-i18n="nav-our-story">Our Story</a></li>
                 </ul>
             </nav>
             <div class="header-icons">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="fr" title="Français">🇫🇷</button>
+                    <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+                    <button class="lang-btn" data-lang="sp" title="Español">🇪🇸</button>
+                    <button class="lang-btn" data-lang="ar" title="العربية">🇲🇦</button>
+                </div>
                 <a href="#"><i class="fas fa-search"></i></a>
                 <a href="#"><i class="far fa-heart"></i></a>
                 <a href="#" style="position:relative;">
@@ -1145,16 +1195,13 @@
 
 
         <div class="hero-content">
-            <p class="hero-subtitle">Est. 2024 — Marrakech</p>
-            <h1 class="hero-title">
-                The Art of
-                <span>Moroccan Elegance</span>
-            </h1>
-            <p class="hero-desc">
+            <p class="hero-subtitle" data-i18n="hero-subtitle">Est. 2024 — Marrakech</p>
+            <h1 class="hero-title" data-i18n="hero-title">The Art of <span data-i18n="hero-title-line2">Moroccan Elegance</span></h1>
+            <p class="hero-desc" data-i18n="hero-desc">
                 Handcrafted caftans and djellabas woven with centuries of tradition, 
                 designed for the modern woman who cherishes timeless beauty.
             </p>
-            <a href="#collection" class="hero-cta">
+            <a href="#collection" class="hero-cta" data-i18n="hero-cta">
                 Explore Collection
                 <i class="fas fa-arrow-right"></i>
             </a>
@@ -1165,28 +1212,28 @@
     <!-- MARQUEE -->
     <section class="marquee-section">
         <div class="marquee-track">
-            <span class="marquee-item">Hand-Embroidered <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Silk & Satin <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Made in Morocco <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Limited Edition <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Sustainable Luxury <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Artisan Crafted <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Hand-Embroidered <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Silk & Satin <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Made in Morocco <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Limited Edition <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Sustainable Luxury <i class="fas fa-gem"></i></span>
-            <span class="marquee-item">Artisan Crafted <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-hand">Hand-Embroidered <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-silk">Silk &amp; Satin <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-made">Made in Morocco <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-limited">Limited Edition <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-sustainable">Sustainable Luxury <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-artisan">Artisan Crafted <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-hand">Hand-Embroidered <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-silk">Silk &amp; Satin <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-made">Made in Morocco <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-limited">Limited Edition <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-sustainable">Sustainable Luxury <i class="fas fa-gem"></i></span>
+            <span class="marquee-item" data-i18n="marquee-artisan">Artisan Crafted <i class="fas fa-gem"></i></span>
         </div>
     </section>
 
 
     <!-- COLLECTION INTRO -->
     <section class="collection-intro" id="collection">
-        <p class="section-label reveal">The Collection</p>
-        <h2 class="section-title reveal">Curated Elegance</h2>
+        <p class="section-label reveal" data-i18n="collection-label">The Collection</p>
+        <h2 class="section-title reveal" data-i18n="collection-title">Curated Elegance</h2>
         <div class="divider reveal"></div>
-        <p class="section-desc reveal">
+        <p class="section-desc reveal" data-i18n="collection-desc">
             Each piece in our collection is a testament to the rich heritage of Moroccan craftsmanship. 
             From intricate hand-embroidery to luxurious silk brocades, discover garments that tell a story.
         </p>
@@ -1197,11 +1244,11 @@
     <section class="products-section">
         <div class="products-inner">
             <div class="filter-tabs reveal">
-                <button class="filter-tab active" data-filter="all">All</button>
-                <button class="filter-tab" data-filter="caftan">Caftans</button>
-                <button class="filter-tab" data-filter="djellaba">Djellabas</button>
-                <button class="filter-tab" data-filter="mother-daughter">Mother & Daughter</button>
-                <button class="filter-tab" data-filter="accessories">Accessories</button>
+                <button class="filter-tab active" data-filter="all" data-i18n="filter-all">All</button>
+                <button class="filter-tab" data-filter="caftan" data-i18n="filter-caftans">Caftans</button>
+                <button class="filter-tab" data-filter="djellaba" data-i18n="filter-djellabas">Djellabas</button>
+                <button class="filter-tab" data-filter="mother-daughter" data-i18n="filter-mother-daughter">Mother &amp; Daughter</button>
+                <button class="filter-tab" data-filter="accessories" data-i18n="filter-accessories">Accessories</button>
             </div>
 
 
@@ -1211,13 +1258,13 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-01.jpg" alt="Royal Pink Caftan">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
-                        <span class="product-badge">New</span>
+                        <span class="product-badge" data-i18n="badge-new">New</span>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Royal Pink Caftan</h3>
-                        <p class="product-category">Hand-Embroidered Silk</p>
+                        <h3 class="product-name" data-i18n="product1-name">Royal Pink Caftan</h3>
+                        <p class="product-category" data-i18n="product1-cat">Hand-Embroidered Silk</p>
                         <p class="product-price">$1,280</p>
                     </div>
                 </div>
@@ -1228,12 +1275,12 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-02.jpg" alt="Mint Garden Caftan">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Mint Garden Caftan</h3>
-                        <p class="product-category">Brocade & Crystal</p>
+                        <h3 class="product-name" data-i18n="product2-name">Mint Garden Caftan</h3>
+                        <p class="product-category" data-i18n="product2-cat">Brocade &amp; Crystal</p>
                         <p class="product-price">$1,450</p>
                     </div>
                 </div>
@@ -1244,13 +1291,13 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-03.jpg" alt="Rose & Mini Rose Set">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
-                        <span class="product-badge">Set</span>
+                        <span class="product-badge" data-i18n="badge-set">Set</span>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Rose & Mini Rose Set</h3>
-                        <p class="product-category">Mother & Daughter</p>
+                        <h3 class="product-name" data-i18n="product3-name">Rose &amp; Mini Rose Set</h3>
+                        <p class="product-category" data-i18n="product3-cat">Mother &amp; Daughter</p>
                         <p class="product-price">$2,100 <span class="original">$2,400</span></p>
                     </div>
                 </div>
@@ -1261,12 +1308,12 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-04.jpg" alt="Golden Hour Djellaba">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Golden Hour Djellaba</h3>
-                        <p class="product-category">Velvet & Gold Thread</p>
+                        <h3 class="product-name" data-i18n="product4-name">Golden Hour Djellaba</h3>
+                        <p class="product-category" data-i18n="product4-cat">Velvet &amp; Gold Thread</p>
                         <p class="product-price">$980</p>
                     </div>
                 </div>
@@ -1277,13 +1324,13 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-05.jpg" alt="Ivory Palace Caftan">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
-                        <span class="product-badge">Bestseller</span>
+                        <span class="product-badge" data-i18n="badge-bestseller">Bestseller</span>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Ivory Palace Caftan</h3>
-                        <p class="product-category">Pearl Embellished</p>
+                        <h3 class="product-name" data-i18n="product5-name">Ivory Palace Caftan</h3>
+                        <p class="product-category" data-i18n="product5-cat">Pearl Embellished</p>
                         <p class="product-price">$1,680</p>
                     </div>
                 </div>
@@ -1294,13 +1341,13 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-06.jpg" alt="Sage & Little Sage Set">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
-                        <span class="product-badge">Set</span>
+                        <span class="product-badge" data-i18n="badge-set">Set</span>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Sage & Little Sage Set</h3>
-                        <p class="product-category">Mother & Daughter</p>
+                        <h3 class="product-name" data-i18n="product6-name">Sage &amp; Little Sage Set</h3>
+                        <p class="product-category" data-i18n="product6-cat">Mother &amp; Daughter</p>
                         <p class="product-price">$1,890</p>
                     </div>
                 </div>
@@ -1311,12 +1358,12 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-07.jpg" alt="Midnight Blue Djellaba">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Midnight Blue Djellaba</h3>
-                        <p class="product-category">Silk Taffeta</p>
+                        <h3 class="product-name" data-i18n="product7-name">Midnight Blue Djellaba</h3>
+                        <p class="product-category" data-i18n="product7-cat">Silk Taffeta</p>
                         <p class="product-price">$1,120</p>
                     </div>
                 </div>
@@ -1327,13 +1374,13 @@
                     <div class="product-image-wrap">
                         <img src="assets/caftans/img-08.jpg" alt="Gold Embroidered Belt">
                         <div class="product-overlay">
-                            <button class="quick-add">Quick Add</button>
+                            <button class="quick-add" data-i18n="quick-add">Quick Add</button>
                         </div>
-                        <span class="product-badge">Accessory</span>
+                        <span class="product-badge" data-i18n="badge-accessory">Accessory</span>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">Gold Embroidered Belt</h3>
-                        <p class="product-category">Hand-Woven Silk</p>
+                        <h3 class="product-name" data-i18n="product8-name">Gold Embroidered Belt</h3>
+                        <p class="product-category" data-i18n="product8-cat">Hand-Woven Silk</p>
                         <p class="product-price">$320</p>
                     </div>
                 </div>
@@ -1360,21 +1407,21 @@
                 </div>
             </div>
             <div class="mom-daughter-text reveal">
-                <p class="section-label">Twinning in Tradition</p>
-                <h2 class="section-title">Mother & Daughter</h2>
+                <p class="section-label" data-i18n="md-label">Twinning in Tradition</p>
+                <h2 class="section-title" data-i18n="md-title">Mother &amp; Daughter</h2>
                 <div class="divider"></div>
-                <p class="section-desc">
+                <p class="section-desc" data-i18n="md-desc">
                     Celebrate the unbreakable bond between mother and daughter with our exclusive matching caftan sets. 
                     Each pair is meticulously crafted to mirror the same intricate patterns, 
                     creating unforgettable moments of shared elegance.
                 </p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> Identical hand-embroidery patterns</li>
-                    <li><i class="fas fa-check"></i> Premium silk & brocade fabrics</li>
-                    <li><i class="fas fa-check"></i> Custom sizing for both adult & children</li>
-                    <li><i class="fas fa-check"></i> Complimentary gift packaging</li>
+                    <li data-i18n="md-feat1"><i class="fas fa-check"></i> Identical hand-embroidery patterns</li>
+                    <li data-i18n="md-feat2"><i class="fas fa-check"></i> Premium silk &amp; brocade fabrics</li>
+                    <li data-i18n="md-feat3"><i class="fas fa-check"></i> Custom sizing for both adult &amp; children</li>
+                    <li data-i18n="md-feat4"><i class="fas fa-check"></i> Complimentary gift packaging</li>
                 </ul>
-                <a href="#" class="btn-outline">
+                <a href="#" class="btn-outline" data-i18n="md-cta">
                     Shop the Collection
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -1386,14 +1433,14 @@
     <!-- NEWSLETTER -->
     <section class="newsletter">
         <div class="newsletter-inner reveal">
-            <p class="section-label">Stay Connected</p>
-            <h2 class="section-title">Join H.A. Models</h2>
+            <p class="section-label" data-i18n="newsletter-label">Stay Connected</p>
+            <h2 class="section-title" data-i18n="newsletter-title">Join H.A. Models</h2>
             <div class="divider"></div>
-            <p class="section-desc">
+            <p class="section-desc" data-i18n="newsletter-desc">
                 Be the first to discover new collections, exclusive offers, and stories from our artisans in Marrakech.
             </p>
             <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address">
+                <input type="email" data-i18n="newsletter-placeholder" placeholder="Enter your email address">
                 <button type="submit"><i class="fas fa-arrow-right"></i></button>
             </form>
         </div>
@@ -1405,7 +1452,7 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <a href="#" class="logo">H.A. Models</a>
-                <p>
+                <p data-i18n="footer-brand-desc">
                     Luxury Moroccan fashion house dedicated to preserving the art of traditional 
                     caftan and djellaba craftsmanship while embracing contemporary elegance.
                 </p>
@@ -1417,44 +1464,234 @@
                 </div>
             </div>
             <div class="footer-column">
-                <h4>Shop</h4>
+                <h4 data-i18n="footer-shop">Shop</h4>
                 <ul>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Caftans</a></li>
-                    <li><a href="#">Djellabas</a></li>
-                    <li><a href="#">Mother & Daughter</a></li>
-                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#" data-i18n="footer-shop1">New Arrivals</a></li>
+                    <li><a href="#" data-i18n="footer-shop2">Caftans</a></li>
+                    <li><a href="#" data-i18n="footer-shop3">Djellabas</a></li>
+                    <li><a href="#" data-i18n="footer-shop4">Mother &amp; Daughter</a></li>
+                    <li><a href="#" data-i18n="footer-shop5">Accessories</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h4>Company</h4>
+                <h4 data-i18n="footer-company">Company</h4>
                 <ul>
-                    <li><a href="#">Our Story</a></li>
-                    <li><a href="#">Artisans</a></li>
-                    <li><a href="#">Sustainability</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Careers</a></li>
+                    <li><a href="#" data-i18n="footer-company1">Our Story</a></li>
+                    <li><a href="#" data-i18n="footer-company2">Artisans</a></li>
+                    <li><a href="#" data-i18n="footer-company3">Sustainability</a></li>
+                    <li><a href="#" data-i18n="footer-company4">Press</a></li>
+                    <li><a href="#" data-i18n="footer-company5">Careers</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h4>Support</h4>
+                <h4 data-i18n="footer-support">Support</h4>
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
-                    <li><a href="#">Size Guide</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#" data-i18n="footer-support1">Contact Us</a></li>
+                    <li><a href="#" data-i18n="footer-support2">Shipping &amp; Returns</a></li>
+                    <li><a href="#" data-i18n="footer-support3">Size Guide</a></li>
+                    <li><a href="#" data-i18n="footer-support4">FAQ</a></li>
+                    <li><a href="#" data-i18n="footer-support5">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© 2024 H.A. Models. All rights reserved.</span>
-            <span>Crafted with love in Marrakech</span>
+            <span data-i18n="footer-bottom-left">© 2024 H.A. Models. All rights reserved.</span>
+            <span data-i18n="footer-bottom-right">Crafted with love in Marrakech</span>
         </div>
     </footer>
 
 
     <script>
+        const translations = {
+            fr: {
+                'nav-collection': 'Collection', 'nav-caftans': 'Caftans', 'nav-djellabas': 'Djellabas',
+                'nav-mother-daughter': 'Mère & Fille', 'nav-our-story': 'Notre Histoire',
+                'hero-subtitle': 'Fondé 2024 — Marrakech', 'hero-title': "L'Art de l'", 'hero-title-line2': 'Élégance Marocaine',
+                'hero-desc': 'Caftans et djellabas faits main tissés de siècles de tradition, conçus pour la femme moderne qui chérit la beauté intemporelle.',
+                'hero-cta': 'Explorer la Collection',
+                'marquee-hand': 'Broderie Main', 'marquee-silk': 'Soie & Satin', 'marquee-made': 'Fabriqué au Maroc',
+                'marquee-limited': 'Édition Limitée', 'marquee-sustainable': 'Luxe Durable', 'marquee-artisan': 'Artisanal',
+                'collection-label': 'La Collection', 'collection-title': 'Élégance Curatée', 'collection-desc': 'Chaque pièce de notre collection témoigne du riche patrimoine de l\'artisanat marocain. Des broderies main complexes aux somptueux brocarts de soie, découvrez des vêtements qui racontent une histoire.',
+                'filter-all': 'Tout', 'filter-caftans': 'Caftans', 'filter-djellabas': 'Djellabas',
+                'filter-mother-daughter': 'Mère & Fille', 'filter-accessories': 'Accessoires',
+                'quick-add': 'Ajout Rapide', 'badge-new': 'Nouveau', 'badge-set': 'Ensemble', 'badge-bestseller': 'Meilleure Vente', 'badge-accessory': 'Accessoire',
+                'product1-name': 'Caftan Royal Rose', 'product1-cat': 'Soie Brodée Main',
+                'product2-name': 'Caftan Jardin Menthe', 'product2-cat': 'Brocart & Cristal',
+                'product3-name': 'Ensemble Rose & Mini Rose', 'product3-cat': 'Mère & Fille',
+                'product4-name': 'Djellaba Heure Dorée', 'product4-cat': 'Velours & Fil d\'Or',
+                'product5-name': 'Caftan Palais d\'Ivoire', 'product5-cat': 'Perles Ornées',
+                'product6-name': 'Ensemble Sauge & Petite Sauge', 'product6-cat': 'Mère & Fille',
+                'product7-name': 'Djellaba Bleu Nuit', 'product7-cat': 'Taffetas de Soie',
+                'product8-name': 'Ceinture Brodée Or', 'product8-cat': 'Soie Tissée Main',
+                'md-label': 'Duo dans la Tradition', 'md-title': 'Mère & Fille',
+                'md-desc': 'Célébrez le lien indéfectible entre mère et fille avec nos ensembles de caftans assortis exclusifs. Chaque paire est méticuleusement conçue pour refléter les mêmes motifs complexes, créant des moments inoubliables d\'élégance partagée.',
+                'md-feat1': 'Motifs de broderie main identiques', 'md-feat2': 'Tissus premium en soie et brocart',
+                'md-feat3': 'Tailles personnalisées adulte et enfant', 'md-feat4': 'Emballage cadeau offert',
+                'md-cta': 'Acheter la Collection',
+                'newsletter-label': 'Restez Connecté', 'newsletter-title': 'Rejoignez H.A. Models',
+                'newsletter-desc': 'Soyez la première à découvrir les nouvelles collections, offres exclusives et histoires de nos artisans à Marrakech.',
+                'newsletter-placeholder': 'Entrez votre adresse email',
+                'footer-brand-desc': 'Maison de mode marocaine de luxe dédiée à la préservation de l\'art du caftan et de la djellaba traditionnels tout en embrassant l\'élégance contemporaine.',
+                'footer-shop': 'Boutique', 'footer-shop1': 'Nouveautés', 'footer-shop2': 'Caftans',
+                'footer-shop3': 'Djellabas', 'footer-shop4': 'Mère & Fille', 'footer-shop5': 'Accessoires',
+                'footer-company': 'Société', 'footer-company1': 'Notre Histoire', 'footer-company2': 'Artisans',
+                'footer-company3': 'Durabilité', 'footer-company4': 'Presse', 'footer-company5': 'Carrières',
+                'footer-support': 'Support', 'footer-support1': 'Contactez-Nous', 'footer-support2': 'Livraison & Retours',
+                'footer-support3': 'Guide des Tailles', 'footer-support4': 'FAQ', 'footer-support5': 'Politique de Confidentialité',
+                'footer-bottom-left': '© 2024 H.A. Models. Tous droits réservés.', 'footer-bottom-right': 'Confectionné avec amour à Marrakech'
+            },
+            en: {
+                'nav-collection': 'Collection', 'nav-caftans': 'Caftans', 'nav-djellabas': 'Djellabas',
+                'nav-mother-daughter': 'Mother & Daughter', 'nav-our-story': 'Our Story',
+                'hero-subtitle': 'Est. 2024 — Marrakech', 'hero-title': 'The Art of ', 'hero-title-line2': 'Moroccan Elegance',
+                'hero-desc': 'Handcrafted caftans and djellabas woven with centuries of tradition, designed for the modern woman who cherishes timeless beauty.',
+                'hero-cta': 'Explore Collection',
+                'marquee-hand': 'Hand-Embroidered', 'marquee-silk': 'Silk & Satin', 'marquee-made': 'Made in Morocco',
+                'marquee-limited': 'Limited Edition', 'marquee-sustainable': 'Sustainable Luxury', 'marquee-artisan': 'Artisan Crafted',
+                'collection-label': 'The Collection', 'collection-title': 'Curated Elegance',
+                'collection-desc': 'Each piece in our collection is a testament to the rich heritage of Moroccan craftsmanship. From intricate hand-embroidery to luxurious silk brocades, discover garments that tell a story.',
+                'filter-all': 'All', 'filter-caftans': 'Caftans', 'filter-djellabas': 'Djellabas',
+                'filter-mother-daughter': 'Mother & Daughter', 'filter-accessories': 'Accessories',
+                'quick-add': 'Quick Add', 'badge-new': 'New', 'badge-set': 'Set', 'badge-bestseller': 'Bestseller', 'badge-accessory': 'Accessory',
+                'product1-name': 'Royal Pink Caftan', 'product1-cat': 'Hand-Embroidered Silk',
+                'product2-name': 'Mint Garden Caftan', 'product2-cat': 'Brocade & Crystal',
+                'product3-name': 'Rose & Mini Rose Set', 'product3-cat': 'Mother & Daughter',
+                'product4-name': 'Golden Hour Djellaba', 'product4-cat': 'Velvet & Gold Thread',
+                'product5-name': 'Ivory Palace Caftan', 'product5-cat': 'Pearl Embellished',
+                'product6-name': 'Sage & Little Sage Set', 'product6-cat': 'Mother & Daughter',
+                'product7-name': 'Midnight Blue Djellaba', 'product7-cat': 'Silk Taffeta',
+                'product8-name': 'Gold Embroidered Belt', 'product8-cat': 'Hand-Woven Silk',
+                'md-label': 'Twinning in Tradition', 'md-title': 'Mother & Daughter',
+                'md-desc': 'Celebrate the unbreakable bond between mother and daughter with our exclusive matching caftan sets. Each pair is meticulously crafted to mirror the same intricate patterns, creating unforgettable moments of shared elegance.',
+                'md-feat1': 'Identical hand-embroidery patterns', 'md-feat2': 'Premium silk & brocade fabrics',
+                'md-feat3': 'Custom sizing for both adult & children', 'md-feat4': 'Complimentary gift packaging',
+                'md-cta': 'Shop the Collection',
+                'newsletter-label': 'Stay Connected', 'newsletter-title': 'Join H.A. Models',
+                'newsletter-desc': 'Be the first to discover new collections, exclusive offers, and stories from our artisans in Marrakech.',
+                'newsletter-placeholder': 'Enter your email address',
+                'footer-brand-desc': 'Luxury Moroccan fashion house dedicated to preserving the art of traditional caftan and djellaba craftsmanship while embracing contemporary elegance.',
+                'footer-shop': 'Shop', 'footer-shop1': 'New Arrivals', 'footer-shop2': 'Caftans',
+                'footer-shop3': 'Djellabas', 'footer-shop4': 'Mother & Daughter', 'footer-shop5': 'Accessories',
+                'footer-company': 'Company', 'footer-company1': 'Our Story', 'footer-company2': 'Artisans',
+                'footer-company3': 'Sustainability', 'footer-company4': 'Press', 'footer-company5': 'Careers',
+                'footer-support': 'Support', 'footer-support1': 'Contact Us', 'footer-support2': 'Shipping & Returns',
+                'footer-support3': 'Size Guide', 'footer-support4': 'FAQ', 'footer-support5': 'Privacy Policy',
+                'footer-bottom-left': '© 2024 H.A. Models. All rights reserved.', 'footer-bottom-right': 'Crafted with love in Marrakech'
+            },
+            sp: {
+                'nav-collection': 'Colección', 'nav-caftans': 'Caftanes', 'nav-djellabas': 'Djellabas',
+                'nav-mother-daughter': 'Madre & Hija', 'nav-our-story': 'Nuestra Historia',
+                'hero-subtitle': 'Est. 2024 — Marrakech', 'hero-title': 'El Arte de la ', 'hero-title-line2': 'Elegancia Marroquí',
+                'hero-desc': 'Caftanes y djellabas artesanales tejidos con siglos de tradición, diseñados para la mujer moderna que aprecia la belleza atemporal.',
+                'hero-cta': 'Explorar Colección',
+                'marquee-hand': 'Bordado a Mano', 'marquee-silk': 'Seda & Satén', 'marquee-made': 'Hecho en Marruecos',
+                'marquee-limited': 'Edición Limitada', 'marquee-sustainable': 'Lujo Sostenible', 'marquee-artisan': 'Artesanal',
+                'collection-label': 'La Colección', 'collection-title': 'Elegancia Curada',
+                'collection-desc': 'Cada pieza de nuestra colección es un testimonio de la rica herencia de la artesanía marroquí. Desde intrincados bordados a mano hasta lujosos brocados de seda, descubre prendas que cuentan una historia.',
+                'filter-all': 'Todo', 'filter-caftans': 'Caftanes', 'filter-djellabas': 'Djellabas',
+                'filter-mother-daughter': 'Madre & Hija', 'filter-accessories': 'Accesorios',
+                'quick-add': 'Añadir Rápido', 'badge-new': 'Nuevo', 'badge-set': 'Set', 'badge-bestseller': 'Más Vendido', 'badge-accessory': 'Accesorio',
+                'product1-name': 'Caftán Rosa Real', 'product1-cat': 'Seda Bordada a Mano',
+                'product2-name': 'Caftán Jardín Menta', 'product2-cat': 'Brocado & Cristal',
+                'product3-name': 'Set Rosa & Mini Rosa', 'product3-cat': 'Madre & Hija',
+                'product4-name': 'Djellaba Hora Dorada', 'product4-cat': 'Terciopelo & Hilo de Oro',
+                'product5-name': 'Caftán Palacio Marfil', 'product5-cat': 'Adornado con Perlas',
+                'product6-name': 'Set Salvia & Pequeña Salvia', 'product6-cat': 'Madre & Hija',
+                'product7-name': 'Djellaba Azul Medianoche', 'product7-cat': 'Tafetán de Seda',
+                'product8-name': 'Cinturón Bordado en Oro', 'product8-cat': 'Seda Tejida a Mano',
+                'md-label': 'Juegos de Tradición', 'md-title': 'Madre & Hija',
+                'md-desc': 'Celebra el vínculo inquebrantable entre madre e hija con nuestros exclusivos conjuntos de caftanes a juego. Cada par está meticulosamente elaborado para reflejar los mismos patrones intrincados, creando momentos inolvidables de elegancia compartida.',
+                'md-feat1': 'Patrones de bordado a mano idénticos', 'md-feat2': 'Telas premium de seda y brocado',
+                'md-feat3': 'Tallas personalizadas para adulto y niños', 'md-feat4': 'Embalaje de regalo gratuito',
+                'md-cta': 'Comprar la Colección',
+                'newsletter-label': 'Mantente Conectado', 'newsletter-title': 'Únete a H.A. Models',
+                'newsletter-desc': 'Sé la primera en descubrir nuevas colecciones, ofertas exclusivas e historias de nuestros artesanos en Marrakech.',
+                'newsletter-placeholder': 'Ingresa tu correo electrónico',
+                'footer-brand-desc': 'Casa de moda marroquí de lujo dedicada a preservar el arte de la artesanía tradicional del caftán y la djellaba mientras abraza la elegancia contemporánea.',
+                'footer-shop': 'Tienda', 'footer-shop1': 'Novedades', 'footer-shop2': 'Caftanes',
+                'footer-shop3': 'Djellabas', 'footer-shop4': 'Madre & Hija', 'footer-shop5': 'Accesorios',
+                'footer-company': 'Empresa', 'footer-company1': 'Nuestra Historia', 'footer-company2': 'Artesanos',
+                'footer-company3': 'Sostenibilidad', 'footer-company4': 'Prensa', 'footer-company5': 'Carreras',
+                'footer-support': 'Soporte', 'footer-support1': 'Contáctanos', 'footer-support2': 'Envíos & Devoluciones',
+                'footer-support3': 'Guía de Tallas', 'footer-support4': 'FAQ', 'footer-support5': 'Política de Privacidad',
+                'footer-bottom-left': '© 2024 H.A. Models. Todos los derechos reservados.', 'footer-bottom-right': 'Hecho con amor en Marrakech'
+            },
+            ar: {
+                'nav-collection': 'المجموعة', 'nav-caftans': 'القفطان', 'nav-djellabas': 'الجلابة',
+                'nav-mother-daughter': 'الأم وابنتها', 'nav-our-story': 'قصتنا',
+                'hero-subtitle': 'تأسست 2024 — مراكش', 'hero-title': 'فن ', 'hero-title-line2': 'الأناقة المغربية',
+                'hero-desc': 'قفاطين وجلابية مصنوعة يدوياً منسوجة بقرون من التقاليد، مصممة للمرأة العصرية التي تعتز بالجمال الخالد.',
+                'hero-cta': 'استكشاف المجموعة',
+                'marquee-hand': 'تطريز يدوي', 'marquee-silk': 'حرير وساتان', 'marquee-made': 'صنع في المغرب',
+                'marquee-limited': 'إصدار محدود', 'marquee-sustainable': 'فخامة مستدامة', 'marquee-artisan': 'حرفي',
+                'collection-label': 'المجموعة', 'collection-title': 'أناقة منتقاة',
+                'collection-desc': 'كل قطعة في مجموعتنا هي شهادة على التراث الغني للحرفية المغربية. من التطريز اليدوي المعقد إلى الديباج الحريري الفاخر، اكتشف ملابس تروي قصة.',
+                'filter-all': 'الكل', 'filter-caftans': 'قفاطين', 'filter-djellabas': 'جلابية',
+                'filter-mother-daughter': 'الأم وابنتها', 'filter-accessories': 'إكسسوارات',
+                'quick-add': 'إضافة سريعة', 'badge-new': 'جديد', 'badge-set': 'طقم', 'badge-bestseller': 'الأكثر مبيعاً', 'badge-accessory': 'إكسسوار',
+                'product1-name': 'قفطان وردي ملكي', 'product1-cat': 'حرير مطرز يدوياً',
+                'product2-name': 'قفطان حديقة النعناع', 'product2-cat': 'ديباج و كريستال',
+                'product3-name': 'طقم الوردة والوردة الصغيرة', 'product3-cat': 'الأم وابنتها',
+                'product4-name': 'جلابة الساعة الذهبية', 'product4-cat': 'مخمل و خيط ذهبي',
+                'product5-name': 'قفطان قصر العاج', 'product5-cat': 'مرصع باللؤلؤ',
+                'product6-name': 'طقم الميرمية والصغيرة', 'product6-cat': 'الأم وابنتها',
+                'product7-name': 'جلابة زرقاء منتصف الليل', 'product7-cat': 'تفتا حرير',
+                'product8-name': 'حزام مطرز بالذهب', 'product8-cat': 'حرير منسوج يدوياً',
+                'md-label': 'التوأمة في التقاليد', 'md-title': 'الأم وابنتها',
+                'md-desc': 'احتفلي بالرابط الذي لا ينكسر بين الأم وابنتها مع أطقم القفاطين المطابقة الحصرية لدينا. كل زوج مصنوع بدقة ليعكس نفس الأنماط المعقدة، مما يخلق لحظات لا تنسى من الأناقة المشتركة.',
+                'md-feat1': 'أنماط تطريز يدوي متطابقة', 'md-feat2': 'أقمشة حرير وديباج فاخرة',
+                'md-feat3': 'مقاسات مخصصة للكبار والصغار', 'md-feat4': 'تغليف هدايا مجاني',
+                'md-cta': 'تسوق المجموعة',
+                'newsletter-label': 'ابق على اتصال', 'newsletter-title': 'انضم إلى H.A. Models',
+                'newsletter-desc': 'كوني أول من يكتشف المجموعات الجديدة والعروض الحصرية وقصص حرفيينا في مراكش.',
+                'newsletter-placeholder': 'أدخل بريدك الإلكتروني',
+                'footer-brand-desc': 'دار أزياء مغربية فاخرة مكرسة للحفاظ على فن صناعة القفطان والجلابة التقليديين مع تبني الأناقة المعاصرة.',
+                'footer-shop': 'المتجر', 'footer-shop1': 'وصل حديثاً', 'footer-shop2': 'قفاطين',
+                'footer-shop3': 'جلابية', 'footer-shop4': 'الأم وابنتها', 'footer-shop5': 'إكسسوارات',
+                'footer-company': 'الشركة', 'footer-company1': 'قصتنا', 'footer-company2': 'الحرفيون',
+                'footer-company3': 'الاستدامة', 'footer-company4': 'الصحافة', 'footer-company5': 'الوظائف',
+                'footer-support': 'الدعم', 'footer-support1': 'اتصل بنا', 'footer-support2': 'الشحن والإرجاع',
+                'footer-support3': 'دليل المقاسات', 'footer-support4': 'الأسئلة الشائعة', 'footer-support5': 'سياسة الخصوصية',
+                'footer-bottom-left': '© 2024 H.A. Models. جميع الحقوق محفوظة.', 'footer-bottom-right': 'مصنوع بحب في مراكش'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[key]) {
+                    if (el.tagName === 'INPUT') {
+                        el.placeholder = t[key];
+                    } else if (el.tagName === 'SPAN' && el.parentElement.classList.contains('hero-title')) {
+                        el.textContent = t[key];
+                    } else {
+                        el.innerHTML = t[key];
+                    }
+                }
+            });
+
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            localStorage.setItem('hf-model-lang', lang);
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+        });
+
         // ===== SCROLL REVEAL =====
         const revealElements = document.querySelectorAll('.reveal');
 
@@ -1544,12 +1781,11 @@
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const originalText = btn.textContent;
-                btn.textContent = 'Added ✓';
+                btn.textContent = translations[currentLang]['quick-add'] + ' ✓';
                 btn.style.background = 'var(--mint-green)';
                 btn.style.color = 'var(--charcoal)';
 
 
-                // Update cart count
                 const cartCount = document.querySelector('.cart-count');
                 cartCount.textContent = parseInt(cartCount.textContent) + 1;
 
@@ -1574,6 +1810,12 @@
                 m.style.transform = `translateY(${scrolled * speed}px) rotate(var(--rot, 0deg))`;
             });
         });
+
+        // ===== RESTORE SAVED LANGUAGE =====
+        const savedLang = localStorage.getItem('hf-model-lang');
+        if (savedLang && translations[savedLang]) {
+            switchLang(savedLang);
+        }
     </script>
 </body>
 </html>

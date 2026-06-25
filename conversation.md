@@ -31,3 +31,11 @@
 ### Rebrand
 - "Maison Zahra" → "H.A. Models" throughout the site
 - Title, logo, footer, and newsletter heading updated
+
+### Multilingual (4 languages)
+- Added language switcher in header with flags: 🇫🇷 🇬🇧 🇪🇸 🇲🇦
+- Arabic uses Moroccan flag
+- Full translations for all text in French, English, Spanish, Arabic
+- RTL support for Arabic (`dir="rtl"`)
+- Language preference saved in localStorage
+- All text content translated: nav, hero, products, footer, badges, buttons
