@@ -8,7 +8,10 @@
   "headers": [
     {
       "source": "/api/status",
-      "headers": [
+  "rewrites": [
+    { "source": "/status", "destination": "/status.html" }
+  ],
+  "headers": [
         { "key": "Cache-Control", "value": "no-store, max-age=0" }
       ]
     }
