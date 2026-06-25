@@ -32,7 +32,12 @@
 - "Maison Zahra" → "H.A. Models" throughout the site
 - Title, logo, footer, and newsletter heading updated
 
-### Multilingual (4 languages)
+### Logo update (June 25, 2026)
+- Old single `assets/logo.png` replaced with two theme-aware logos:
+  - `assets/logo-light.png` — shown in light mode
+  - `assets/logo-dark.png` — shown in dark mode
+- `setTheme()` JS now switches both header and footer logo `src` on theme toggle
+- Both logos resized to 72px height with transparency preserved
 - Added language switcher in header with flags: 🇫🇷 🇬🇧 🇪🇸 🇲🇦
 - Arabic uses Moroccan flag
 - Full translations for all text in French, English, Spanish, Arabic

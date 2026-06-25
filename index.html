@@ -1183,7 +1183,7 @@
     <!-- HEADER -->
     <header class="header" id="header">
         <div class="header-inner">
-            <a href="#" class="logo"><img src="assets/logo.png" alt="H.A. Models" class="logo-img"></a>
+            <a href="#" class="logo"><img src="assets/logo-light.png" alt="H.A. Models" class="logo-img" id="logo-img"></a>
             <nav>
                 <ul class="nav">
                     <li><a href="#collection" data-i18n="nav-collection">Collection</a></li>
@@ -1491,7 +1491,7 @@
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <a href="#" class="logo"><img src="assets/logo.png" alt="H.A. Models" class="logo-img"></a>
+                <a href="#" class="logo"><img src="assets/logo-light.png" alt="H.A. Models" class="logo-img" id="logo-img-footer"></a>
                 <p data-i18n="footer-brand-desc">
                     Luxury Moroccan fashion house dedicated to preserving the art of traditional 
                     caftan and djellaba craftsmanship while embracing contemporary elegance.
@@ -1862,6 +1862,8 @@
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            document.getElementById('logo-img').src = theme === 'dark' ? 'assets/logo-dark.png' : 'assets/logo-light.png';
+            document.getElementById('logo-img-footer').src = theme === 'dark' ? 'assets/logo-dark.png' : 'assets/logo-light.png';
             localStorage.setItem('hf-model-theme', theme);
         }
 
