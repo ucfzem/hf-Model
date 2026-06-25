@@ -62,3 +62,23 @@
 - Language preference saved in localStorage
 - All text content translated: nav, hero, products, footer, badges, buttons
 - Updated location: Tangier (Tanger / Tánger / طنجة), year: 2026
+
+### Social links (June 25, 2026)
+- Instagram → https://www.instagram.com/hafidaa_roeya
+- TikTok → https://www.tiktok.com/@hafida.affaki
+
+### New sections (June 25, 2026)
+- **Accessoires** — product grid with 4 items (belt, silk bag, earrings, clutch)
+- **Notre Histoire** — brand story
+- **Artisans** — craftsmanship
+- **Durabilité** — sustainability
+- **Contactez-Nous** — contact form
+- **FAQ** — accordion with 5 questions
+- **Presse** — press mentions
+- **Carrières** — careers
+- **Livraison & Retours** — shipping & returns info
+- **Guide des Tailles** — size guide
+- **Politique de Confidentialité** — privacy policy
+- All sections fully translated in FR/EN/SP/AR
+- Nav updated with Accessoires, Contact, FAQ links
+- Smooth scroll offset for fixed header (scroll-padding-top)
