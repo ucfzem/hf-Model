@@ -30,6 +30,7 @@
             --soft-gold-light: #E8D48B;
             --charcoal: #2C2C2C;
             --warm-white: #FAFAF8;
+            scroll-padding-top: 100px;
         }
 
         [data-theme="dark"] {
@@ -948,6 +949,155 @@
         }
 
 
+        /* ===== ACCESSORIES ===== */
+        .acc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .acc-card {
+            background: var(--warm-white);
+            border: 1px solid var(--beige-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all .3s;
+        }
+        .acc-card:hover {
+            border-color: var(--soft-gold);
+            transform: translateY(-4px);
+        }
+        .acc-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+        .acc-card-body {
+            padding: 16px;
+        }
+        .acc-card-body h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: var(--charcoal);
+        }
+        .acc-card-body p {
+            font-size: .75rem;
+            color: var(--soft-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        /* ===== STORY / ARTISAN / SUST ===== */
+        .content-section {
+            padding: 80px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .content-section .section-desc {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+
+
+        /* ===== CONTACT ===== */
+        .contact-form {
+            max-width: 500px;
+            margin: 30px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 14px 18px;
+            border: 1px solid var(--beige-dark);
+            border-radius: 8px;
+            background: var(--warm-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: .85rem;
+            color: var(--charcoal);
+            outline: none;
+            transition: border-color .3s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--soft-gold);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-form button {
+            padding: 14px 32px;
+            background: var(--soft-gold);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .3s;
+        }
+        .contact-form button:hover {
+            background: var(--soft-gold-light);
+            color: var(--charcoal);
+        }
+
+
+        /* ===== FAQ ===== */
+        .faq-list {
+            max-width: 700px;
+            margin: 30px auto 0;
+            text-align: left;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--beige-dark);
+            padding: 18px 0;
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            padding: 0;
+        }
+        .faq-question i {
+            transition: transform .3s;
+            color: var(--soft-gold);
+        }
+        .faq-question.open i {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease, padding .3s ease;
+            font-size: .9rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+        .faq-answer.open {
+            max-height: 300px;
+            padding-top: 12px;
+        }
+
+
         /* ===== FOOTER ===== */
         .footer {
             background: var(--charcoal);
@@ -1203,7 +1353,10 @@
                     <li><a href="#caftans" data-i18n="nav-caftans">Caftans</a></li>
                     <li><a href="#djellabas" data-i18n="nav-djellabas">Djellabas</a></li>
                     <li><a href="#mother-daughter" data-i18n="nav-mother-daughter">Mother & Daughter</a></li>
+                    <li><a href="#accessories" data-i18n="nav-accessories">Accessoires</a></li>
                     <li><a href="#about" data-i18n="nav-our-story">Our Story</a></li>
+                    <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+                    <li><a href="#faq" data-i18n="nav-faq">FAQ</a></li>
                 </ul>
             </nav>
             <div class="header-icons">
@@ -1483,6 +1636,144 @@
     </section>
 
 
+    <!-- ACCESSORIES -->
+    <section class="collection" id="accessories" style="background:var(--beige);">
+        <div class="collection-inner reveal">
+            <p class="section-label" data-i18n="acc-label">The Adornment</p>
+            <h2 class="section-title" data-i18n="acc-title">Artisan Accessories</h2>
+            <div class="divider"></div>
+            <p class="section-desc" data-i18n="acc-desc">Complete your look with our handcrafted accessories — embroidered belts, silk bags, and filigree jewelry.</p>
+            <div class="acc-grid">
+                <div class="acc-card">
+                    <img src="assets/caftans/img-08.jpg" alt="Gold Embroidered Belt">
+                    <div class="acc-card-body">
+                        <h4 data-i18n="acc-name1">Gold Embroidered Belt</h4>
+                        <p data-i18n="badge-accessory">Accessory</p>
+                    </div>
+                </div>
+                <div class="acc-card">
+                    <img src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400&q=80" alt="Silk Evening Bag">
+                    <div class="acc-card-body">
+                        <h4 data-i18n="acc-name2">Silk Evening Bag</h4>
+                        <p data-i18n="badge-accessory">Accessory</p>
+                    </div>
+                </div>
+                <div class="acc-card">
+                    <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80" alt="Filigree Earrings">
+                    <div class="acc-card-body">
+                        <h4 data-i18n="acc-name3">Filigree Earrings</h4>
+                        <p data-i18n="badge-accessory">Accessory</p>
+                    </div>
+                </div>
+                <div class="acc-card">
+                    <img src="https://images.unsplash.com/photo-1611107683227-e9060eccd846?w=400&q=80" alt="Embroidered clutch">
+                    <div class="acc-card-body">
+                        <h4 data-i18n="acc-name4">Embroidered Clutch</h4>
+                        <p data-i18n="badge-accessory">Accessory</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- OUR STORY -->
+    <section class="content-section reveal" id="about">
+        <p class="section-label" data-i18n="story-label">Our Story</p>
+        <h2 class="section-title" data-i18n="story-title">The H.A. Models Legacy</h2>
+        <div class="divider"></div>
+        <p class="section-desc" data-i18n="story-desc">Born in Tangier, H.A. Models is driven by a passion for Moroccan craftsmanship. Since 2026, we collaborate with the kingdom's finest artisans to create pieces that blend tradition and modernity.</p>
+    </section>
+
+
+    <!-- ARTISANS -->
+    <section class="content-section reveal" style="background:var(--beige);" id="artisans">
+        <p class="section-label" data-i18n="artisan-label">Our Artisans</p>
+        <h2 class="section-title" data-i18n="artisan-title">The Craftsmanship</h2>
+        <div class="divider"></div>
+        <p class="section-desc" data-i18n="artisan-desc">Each piece is the result of meticulous work by our artisans. Embroiderers, weavers, and goldsmiths perpetuate ancestral techniques to bring unique creations to life.</p>
+    </section>
+
+
+    <!-- SUSTAINABILITY -->
+    <section class="content-section reveal" id="sustainability">
+        <p class="section-label" data-i18n="sust-label">Sustainability</p>
+        <h2 class="section-title" data-i18n="sust-title">Responsible Luxury</h2>
+        <div class="divider"></div>
+        <p class="section-desc" data-i18n="sust-desc">We are committed to ethical fashion: natural fabrics, plant-based dyes, fair working conditions, and preserving traditional craftsmanship.</p>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="content-section reveal" style="background:var(--beige);" id="contact">
+        <p class="section-label" data-i18n="contact-label">Contact Us</p>
+        <h2 class="section-title" data-i18n="contact-title">Get in Touch</h2>
+        <div class="divider"></div>
+        <p class="section-desc" data-i18n="contact-desc">A question, a special request? Our team in Tangier is here for you.</p>
+        <form class="contact-form">
+            <input type="text" data-i18n="contact-name" placeholder="Your name">
+            <input type="email" data-i18n="contact-email" placeholder="Your email">
+            <textarea data-i18n="contact-msg" placeholder="Your message"></textarea>
+            <button type="submit" data-i18n="contact-send">Send</button>
+        </form>
+    </section>
+
+
+    <!-- FAQ -->
+    <section class="content-section reveal" id="faq">
+        <p class="section-label" data-i18n="faq-label">FAQ</p>
+        <h2 class="section-title" data-i18n="faq-title">Frequently Asked Questions</h2>
+        <div class="divider"></div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-i18n="faq-q1">What are the delivery times?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-i18n="faq-a1">Delivery in Morocco takes 3-5 business days. International delivery takes 7-14 days depending on destination.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-i18n="faq-q2">Can I return an item?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-i18n="faq-a2">Yes, you have 14 days after receipt to return an item. It must be in its original condition.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-i18n="faq-q3">Do you offer custom sizing?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-i18n="faq-a3">Absolutely. Contact us via the form with your measurements and we will create a unique piece tailored to your silhouette.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-i18n="faq-q4">How to care for a caftan?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-i18n="faq-a4">Our pieces are delicate. We recommend professional dry cleaning to preserve embroidery and precious fabrics.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-i18n="faq-q5">Can I order from abroad?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-i18n="faq-a5">Yes, we ship worldwide. Shipping costs vary by destination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- NEWSLETTER -->
     <section class="newsletter">
         <div class="newsletter-inner reveal">
@@ -1559,6 +1850,7 @@
             fr: {
                 'nav-collection': 'Collection', 'nav-caftans': 'Caftans', 'nav-djellabas': 'Djellabas',
                 'nav-mother-daughter': 'Mère & Fille', 'nav-our-story': 'Notre Histoire',
+                'nav-accessories': 'Accessoires', 'nav-contact': 'Contact', 'nav-faq': 'FAQ',
                 'hero-subtitle': 'Fondé en 2026 — Tanger', 'hero-title': "L'Art de <span class=\"hero-accent\">l'Élégance</span>",
                 'hero-desc': 'Caftans et djellabas faits main tissés de siècles de tradition, conçus pour la femme moderne qui chérit la beauté intemporelle.',
                 'hero-cta': 'Explorer la Collection',
@@ -1591,11 +1883,25 @@
                 'footer-company3': 'Durabilité', 'footer-company4': 'Presse', 'footer-company5': 'Carrières',
                 'footer-support': 'Support', 'footer-support1': 'Contactez-Nous', 'footer-support2': 'Livraison & Retours',
                 'footer-support3': 'Guide des Tailles', 'footer-support4': 'FAQ', 'footer-support5': 'Politique de Confidentialité',
-                'footer-bottom-left': '© 2026 H.A. Models. Tous droits réservés.', 'footer-bottom-right': 'Confectionné avec amour à Tanger'
+                'footer-bottom-left': '© 2026 H.A. Models. Tous droits réservés.', 'footer-bottom-right': 'Confectionné avec amour à Tanger',
+                'acc-label': 'La Parure', 'acc-title': 'Accessoires Artisanaux', 'acc-desc': 'Complétez votre tenue avec nos accessoires faits main — ceintures brodées, sacs en soie et bijoux en filigrane.',
+                'acc-name1': 'Ceinture Brodée Or', 'acc-name2': 'Sac de Soirée en Soie', 'acc-name3': 'Boucles d\'Oreilles Filigrane', 'acc-name4': 'Pochette Brodée',
+                'story-label': 'Notre Histoire', 'story-title': 'L\'Héritage H.A. Models', 'story-desc': 'Née à Tanger, H.A. Models est le fruit d\'une passion pour l\'artisanat marocain. Depuis 2026, nous collaborons avec les meilleurs artisans du royaume pour créer des pièces qui marient tradition et modernité.',
+                'artisan-label': 'Nos Artisans', 'artisan-title': 'Le Savoir-Faire', 'artisan-desc': 'Chaque pièce est le résultat d\'un travail minutieux de nos artisans. Brodeurs, tisserands et orfèvres perpétuent des gestes ancestraux pour donner vie à des créations uniques.',
+                'sust-label': 'Durabilité', 'sust-title': 'Un Luxe Responsable', 'sust-desc': 'Nous nous engageons pour une mode éthique : tissus naturels, teintures végétales, conditions de travail équitables et préservation des savoir-faire traditionnels.',
+                'contact-label': 'Contactez-Nous', 'contact-title': 'Restons en Ligue', 'contact-desc': 'Une question, une demande spéciale ? Notre équipe à Tanger est à votre écoute.',
+                'contact-name': 'Votre nom', 'contact-email': 'Votre email', 'contact-msg': 'Votre message', 'contact-send': 'Envoyer',
+                'faq-label': 'FAQ', 'faq-title': 'Questions Fréquentes',
+                'faq-q1': 'Quels sont les délais de livraison ?', 'faq-a1': 'La livraison au Maroc prend 3 à 5 jours ouvrés. Pour l\'international, comptez 7 à 14 jours selon la destination.',
+                'faq-q2': 'Puis-je retourner un article ?', 'faq-a2': 'Oui, vous disposez de 14 jours après réception pour retourner votre article. Il doit être dans son état d\'origine.',
+                'faq-q3': 'Proposez-vous des tailles sur mesure ?', 'faq-a3': 'Absolument. Contactez-nous via le formulaire avec vos mesures et nous réaliserons une pièce unique adaptée à votre silhouette.',
+                'faq-q4': 'Comment entretenir un caftan ?', 'faq-a4': 'Nos pièces sont délicates. Nous recommandons un nettoyage à sec professionnel pour préserver la broderie et les tissus précieux.',
+                'faq-q5': 'Puis-je commander depuis l\'étranger ?', 'faq-a5': 'Oui, nous expédions dans le monde entier. Les frais de port varient selon la destination.'
             },
             en: {
                 'nav-collection': 'Collection', 'nav-caftans': 'Caftans', 'nav-djellabas': 'Djellabas',
                 'nav-mother-daughter': 'Mother & Daughter', 'nav-our-story': 'Our Story',
+                'nav-accessories': 'Accessories', 'nav-contact': 'Contact', 'nav-faq': 'FAQ',
                 'hero-subtitle': 'Est. 2026 — Tangier', 'hero-title': 'The Art of <span class="hero-accent">Elegance</span>',
                 'hero-desc': 'Handcrafted caftans and djellabas woven with centuries of tradition, designed for the modern woman who cherishes timeless beauty.',
                 'hero-cta': 'Explore Collection',
@@ -1629,11 +1935,25 @@
                 'footer-company3': 'Sustainability', 'footer-company4': 'Press', 'footer-company5': 'Careers',
                 'footer-support': 'Support', 'footer-support1': 'Contact Us', 'footer-support2': 'Shipping & Returns',
                 'footer-support3': 'Size Guide', 'footer-support4': 'FAQ', 'footer-support5': 'Privacy Policy',
-                'footer-bottom-left': '© 2026 H.A. Models. All rights reserved.', 'footer-bottom-right': 'Crafted with love in Tangier'
+                'footer-bottom-left': '© 2026 H.A. Models. All rights reserved.', 'footer-bottom-right': 'Crafted with love in Tangier',
+                'acc-label': 'The Adornment', 'acc-title': 'Artisan Accessories', 'acc-desc': 'Complete your look with our handcrafted accessories — embroidered belts, silk bags, and filigree jewelry.',
+                'acc-name1': 'Gold Embroidered Belt', 'acc-name2': 'Silk Evening Bag', 'acc-name3': 'Filigree Earrings', 'acc-name4': 'Embroidered Clutch',
+                'story-label': 'Our Story', 'story-title': 'The H.A. Models Legacy', 'story-desc': 'Born in Tangier, H.A. Models is driven by a passion for Moroccan craftsmanship. Since 2026, we collaborate with the kingdom\'s finest artisans to create pieces that blend tradition and modernity.',
+                'artisan-label': 'Our Artisans', 'artisan-title': 'The Craftsmanship', 'artisan-desc': 'Each piece is the result of meticulous work by our artisans. Embroiderers, weavers, and goldsmiths perpetuate ancestral techniques to bring unique creations to life.',
+                'sust-label': 'Sustainability', 'sust-title': 'Responsible Luxury', 'sust-desc': 'We are committed to ethical fashion: natural fabrics, plant-based dyes, fair working conditions, and preserving traditional craftsmanship.',
+                'contact-label': 'Contact Us', 'contact-title': 'Get in Touch', 'contact-desc': 'A question, a special request? Our team in Tangier is here for you.',
+                'contact-name': 'Your name', 'contact-email': 'Your email', 'contact-msg': 'Your message', 'contact-send': 'Send',
+                'faq-label': 'FAQ', 'faq-title': 'Frequently Asked Questions',
+                'faq-q1': 'What are the delivery times?', 'faq-a1': 'Delivery in Morocco takes 3–5 business days. International delivery takes 7–14 days depending on destination.',
+                'faq-q2': 'Can I return an item?', 'faq-a2': 'Yes, you have 14 days after receipt to return an item. It must be in its original condition.',
+                'faq-q3': 'Do you offer custom sizing?', 'faq-a3': 'Absolutely. Contact us via the form with your measurements and we will create a unique piece tailored to your silhouette.',
+                'faq-q4': 'How to care for a caftan?', 'faq-a4': 'Our pieces are delicate. We recommend professional dry cleaning to preserve embroidery and precious fabrics.',
+                'faq-q5': 'Can I order from abroad?', 'faq-a5': 'Yes, we ship worldwide. Shipping costs vary by destination.'
             },
             sp: {
                 'nav-collection': 'Colección', 'nav-caftans': 'Caftanes', 'nav-djellabas': 'Djellabas',
                 'nav-mother-daughter': 'Madre & Hija', 'nav-our-story': 'Nuestra Historia',
+                'nav-accessories': 'Accesorios', 'nav-contact': 'Contacto', 'nav-faq': 'FAQ',
                 'hero-subtitle': 'Est. 2026 — Tangier', 'hero-title': 'El Arte de la <span class="hero-accent">Elegancia</span>',
                 'hero-desc': 'Caftanes y djellabas artesanales tejidos con siglos de tradición, diseñados para la mujer moderna que aprecia la belleza atemporal.',
                 'hero-cta': 'Explorar Colección',
@@ -1667,11 +1987,25 @@
                 'footer-company3': 'Sostenibilidad', 'footer-company4': 'Prensa', 'footer-company5': 'Carreras',
                 'footer-support': 'Soporte', 'footer-support1': 'Contáctanos', 'footer-support2': 'Envíos & Devoluciones',
                 'footer-support3': 'Guía de Tallas', 'footer-support4': 'FAQ', 'footer-support5': 'Política de Privacidad',
-                'footer-bottom-left': '© 2026 H.A. Models. Todos los derechos reservados.', 'footer-bottom-right': 'Hecho con amor en Tánger'
+                'footer-bottom-left': '© 2026 H.A. Models. Todos los derechos reservados.', 'footer-bottom-right': 'Hecho con amor en Tánger',
+                'acc-label': 'El Adorno', 'acc-title': 'Accesorios Artesanales', 'acc-desc': 'Completa tu look con nuestros accesorios hechos a mano — cinturones bordados, bolsos de seda y joyería de filigrana.',
+                'acc-name1': 'Cinturón Bordado en Oro', 'acc-name2': 'Bolso de Seda de Noche', 'acc-name3': 'Pendientes de Filigrana', 'acc-name4': 'Bolso de Mano Bordado',
+                'story-label': 'Nuestra Historia', 'story-title': 'El Legado H.A. Models', 'story-desc': 'Nacida en Tánger, H.A. Models es fruto de la pasión por la artesanía marroquí. Desde 2026, colaboramos con los mejores artesanos del reino para crear piezas que fusionan tradición y modernidad.',
+                'artisan-label': 'Nuestros Artesanos', 'artisan-title': 'El Saber Hacer', 'artisan-desc': 'Cada pieza es el resultado del trabajo minucioso de nuestros artesanos. Bordadores, tejedores y orfebres perpetúan técnicas ancestrales para dar vida a creaciones únicas.',
+                'sust-label': 'Sostenibilidad', 'sust-title': 'Lujo Responsable', 'sust-desc': 'Nos comprometemos con una moda ética: tejidos naturales, tintes vegetales, condiciones laborales justas y preservación de la artesanía tradicional.',
+                'contact-label': 'Contáctanos', 'contact-title': 'Mantengamos el Contacto', 'contact-desc': '¿Una pregunta, un pedido especial? Nuestro equipo en Tánger está para escucharte.',
+                'contact-name': 'Tu nombre', 'contact-email': 'Tu email', 'contact-msg': 'Tu mensaje', 'contact-send': 'Enviar',
+                'faq-label': 'FAQ', 'faq-title': 'Preguntas Frecuentes',
+                'faq-q1': '¿Cuáles son los plazos de entrega?', 'faq-a1': 'La entrega en Marruecos tarda de 3 a 5 días hábiles. Para internacional, de 7 a 14 días según el destino.',
+                'faq-q2': '¿Puedo devolver un artículo?', 'faq-a2': 'Sí, dispones de 14 días tras la recepción para devolverlo. Debe estar en su estado original.',
+                'faq-q3': '¿Ofrecen tallas a medida?', 'faq-a3': 'Por supuesto. Contáctanos vía el formulario con tus medidas y crearemos una pieza única adaptada a tu silueta.',
+                'faq-q4': '¿Cómo cuidar un caftán?', 'faq-a4': 'Nuestras piezas son delicadas. Recomendamos limpieza en seco profesional para preservar el bordado y las telas preciosas.',
+                'faq-q5': '¿Puedo pedir desde el extranjero?', 'faq-a5': 'Sí, enviamos a todo el mundo. Los gastos de envío varían según el destino.'
             },
             ar: {
                 'nav-collection': 'المجموعة', 'nav-caftans': 'القفطان', 'nav-djellabas': 'الجلابة',
                 'nav-mother-daughter': 'الأم وابنتها', 'nav-our-story': 'قصتنا',
+                'nav-accessories': 'إكسسوارات', 'nav-contact': 'اتصل بنا', 'nav-faq': 'الأسئلة الشائعة',
                 'hero-subtitle': 'تأسست 2026 — طنجة', 'hero-title': 'فن <span class="hero-accent">الأناقة</span>',
                 'hero-desc': 'قفاطين وجلابية مصنوعة يدوياً منسوجة بقرون من التقاليد، مصممة للمرأة العصرية التي تعتز بالجمال الخالد.',
                 'hero-cta': 'استكشاف المجموعة',
@@ -1705,7 +2039,20 @@
                 'footer-company3': 'الاستدامة', 'footer-company4': 'الصحافة', 'footer-company5': 'الوظائف',
                 'footer-support': 'الدعم', 'footer-support1': 'اتصل بنا', 'footer-support2': 'الشحن والإرجاع',
                 'footer-support3': 'دليل المقاسات', 'footer-support4': 'الأسئلة الشائعة', 'footer-support5': 'سياسة الخصوصية',
-                'footer-bottom-left': '© 2026 H.A. Models. جميع الحقوق محفوظة.', 'footer-bottom-right': 'مصنوع بحب في طنجة'
+                'footer-bottom-left': '© 2026 H.A. Models. جميع الحقوق محفوظة.', 'footer-bottom-right': 'مصنوع بحب في طنجة',
+                'acc-label': 'الزينة', 'acc-title': 'إكسسوارات حرفية', 'acc-desc': 'أكمل إطلالتك مع إكسسواراتنا المصنوعة يدوياً — أحزمة مطرزة، حقائب حريرية، ومجوهرات بتقنية التخريم.',
+                'acc-name1': 'حزام مطرز بالذهب', 'acc-name2': 'حقيبة سهرة حريرية', 'acc-name3': 'أقراط بتقنية التخريم', 'acc-name4': 'حقيبة يد مطرزة',
+                'story-label': 'قصتنا', 'story-title': 'إرث H.A. Models', 'story-desc': 'وُلدت H.A. Models في طنجة من شغف بالحرفية المغربية. منذ 2026، نتعاون مع أمهر الحرفيين في المملكة لابتكار قطع تمزج بين التقاليد والحداثة.',
+                'artisan-label': 'حرفيونا', 'artisan-title': 'المهارة الحرفية', 'artisan-desc': 'كل قطعة هي نتاج عمل دقيق من حرفيينا. المطرزون، النساجون، والصاغة يواصلون تقنيات الأجداد لإبداع قطع فريدة.',
+                'sust-label': 'الاستدامة', 'sust-title': 'فخامة مسؤولة', 'sust-desc': 'نلتزم بالأزياء الأخلاقية: أقمشة طبيعية، أصباغ نباتية، ظروف عمل عادلة، والحفاظ على الحرف التقليدية.',
+                'contact-label': 'اتصل بنا', 'contact-title': 'ابق على تواصل', 'contact-desc': 'سؤال، طلب خاص؟ فريقنا في طنجة في خدمتك.',
+                'contact-name': 'اسمك', 'contact-email': 'بريدك الإلكتروني', 'contact-msg': 'رسالتك', 'contact-send': 'إرسال',
+                'faq-label': 'الأسئلة الشائعة', 'faq-title': 'أسئلة متكررة',
+                'faq-q1': 'ما هي مدة التوصيل؟', 'faq-a1': 'التوصيل في المغرب يستغرق 3-5 أيام عمل. للخارج، 7-14 يوماً حسب الوجهة.',
+                'faq-q2': 'هل يمكنني إرجاع قطعة؟', 'faq-a2': 'نعم، لديك 14 يوماً من الاستلام للإرجاع. يجب أن تكون بحالتها الأصلية.',
+                'faq-q3': 'هل تقدمون مقاسات مخصصة؟', 'faq-a3': 'بالتأكيد. اتصل بنا عبر النموذج مع قياساتك وسنصنع قطعة فريدة تناسب قوامك.',
+                'faq-q4': 'كيف أعتني بالقفطان؟', 'faq-a4': 'قطعنا حساسة. نوصي بالتنظيف الجاف المهني للحفاظ على التطريز والأقمشة الثمينة.',
+                'faq-q5': 'هل يمكنني الطلب من الخارج؟', 'faq-a5': 'نعم، نشحن لجميع أنحاء العالم. تختلف تكاليف الشحن حسب الوجهة.'
             }
         };
 
@@ -1718,7 +2065,7 @@
             [...document.querySelectorAll('[data-i18n]')].reverse().forEach(el => {
                 const key = el.dataset.i18n;
                 if (t[key]) {
-                    if (el.tagName === 'INPUT') {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                         el.placeholder = t[key];
                     } else {
                         el.innerHTML = t[key];
@@ -1811,6 +2158,16 @@
             lastScroll = currentScroll;
         });
 
+
+        function toggleFAQ(btn) {
+            btn.classList.toggle('open');
+            const answer = btn.nextElementSibling;
+            answer.classList.toggle('open');
+        }
+
+        document.querySelectorAll('.contact-form').forEach(form => {
+            form.addEventListener('submit', e => e.preventDefault());
+        });
 
         // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
