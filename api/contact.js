@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         personalizations: [{ to: [{ email: 'hafidaaffaki1@gmail.com' }] }],
-        from: { email: 'hafidaaffaki1@gmail.com' },
+        from: { email: 'azer.tyu199p@gmail.com' },
         replyTo: { email },
         subject: 'Contact H.A. Models - ' + name,
         content: [{ type: 'text/plain', value: 'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message }],
