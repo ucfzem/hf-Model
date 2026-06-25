@@ -4,91 +4,285 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>◆ SPY PAGE — H.A. Models</title>
+  <title>◆ SPY — H.A. Models</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace; background: #0a0a0a; color: #00ff88; display: flex; justify-content: center; padding: 2rem 1rem; }
-    .card { max-width: 800px; width: 100%; }
-    h1 { font-size: 1.5rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #00ff88; margin-bottom: .25rem; }
-    .sub { color: #666; font-size: .75rem; margin-bottom: 1.5rem; letter-spacing: 1px; }
-    .section { margin-bottom: 1.5rem; }
-    .section-title { color: #00cc6a; font-size: .7rem; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #1a3a2a; padding-bottom: .3rem; margin-bottom: .5rem; }
-    table { width: 100%; border-collapse: collapse; font-size: .78rem; }
-    td { padding: .35rem .25rem; border-bottom: 1px solid #111; vertical-align: top; }
-    td:first-child { color: #666; width: 140px; padding-right: 1rem; }
-    td:last-child { color: #ccc; word-break: break-all; }
-    td:last-child .null { color: #444; font-style: italic; }
+    body { font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace; background: #0a0a0a; color: #00ff88; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
+
+    h1 { font-size: 1.3rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; margin-bottom: .25rem; }
+    .sub { color: #555; font-size: .72rem; margin-bottom: 1.5rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .75rem; margin-bottom: 1.5rem; }
+    .stat { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 8px; padding: .8rem; }
+    .stat .num { font-size: 1.6rem; font-weight: 600; color: #00ff88; }
+    .stat .lbl { font-size: .65rem; color: #555; letter-spacing: 1px; text-transform: uppercase; margin-top: .2rem; }
+    .stat .subnum { font-size: .7rem; color: #444; margin-top: .1rem; }
+
+    .row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .panel { flex: 1; min-width: 280px; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1rem; }
+
+    .panel-title { font-size: .65rem; color: #00cc6a; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #1a1a1a; padding-bottom: .4rem; margin-bottom: .6rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: .72rem; }
+    td { padding: .3rem .15rem; border-bottom: 1px solid #111; vertical-align: top; }
+    td:first-child { color: #666; width: 90px; }
+    td:last-child { color: #bbb; word-break: break-all; }
+    .null { color: #333; font-style: italic; }
+
+    .bar-wrap { display: flex; align-items: center; gap: .5rem; margin: .2rem 0; font-size: .72rem; }
+    .bar { height: 16px; background: #00ff8822; border-radius: 3px; min-width: 2px; max-width: 100%; flex-shrink: 0; }
+    .bar-count { color: #888; width: 30px; text-align: right; }
+
+    .click-row { display: flex; justify-content: space-between; padding: .25rem 0; border-bottom: 1px solid #111; font-size: .72rem; }
+    .click-row .el { color: #bbb; }
+    .click-row .cnt { color: #00ff88; }
+
+    .visit-row { padding: .35rem 0; border-bottom: 1px solid #0a0a0a; font-size: .68rem; line-height: 1.4; }
+    .visit-row .time { color: #444; }
+    .visit-row .page { color: #00ff88; }
+    .visit-row .ref { color: #666; font-size: .65rem; }
+
+    .actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .btn { background: none; border: 1px solid #1a1a1a; color: #555; padding: .4rem .8rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; }
+    .btn:hover { border-color: #00ff8844; color: #00ff88; }
+    .btn.danger:hover { border-color: #ff444444; color: #ff4444; }
+
     .loading { text-align: center; padding: 3rem; color: #444; }
     .loading span { animation: blink 1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
-    .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #1a1a1a; font-size: .65rem; color: #333; text-align: center; letter-spacing: 1px; }
-    .badge { color: #00ff88; }
-    .raw { font-size: .65rem; color: #555; margin-top: .5rem; }
-    .raw summary { cursor: pointer; color: #444; }
-    .raw pre { background: #0d0d0d; padding: .5rem; border-radius: 4px; margin-top: .3rem; overflow-x: auto; max-height: 300px; }
+
+    .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #111; font-size: .62rem; color: #333; text-align: center; letter-spacing: 1px; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .footer .badge { color: #00ff88; }
+    .footer .dim { color: #333; }
+
+    .server-tab { margin-top: 1rem; }
+    .server-tab summary { cursor: pointer; color: #333; font-size: .7rem; letter-spacing: 1px; margin-bottom: .5rem; }
+    .server-tab pre { background: #0d0d0d; padding: .5rem; border-radius: 4px; font-size: .65rem; max-height: 250px; overflow-x: auto; color: #666; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>◆ SPY PAGE</h1>
-    <p class="sub">H.A. Models · deployment &amp; visitor intelligence</p>
-    <div id="status"><div class="loading"><span>●●●</span> intercepting signal…</div></div>
-    <div class="footer"><span class="badge">● noindex</span> · data collected server-side · you are being watched</div>
+  <div class="wrap">
+    <h1>◆ SPY</h1>
+    <p class="sub">H.A. Models · analytics &amp; visitor intelligence</p>
+
+    <div id="app"><div class="loading"><span>●●●</span> intercepting signal…</div></div>
+
+    <div class="footer">
+      <span class="badge">● noindex</span>
+      <span class="dim">data in localStorage · server-side intelligence below</span>
+    </div>
   </div>
+
   <script>
-    function val(v) {
-      if (v === null || v === undefined) return '<span class="null">—</span>';
-      return v;
+    const STORAGE_KEY = 'ha-spy-data';
+
+    function loadData() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || emptyData(); }
+      catch { return emptyData(); }
     }
 
-    function table(rows) {
-      return '<table>' + rows.map(([k, v]) =>
-        '<tr><td>' + k + '</td><td>' + val(v) + '</td></tr>'
-      ).join('') + '</table>';
+    function emptyData() {
+      return { visits: [], clicks: [], pages: {}, sessions: [], startTime: Date.now() };
     }
 
+    function saveData(d) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+    }
+
+    // track this visit
+    function trackVisit() {
+      const d = loadData();
+      const now = Date.now();
+      const entry = {
+        time: now,
+        page: window.location.pathname,
+        ref: document.referrer || 'direct',
+        ts: new Date().toISOString()
+      };
+      d.visits.push(entry);
+      const pageKey = entry.page;
+      d.pages[pageKey] = (d.pages[pageKey] || 0) + 1;
+      d.sessions.push({ start: now, last: now });
+      saveData(d);
+    }
+
+    // track clicks
+    document.addEventListener('click', function(e) {
+      const el = e.target;
+      let key = '';
+      if (el.tagName === 'A') key = el.href || el.textContent;
+      else if (el.tagName === 'BUTTON') key = el.textContent || el.className;
+      else key = el.tagName + (el.className ? '.' + el.className : '') + (el.textContent ? ' "' + el.textContent.trim().slice(0, 30) + '"' : '');
+      if (!key) return;
+      const d = loadData();
+      d.clicks.push({ time: Date.now(), element: key, page: window.location.pathname });
+      saveData(d);
+    });
+
+    // track time on page
+    setInterval(function() {
+      const d = loadData();
+      if (d.sessions.length) {
+        d.sessions[d.sessions.length - 1].last = Date.now();
+        saveData(d);
+      }
+    }, 5000);
+
+    trackVisit();
+
+    // ===== RENDER =====
+    function val(v) { return (v === null || v === undefined) ? '<span class="null">—</span>' : v; }
+
+    function render(data, server) {
+      const now = Date.now();
+
+      // compute stats
+      const totalVisits = data.visits.length;
+      const totalClicks = data.clicks.length;
+
+      // unique pages
+      const uniquePages = Object.keys(data.pages).length;
+
+      // today
+      const todayStart = new Date(); todayStart.setHours(0,0,0,0);
+      const todayVisits = data.visits.filter(v => v.time >= todayStart.getTime()).length;
+
+      // avg time
+      let avgTime = 0;
+      if (data.sessions.length) {
+        const times = data.sessions.map(s => (s.last - s.start) / 1000).filter(t => t >= 0 && t < 86400);
+        avgTime = times.length ? times.reduce((a, b) => a + b, 0) / times.length : 0;
+      }
+
+      // page ranking
+      const pageRank = Object.entries(data.pages).sort((a, b) => b[1] - a[1]);
+      const maxPage = pageRank.length ? pageRank[0][1] : 1;
+
+      // click ranking
+      const clickMap = {};
+      data.clicks.forEach(c => { clickMap[c.element] = (clickMap[c.element] || 0) + 1; });
+      const clickRank = Object.entries(clickMap).sort((a, b) => b[1] - a[1]).slice(0, 15);
+
+      // recent visits (last 50)
+      const recent = data.visits.slice(-50).reverse();
+
+      // global visits from server?
+      const globalVisits = server ? (server.globalVisits || '—') : '—';
+
+      let html = '';
+
+      // ---- STATS GRID ----
+      html += '<div class="grid">';
+      html += `<div class="stat"><div class="num">${totalVisits}</div><div class="lbl">visits (local)</div></div>`;
+      html += `<div class="stat"><div class="num">${todayVisits}</div><div class="lbl">today</div></div>`;
+      html += `<div class="stat"><div class="num">${avgTime > 0 ? Math.floor(avgTime / 60) + 'm ' + Math.floor(avgTime % 60) + 's' : '—'}</div><div class="lbl">avg time</div></div>`;
+      html += `<div class="stat"><div class="num">${uniquePages}</div><div class="lbl">pages</div></div>`;
+      html += `<div class="stat"><div class="num">${totalClicks}</div><div class="lbl">clicks tracked</div></div>`;
+      html += '</div>';
+
+      // ---- PAGES + CLICKS ----
+      html += '<div class="row">';
+
+      // most visited pages
+      html += '<div class="panel"><div class="panel-title">most visited pages</div>';
+      if (pageRank.length) {
+        pageRank.slice(0, 10).forEach(([page, count]) => {
+          const pct = Math.round((count / maxPage) * 100);
+          html += `<div class="bar-wrap"><span class="bar-count">${count}</span><div class="bar" style="width:${pct}%"></div><span>${page}</span></div>`;
+        });
+      } else {
+        html += '<span style="color:#333">no data yet</span>';
+      }
+      html += '</div>';
+
+      // most clicked elements
+      html += '<div class="panel"><div class="panel-title">most clicked elements</div>';
+      if (clickRank.length) {
+        clickRank.slice(0, 10).forEach(([el, count]) => {
+          html += `<div class="click-row"><span class="el">${el}</span><span class="cnt">${count}</span></div>`;
+        });
+      } else {
+        html += '<span style="color:#333">no data yet</span>';
+      }
+      html += '</div>';
+
+      html += '</div>';
+
+      // ---- RECENT VISITS ----
+      html += '<div class="panel" style="margin-bottom:1rem"><div class="panel-title">recent visits</div>';
+      if (recent.length) {
+        recent.slice(0, 30).forEach(v => {
+          const d = new Date(v.time);
+          const timeStr = d.toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+          html += `<div class="visit-row"><span class="time">${timeStr}</span> · <span class="page">${v.page}</span>${v.ref !== 'direct' ? '<br><span class="ref">↳ ' + v.ref + '</span>' : '<br><span class="ref" style="color:#333">direct</span>'}</div>`;
+        });
+      } else {
+        html += '<span style="color:#333">no visits yet</span>';
+      }
+      html += '</div>';
+
+      // ---- ACTIONS ----
+      html += '<div class="actions">';
+      html += '<button class="btn" onclick="exportJSON()">export JSON</button>';
+      html += '<button class="btn" onclick="exportCSV()">export CSV</button>';
+      html += '<button class="btn danger" onclick="clearData()">clear local</button>';
+      html += '</div>';
+
+      // ---- SERVER INTELLIGENCE (collapsible) ----
+      if (server) {
+        html += '<details class="server-tab"><summary>▼ server-side intelligence</summary>';
+        html += '<table>';
+        Object.entries(server.visitor || {}).forEach(([k, v]) => { html += `<tr><td>visitor.${k}</td><td>${val(v)}</td></tr>`; });
+        Object.entries(server.deployment || {}).forEach(([k, v]) => { html += `<tr><td>deploy.${k}</td><td>${val(v)}</td></tr>`; });
+        Object.entries(server.git || {}).forEach(([k, v]) => { html += `<tr><td>git.${k}</td><td>${val(v)}</td></tr>`; });
+        html += `<tr><td>timestamp</td><td>${server.timestamp}</td></tr>`;
+        html += '</table>';
+        html += '<details class="raw"><summary style="cursor:pointer;color:#333;font-size:.7rem;margin-top:.5rem;">▼ raw JSON</summary><pre>' + JSON.stringify(server, null, 2) + '</pre></details>';
+        html += '</details>';
+      }
+
+      document.getElementById('app').innerHTML = html;
+    }
+
+    // ===== EXPORT =====
+    window.exportJSON = function() {
+      const d = loadData();
+      const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ha-spy-data.json';
+      a.click();
+    };
+
+    window.exportCSV = function() {
+      const d = loadData();
+      let csv = 'time,page,referrer\n';
+      d.visits.forEach(v => {
+        csv += `${new Date(v.time).toISOString()},"${v.page}","${v.ref}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ha-spy-visits.csv';
+      a.click();
+    };
+
+    window.clearData = function() {
+      if (confirm('Clear all local analytics data?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    };
+
+    // ===== FETCH SERVER + RENDER =====
     fetch('/api/status')
       .then(r => r.json())
-      .then(d => {
-        let html = '';
-
-        html += '<div class="section"><div class="section-title">Visitor Intelligence</div>';
-        html += table(Object.entries(d.visitor));
-        html += '</div>';
-
-        html += '<div class="section"><div class="section-title">Deployment</div>';
-        html += table(Object.entries(d.deployment));
-        html += '</div>';
-
-        html += '<div class="section"><div class="section-title">Git</div>';
-        html += table(Object.entries(d.git));
-        html += '</div>';
-
-        html += '<div class="section"><div class="section-title">Runtime</div>';
-        html += table([
-          ['Node', d.runtime.node],
-          ['Platform', d.runtime.platform],
-          ['Arch', d.runtime.arch],
-          ['Uptime', Math.floor(d.runtime.uptime) + 's'],
-          ['Heap Used', (d.runtime.memoryUsage.heapUsed / 1024 / 1024).toFixed(1) + ' MB'],
-          ['Heap Total', (d.runtime.memoryUsage.heapTotal / 1024 / 1024).toFixed(1) + ' MB'],
-          ['RSS', (d.runtime.memoryUsage.rss / 1024 / 1024).toFixed(1) + ' MB'],
-        ]);
-        html += '</div>';
-
-        html += '<div class="section"><div class="section-title">Meta</div>';
-        html += table([
-          ['Served By', d.servedBy],
-          ['Timestamp', d.timestamp],
-        ]);
-        html += '</div>';
-
-        html += '<details class="raw"><summary>▼ raw JSON</summary><pre>' + JSON.stringify(d, null, 2) + '</pre></details>';
-
-        document.getElementById('status').innerHTML = html;
+      .then(server => {
+        render(loadData(), server);
       })
-      .catch(e => {
-        document.getElementById('status').innerHTML = '<p style="color:#ff4444">✖ failed to intercept signal: ' + e.message + '</p>';
+      .catch(() => {
+        render(loadData(), null);
       });
   </script>
 </body>
