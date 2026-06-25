@@ -86,6 +86,7 @@
 - Pinterest → WhatsApp icon with +212 641-904359 in footer
 - All footer navigation buttons linked to their respective sections
 - Caftans/Djellabas nav links now trigger product filtering + scroll
+- Contact form: validates via /api/contact, then opens Gmail compose with pre-filled fields (visitor sends from own Gmail)
 
 ### Image updates (June 25, 2026)
 - Earrings image replaced with user-provided photo → `assets/caftans/acc-earrings.jpg`
