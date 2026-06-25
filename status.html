@@ -59,7 +59,16 @@
     .server-tab summary { cursor: pointer; color: #A09080; font-size: .75rem; letter-spacing: 1px; margin-bottom: .5rem; }
     .server-tab pre { background: #FDF8F0; padding: .5rem; border-radius: 4px; font-size: .72rem; max-height: 250px; overflow-x: auto; color: #5A4A3A; border: 1px solid #F0E8D8; }
 
-    .token-masked { font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; color: #B0A090; }
+    .help-section { margin-top: 1.5rem; background: #fff; border: 1px solid #F0E8D8; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 4px rgba(60,42,30,.04); }
+    .help-section summary { cursor: pointer; font-size: .7rem; color: #B8860B; letter-spacing: 2.5px; text-transform: uppercase; }
+    .help-section .content { margin-top: .8rem; font-size: .82rem; color: #5A4A3A; line-height: 1.6; }
+    .help-section .content h3 { font-size: .85rem; font-weight: 600; color: #3C2A1E; margin-top: 1rem; margin-bottom: .3rem; letter-spacing: .5px; }
+    .help-section .content h3:first-child { margin-top: 0; }
+    .help-section .content p { margin-bottom: .4rem; }
+    .help-section .content ul { margin: .3rem 0 .6rem 1.2rem; }
+    .help-section .content li { margin-bottom: .2rem; }
+    .help-section .content .label { color: #B8860B; font-weight: 500; }
+    .help-section .content code { font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; background: #FDF8F0; padding: .1rem .35rem; border-radius: 3px; color: #5A4A3A; border: 1px solid #F0E8D8; }
   </style>
 </head>
 <body>
@@ -75,7 +84,43 @@
       <button class="btn" id="token-save-btn" style="font-size:.7rem;padding:.3rem .7rem;">save</button>
     </div>
 
-    <div id="app"><div class="loading">loading…</div></div>
+    <div id="app"><div class="loading">loading…</div>    </div>
+
+    <!-- ===== HELP SECTION ===== -->
+    <details class="help-section">
+      <summary>▼ help &amp; explanation</summary>
+      <div class="content">
+        <h3>What the numbers mean</h3>
+        <ul>
+          <li><span class="label">visits (local)</span> — total page loads tracked in <em>your</em> browser's localStorage. Each visitor sees their own stats only.</li>
+          <li><span class="label">today</span> — visits since midnight (your local time).</li>
+          <li><span class="label">avg time</span> — average time spent on this page across your sessions.</li>
+          <li><span class="label">pages</span> — unique page paths you've visited on this site.</li>
+          <li><span class="label">clicks tracked</span> — total clicks on links, buttons, and other elements recorded from your browser.</li>
+          <li><span class="label">most visited pages</span> — which URLs you viewed most, sorted by count with a bar chart.</li>
+          <li><span class="label">most clicked elements</span> — which buttons / links you interacted with most.</li>
+          <li><span class="label">recent visits</span> — chronological log of your page views with referrer info.</li>
+        </ul>
+        <p style="color:#B0A090;font-size:.75rem;">All this data lives only in your browser's localStorage. It never leaves your machine. Clear it anytime with the "clear local" button.</p>
+
+        <h3>GitHub Token — what it's for</h3>
+        <p>This field <strong>stores</strong> a GitHub personal access token in your browser's localStorage so a future script can call the GitHub API (e.g., fetch repo info, stars, commits, issues). It is <strong>not used by anything yet</strong> — it's just a safe place to keep it.</p>
+        <p>The token is never sent anywhere unless you explicitly build a feature that uses it. It stays in your browser, on your machine.</p>
+
+        <h3>What kind of token to use</h3>
+        <ul>
+          <li>Go to <a href="https://github.com/settings/tokens" target="_blank" style="color:#B8860B;">github.com/settings/tokens</a></li>
+          <li>Generate a <strong>fine-grained PAT</strong> or classic token</li>
+          <li>For read-only public data, select scope <code>public_repo</code> (or <code>metadata:read</code>)</li>
+          <li><strong>No expiration</strong> is fine if this is your personal utility page. For extra safety, use a fine-grained token limited to this repo only.</li>
+          <li>Paste it into the field above and click <strong>save</strong> — it's stored in your localStorage.</li>
+        </ul>
+        <p style="color:#B0A090;font-size:.75rem;">⚠️ This page is <code>noindex</code>, but anyone with the URL can open it. Treat your token accordingly.</p>
+
+        <h3>Server-side intelligence</h3>
+        <p>Below the analytics section, there's a collapsible block labelled "server-side intelligence" fetched from the Vercel serverless function (<code>/api/status</code>). It shows your <strong>visitor data</strong> (IP, country, city, browser, language), <strong>deployment info</strong> (environment, region), and <strong>git metadata</strong> (commit SHA, branch, message, repo). This data comes from Vercel's request headers — nothing is stored server-side.</p>
+      </div>
+    </details>
 
     <div class="footer">
       <span class="badge">● noindex</span>
