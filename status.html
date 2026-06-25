@@ -4,54 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Deployment Status — H.A. Models</title>
+  <title>◆ SPY PAGE — H.A. Models</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #222; display: flex; justify-content: center; padding: 3rem 1rem; }
-    .card { max-width: 640px; width: 100%; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.08); padding: 2rem; }
-    h1 { font-size: 1.3rem; font-weight: 600; margin-bottom: .25rem; }
-    .sub { color: #666; font-size: .85rem; margin-bottom: 1.5rem; }
-    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
-    td { padding: .5rem .25rem; border-bottom: 1px solid #eee; }
-    td:first-child { font-weight: 600; color: #555; width: 140px; }
-    td:last-child { font-family: 'SF Mono', 'Fira Code', monospace; word-break: break-all; }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: .75rem; font-weight: 600; text-transform: uppercase; }
-    .badge.on { background: #d4edda; color: #155724; }
-    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; font-size: .8rem; color: #888; text-align: center; }
-    .loading { text-align: center; padding: 2rem; color: #888; }
+    body { font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace; background: #0a0a0a; color: #00ff88; display: flex; justify-content: center; padding: 2rem 1rem; }
+    .card { max-width: 800px; width: 100%; }
+    h1 { font-size: 1.5rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #00ff88; margin-bottom: .25rem; }
+    .sub { color: #666; font-size: .75rem; margin-bottom: 1.5rem; letter-spacing: 1px; }
+    .section { margin-bottom: 1.5rem; }
+    .section-title { color: #00cc6a; font-size: .7rem; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #1a3a2a; padding-bottom: .3rem; margin-bottom: .5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+    td { padding: .35rem .25rem; border-bottom: 1px solid #111; vertical-align: top; }
+    td:first-child { color: #666; width: 140px; padding-right: 1rem; }
+    td:last-child { color: #ccc; word-break: break-all; }
+    td:last-child .null { color: #444; font-style: italic; }
+    .loading { text-align: center; padding: 3rem; color: #444; }
+    .loading span { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #1a1a1a; font-size: .65rem; color: #333; text-align: center; letter-spacing: 1px; }
+    .badge { color: #00ff88; }
+    .raw { font-size: .65rem; color: #555; margin-top: .5rem; }
+    .raw summary { cursor: pointer; color: #444; }
+    .raw pre { background: #0d0d0d; padding: .5rem; border-radius: 4px; margin-top: .3rem; overflow-x: auto; max-height: 300px; }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>🔍 Deployment Status</h1>
-    <p class="sub">H.A. Models — Vercel deployment metadata</p>
-    <div id="status"><div class="loading">Loading…</div></div>
-    <div class="footer">This page is <span class="badge on">noindex</span> · data fetched server-side</div>
+    <h1>◆ SPY PAGE</h1>
+    <p class="sub">H.A. Models · deployment &amp; visitor intelligence</p>
+    <div id="status"><div class="loading"><span>●●●</span> intercepting signal…</div></div>
+    <div class="footer"><span class="badge">● noindex</span> · data collected server-side · you are being watched</div>
   </div>
   <script>
+    function val(v) {
+      if (v === null || v === undefined) return '<span class="null">—</span>';
+      return v;
+    }
+
+    function table(rows) {
+      return '<table>' + rows.map(([k, v]) =>
+        '<tr><td>' + k + '</td><td>' + val(v) + '</td></tr>'
+      ).join('') + '</table>';
+    }
+
     fetch('/api/status')
       .then(r => r.json())
       .then(d => {
-        const rows = [
-          ['Environment', d.environment],
-          ['URL', d.url],
-          ['Region', d.region],
-          ['Commit SHA', d.commitSha],
-          ['Branch', d.commitRef],
-          ['Message', d.commitMessage],
-          ['Author', d.commitAuthor],
-          ['Repo', d.repoOwner + '/' + d.repoSlug],
-          ['Deploy Time', d.deployTime ? new Date(d.deployTime).toISOString() : 'N/A'],
-          ['Node', d.nodeVersion],
-          ['Platform', d.platform],
-        ];
-        document.getElementById('status').innerHTML =
-          '<table>' + rows.map(([k, v]) =>
-            '<tr><td>' + k + '</td><td>' + (v || '—') + '</td></tr>'
-          ).join('') + '</table>';
+        let html = '';
+
+        html += '<div class="section"><div class="section-title">Visitor Intelligence</div>';
+        html += table(Object.entries(d.visitor));
+        html += '</div>';
+
+        html += '<div class="section"><div class="section-title">Deployment</div>';
+        html += table(Object.entries(d.deployment));
+        html += '</div>';
+
+        html += '<div class="section"><div class="section-title">Git</div>';
+        html += table(Object.entries(d.git));
+        html += '</div>';
+
+        html += '<div class="section"><div class="section-title">Runtime</div>';
+        html += table([
+          ['Node', d.runtime.node],
+          ['Platform', d.runtime.platform],
+          ['Arch', d.runtime.arch],
+          ['Uptime', Math.floor(d.runtime.uptime) + 's'],
+          ['Heap Used', (d.runtime.memoryUsage.heapUsed / 1024 / 1024).toFixed(1) + ' MB'],
+          ['Heap Total', (d.runtime.memoryUsage.heapTotal / 1024 / 1024).toFixed(1) + ' MB'],
+          ['RSS', (d.runtime.memoryUsage.rss / 1024 / 1024).toFixed(1) + ' MB'],
+        ]);
+        html += '</div>';
+
+        html += '<div class="section"><div class="section-title">Meta</div>';
+        html += table([
+          ['Served By', d.servedBy],
+          ['Timestamp', d.timestamp],
+        ]);
+        html += '</div>';
+
+        html += '<details class="raw"><summary>▼ raw JSON</summary><pre>' + JSON.stringify(d, null, 2) + '</pre></details>';
+
+        document.getElementById('status').innerHTML = html;
       })
-      .catch(() => {
-        document.getElementById('status').innerHTML = '<p style="color:#c00">Failed to load status.</p>';
+      .catch(e => {
+        document.getElementById('status').innerHTML = '<p style="color:#ff4444">✖ failed to intercept signal: ' + e.message + '</p>';
       });
   </script>
 </body>
