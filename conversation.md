@@ -87,7 +87,7 @@
 - All footer navigation buttons linked to their respective sections
 - Caftans/Djellabas nav links now trigger product filtering + scroll
 - Contact form: validates via /api/contact, then opens Gmail compose with pre-filled fields (visitor sends from own Gmail)
-- Gold Embroidered Belt image replaced (img-08.jpg)
+- Gold Embroidered Belt image replaced (img-08.jpg, v2)
 
 ### Image updates (June 25, 2026)
 - Earrings image replaced with user-provided photo → `assets/caftans/acc-earrings.jpg`
