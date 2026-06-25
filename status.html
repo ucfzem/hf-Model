@@ -7,58 +7,59 @@
   <title>◆ SPY — H.A. Models</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace; background: #0a0a0a; color: #00ff88; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #FDF8F0; color: #3C2A1E; }
     .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
 
-    h1 { font-size: 1.3rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; margin-bottom: .25rem; }
-    .sub { color: #555; font-size: .72rem; margin-bottom: 1.5rem; }
+    h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #3C2A1E; margin-bottom: .25rem; }
+    .sub { color: #A09080; font-size: .8rem; margin-bottom: 1.5rem; letter-spacing: 1px; }
+
+    /* ===== TOKEN BAR ===== */
+    .token-bar { background: #fff; border: 1px solid #E8DDB5; border-radius: 8px; padding: .8rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .token-bar label { font-size: .75rem; color: #8A7A6A; text-transform: uppercase; letter-spacing: 2px; }
+    .token-bar input { flex: 1; min-width: 160px; background: #FDF8F0; border: 1px solid #E0D5C5; border-radius: 4px; padding: .45rem .6rem; font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; color: #3C2A1E; outline: none; }
+    .token-bar input:focus { border-color: #D4AF37; }
+    .token-bar .tiny { font-size: .65rem; color: #B0A090; }
+    .token-bar .saved { color: #8B9D6B; font-size: .65rem; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .75rem; margin-bottom: 1.5rem; }
-    .stat { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 8px; padding: .8rem; }
-    .stat .num { font-size: 1.6rem; font-weight: 600; color: #00ff88; }
-    .stat .lbl { font-size: .65rem; color: #555; letter-spacing: 1px; text-transform: uppercase; margin-top: .2rem; }
-    .stat .subnum { font-size: .7rem; color: #444; margin-top: .1rem; }
+    .stat { background: #fff; border: 1px solid #F0E8D8; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 4px rgba(60,42,30,.04); }
+    .stat .num { font-size: 1.8rem; font-weight: 500; color: #B8860B; }
+    .stat .lbl { font-size: .7rem; color: #8A7A6A; letter-spacing: 1.5px; text-transform: uppercase; margin-top: .15rem; }
 
     .row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .panel { flex: 1; min-width: 280px; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1rem; }
+    .panel { flex: 1; min-width: 280px; background: #fff; border: 1px solid #F0E8D8; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 4px rgba(60,42,30,.04); }
 
-    .panel-title { font-size: .65rem; color: #00cc6a; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #1a1a1a; padding-bottom: .4rem; margin-bottom: .6rem; }
+    .panel-title { font-size: .7rem; color: #B8860B; letter-spacing: 2.5px; text-transform: uppercase; border-bottom: 1px solid #F0E8D8; padding-bottom: .5rem; margin-bottom: .75rem; }
 
-    table { width: 100%; border-collapse: collapse; font-size: .72rem; }
-    td { padding: .3rem .15rem; border-bottom: 1px solid #111; vertical-align: top; }
-    td:first-child { color: #666; width: 90px; }
-    td:last-child { color: #bbb; word-break: break-all; }
-    .null { color: #333; font-style: italic; }
+    .bar-wrap { display: flex; align-items: center; gap: .5rem; margin: .25rem 0; font-size: .8rem; }
+    .bar { height: 18px; background: #D4AF3744; border-radius: 3px; min-width: 2px; max-width: 100%; flex-shrink: 0; }
+    .bar-count { color: #8A7A6A; width: 30px; text-align: right; font-size: .75rem; }
 
-    .bar-wrap { display: flex; align-items: center; gap: .5rem; margin: .2rem 0; font-size: .72rem; }
-    .bar { height: 16px; background: #00ff8822; border-radius: 3px; min-width: 2px; max-width: 100%; flex-shrink: 0; }
-    .bar-count { color: #888; width: 30px; text-align: right; }
+    .click-row { display: flex; justify-content: space-between; padding: .3rem 0; border-bottom: 1px solid #F5F0E8; font-size: .8rem; }
+    .click-row .el { color: #3C2A1E; }
+    .click-row .cnt { color: #B8860B; font-weight: 500; }
 
-    .click-row { display: flex; justify-content: space-between; padding: .25rem 0; border-bottom: 1px solid #111; font-size: .72rem; }
-    .click-row .el { color: #bbb; }
-    .click-row .cnt { color: #00ff88; }
-
-    .visit-row { padding: .35rem 0; border-bottom: 1px solid #0a0a0a; font-size: .68rem; line-height: 1.4; }
-    .visit-row .time { color: #444; }
-    .visit-row .page { color: #00ff88; }
-    .visit-row .ref { color: #666; font-size: .65rem; }
+    .visit-row { padding: .45rem 0; border-bottom: 1px solid #F5F0E8; font-size: .78rem; line-height: 1.4; }
+    .visit-row .time { color: #A09080; font-size: .72rem; }
+    .visit-row .page { color: #3C2A1E; font-weight: 500; }
+    .visit-row .ref { color: #B0A090; font-size: .72rem; }
 
     .actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
-    .btn { background: none; border: 1px solid #1a1a1a; color: #555; padding: .4rem .8rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; }
-    .btn:hover { border-color: #00ff8844; color: #00ff88; }
-    .btn.danger:hover { border-color: #ff444444; color: #ff4444; }
+    .btn { background: none; border: 1px solid #D4AF37; color: #B8860B; padding: .4rem 1rem; border-radius: 6px; cursor: pointer; font-family: 'Cormorant Garamond', Georgia, serif; font-size: .8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: all .15s; }
+    .btn:hover { background: #D4AF37; color: #fff; }
+    .btn.danger { border-color: #C88; color: #A66; }
+    .btn.danger:hover { background: #C88; color: #fff; }
 
-    .loading { text-align: center; padding: 3rem; color: #444; }
-    .loading span { animation: blink 1s steps(1) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
+    .loading { text-align: center; padding: 3rem; color: #B0A090; font-size: 1.1rem; }
 
-    .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #111; font-size: .62rem; color: #333; text-align: center; letter-spacing: 1px; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .footer .badge { color: #00ff88; }
-    .footer .dim { color: #333; }
+    .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #F0E8D8; font-size: .7rem; color: #C0B0A0; text-align: center; letter-spacing: 1px; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .footer .badge { color: #B8860B; }
 
     .server-tab { margin-top: 1rem; }
-    .server-tab summary { cursor: pointer; color: #333; font-size: .7rem; letter-spacing: 1px; margin-bottom: .5rem; }
-    .server-tab pre { background: #0d0d0d; padding: .5rem; border-radius: 4px; font-size: .65rem; max-height: 250px; overflow-x: auto; color: #666; }
+    .server-tab summary { cursor: pointer; color: #A09080; font-size: .75rem; letter-spacing: 1px; margin-bottom: .5rem; }
+    .server-tab pre { background: #FDF8F0; padding: .5rem; border-radius: 4px; font-size: .72rem; max-height: 250px; overflow-x: auto; color: #5A4A3A; border: 1px solid #F0E8D8; }
+
+    .token-masked { font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; color: #B0A090; }
   </style>
 </head>
 <body>
@@ -66,48 +67,72 @@
     <h1>◆ SPY</h1>
     <p class="sub">H.A. Models · analytics &amp; visitor intelligence</p>
 
-    <div id="app"><div class="loading"><span>●●●</span> intercepting signal…</div></div>
+    <!-- ===== TOKEN BAR ===== -->
+    <div class="token-bar">
+      <label>GitHub Token</label>
+      <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <span id="token-status"></span>
+      <button class="btn" id="token-save-btn" style="font-size:.7rem;padding:.3rem .7rem;">save</button>
+    </div>
+
+    <div id="app"><div class="loading">loading…</div></div>
 
     <div class="footer">
       <span class="badge">● noindex</span>
-      <span class="dim">data in localStorage · server-side intelligence below</span>
+      <span>data in localStorage</span>
     </div>
   </div>
 
   <script>
     const STORAGE_KEY = 'ha-spy-data';
+    const TOKEN_KEY = 'ha-github-token';
 
+    // ===== TOKEN =====
+    function loadToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
+    function saveToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+
+    function updateTokenUI() {
+      const input = document.getElementById('token-input');
+      const status = document.getElementById('token-status');
+      const saved = loadToken();
+      if (saved) {
+        input.value = saved;
+        status.innerHTML = '<span class="saved">✓ saved</span>';
+      } else {
+        status.innerHTML = '<span class="tiny">stored locally only</span>';
+      }
+    }
+
+    document.getElementById('token-save-btn').addEventListener('click', function() {
+      const val = document.getElementById('token-input').value.trim();
+      saveToken(val);
+      updateTokenUI();
+    });
+
+    updateTokenUI();
+
+    // ===== ANALYTICS DATA =====
     function loadData() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || emptyData(); }
       catch { return emptyData(); }
     }
-
     function emptyData() {
       return { visits: [], clicks: [], pages: {}, sessions: [], startTime: Date.now() };
     }
-
     function saveData(d) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
     }
 
-    // track this visit
     function trackVisit() {
       const d = loadData();
       const now = Date.now();
-      const entry = {
-        time: now,
-        page: window.location.pathname,
-        ref: document.referrer || 'direct',
-        ts: new Date().toISOString()
-      };
+      const entry = { time: now, page: window.location.pathname, ref: document.referrer || 'direct', ts: new Date().toISOString() };
       d.visits.push(entry);
-      const pageKey = entry.page;
-      d.pages[pageKey] = (d.pages[pageKey] || 0) + 1;
+      d.pages[entry.page] = (d.pages[entry.page] || 0) + 1;
       d.sessions.push({ start: now, last: now });
       saveData(d);
     }
 
-    // track clicks
     document.addEventListener('click', function(e) {
       const el = e.target;
       let key = '';
@@ -120,7 +145,6 @@
       saveData(d);
     });
 
-    // track time on page
     setInterval(function() {
       const d = loadData();
       if (d.sessions.length) {
@@ -132,47 +156,33 @@
     trackVisit();
 
     // ===== RENDER =====
-    function val(v) { return (v === null || v === undefined) ? '<span class="null">—</span>' : v; }
+    function val(v) { return (v === null || v === undefined) ? '<span style="color:#C0B0A0">—</span>' : v; }
 
     function render(data, server) {
       const now = Date.now();
-
-      // compute stats
       const totalVisits = data.visits.length;
       const totalClicks = data.clicks.length;
-
-      // unique pages
       const uniquePages = Object.keys(data.pages).length;
-
-      // today
       const todayStart = new Date(); todayStart.setHours(0,0,0,0);
       const todayVisits = data.visits.filter(v => v.time >= todayStart.getTime()).length;
 
-      // avg time
       let avgTime = 0;
       if (data.sessions.length) {
         const times = data.sessions.map(s => (s.last - s.start) / 1000).filter(t => t >= 0 && t < 86400);
         avgTime = times.length ? times.reduce((a, b) => a + b, 0) / times.length : 0;
       }
 
-      // page ranking
       const pageRank = Object.entries(data.pages).sort((a, b) => b[1] - a[1]);
       const maxPage = pageRank.length ? pageRank[0][1] : 1;
 
-      // click ranking
       const clickMap = {};
       data.clicks.forEach(c => { clickMap[c.element] = (clickMap[c.element] || 0) + 1; });
       const clickRank = Object.entries(clickMap).sort((a, b) => b[1] - a[1]).slice(0, 15);
 
-      // recent visits (last 50)
       const recent = data.visits.slice(-50).reverse();
-
-      // global visits from server?
-      const globalVisits = server ? (server.globalVisits || '—') : '—';
 
       let html = '';
 
-      // ---- STATS GRID ----
       html += '<div class="grid">';
       html += `<div class="stat"><div class="num">${totalVisits}</div><div class="lbl">visits (local)</div></div>`;
       html += `<div class="stat"><div class="num">${todayVisits}</div><div class="lbl">today</div></div>`;
@@ -181,10 +191,8 @@
       html += `<div class="stat"><div class="num">${totalClicks}</div><div class="lbl">clicks tracked</div></div>`;
       html += '</div>';
 
-      // ---- PAGES + CLICKS ----
       html += '<div class="row">';
 
-      // most visited pages
       html += '<div class="panel"><div class="panel-title">most visited pages</div>';
       if (pageRank.length) {
         pageRank.slice(0, 10).forEach(([page, count]) => {
@@ -192,98 +200,77 @@
           html += `<div class="bar-wrap"><span class="bar-count">${count}</span><div class="bar" style="width:${pct}%"></div><span>${page}</span></div>`;
         });
       } else {
-        html += '<span style="color:#333">no data yet</span>';
+        html += '<span style="color:#C0B0A0">no data yet</span>';
       }
       html += '</div>';
 
-      // most clicked elements
       html += '<div class="panel"><div class="panel-title">most clicked elements</div>';
       if (clickRank.length) {
         clickRank.slice(0, 10).forEach(([el, count]) => {
           html += `<div class="click-row"><span class="el">${el}</span><span class="cnt">${count}</span></div>`;
         });
       } else {
-        html += '<span style="color:#333">no data yet</span>';
+        html += '<span style="color:#C0B0A0">no data yet</span>';
       }
       html += '</div>';
 
       html += '</div>';
 
-      // ---- RECENT VISITS ----
       html += '<div class="panel" style="margin-bottom:1rem"><div class="panel-title">recent visits</div>';
       if (recent.length) {
         recent.slice(0, 30).forEach(v => {
           const d = new Date(v.time);
           const timeStr = d.toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
-          html += `<div class="visit-row"><span class="time">${timeStr}</span> · <span class="page">${v.page}</span>${v.ref !== 'direct' ? '<br><span class="ref">↳ ' + v.ref + '</span>' : '<br><span class="ref" style="color:#333">direct</span>'}</div>`;
+          html += `<div class="visit-row"><span class="time">${timeStr}</span> · <span class="page">${v.page}</span>${v.ref !== 'direct' ? '<br><span class="ref">↳ ' + v.ref + '</span>' : '<br><span class="ref" style="color:#C0B0A0">direct</span>'}</div>`;
         });
       } else {
-        html += '<span style="color:#333">no visits yet</span>';
+        html += '<span style="color:#C0B0A0">no visits yet</span>';
       }
       html += '</div>';
 
-      // ---- ACTIONS ----
       html += '<div class="actions">';
       html += '<button class="btn" onclick="exportJSON()">export JSON</button>';
       html += '<button class="btn" onclick="exportCSV()">export CSV</button>';
       html += '<button class="btn danger" onclick="clearData()">clear local</button>';
       html += '</div>';
 
-      // ---- SERVER INTELLIGENCE (collapsible) ----
       if (server) {
         html += '<details class="server-tab"><summary>▼ server-side intelligence</summary>';
-        html += '<table>';
-        Object.entries(server.visitor || {}).forEach(([k, v]) => { html += `<tr><td>visitor.${k}</td><td>${val(v)}</td></tr>`; });
-        Object.entries(server.deployment || {}).forEach(([k, v]) => { html += `<tr><td>deploy.${k}</td><td>${val(v)}</td></tr>`; });
-        Object.entries(server.git || {}).forEach(([k, v]) => { html += `<tr><td>git.${k}</td><td>${val(v)}</td></tr>`; });
-        html += `<tr><td>timestamp</td><td>${server.timestamp}</td></tr>`;
+        html += '<table style="width:100%;border-collapse:collapse;font-size:.78rem;">';
+        Object.entries(server.visitor || {}).forEach(([k, v]) => { html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`; });
+        Object.entries(server.deployment || {}).forEach(([k, v]) => { html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`; });
+        Object.entries(server.git || {}).forEach(([k, v]) => { html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`; });
+        html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">timestamp</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${server.timestamp}</td></tr>`;
         html += '</table>';
-        html += '<details class="raw"><summary style="cursor:pointer;color:#333;font-size:.7rem;margin-top:.5rem;">▼ raw JSON</summary><pre>' + JSON.stringify(server, null, 2) + '</pre></details>';
+        html += '<details class="raw"><summary style="cursor:pointer;color:#A09080;font-size:.72rem;margin-top:.5rem;">▼ raw JSON</summary><pre>' + JSON.stringify(server, null, 2) + '</pre></details>';
         html += '</details>';
       }
 
       document.getElementById('app').innerHTML = html;
     }
 
-    // ===== EXPORT =====
     window.exportJSON = function() {
       const d = loadData();
       const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'ha-spy-data.json';
-      a.click();
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ha-spy-data.json'; a.click();
     };
 
     window.exportCSV = function() {
       const d = loadData();
       let csv = 'time,page,referrer\n';
-      d.visits.forEach(v => {
-        csv += `${new Date(v.time).toISOString()},"${v.page}","${v.ref}"\n`;
-      });
+      d.visits.forEach(v => { csv += `${new Date(v.time).toISOString()},"${v.page}","${v.ref}"\n`; });
       const blob = new Blob([csv], { type: 'text/csv' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'ha-spy-visits.csv';
-      a.click();
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ha-spy-visits.csv'; a.click();
     };
 
     window.clearData = function() {
-      if (confirm('Clear all local analytics data?')) {
-        localStorage.removeItem(STORAGE_KEY);
-        location.reload();
-      }
+      if (confirm('Clear all local analytics data?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
     };
 
-    // ===== FETCH SERVER + RENDER =====
     fetch('/api/status')
       .then(r => r.json())
-      .then(server => {
-        render(loadData(), server);
-      })
-      .catch(() => {
-        render(loadData(), null);
-      });
+      .then(server => render(loadData(), server))
+      .catch(() => render(loadData(), null));
   </script>
 </body>
 </html>
