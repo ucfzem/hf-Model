@@ -82,6 +82,7 @@
 - All sections fully translated in FR/EN/SP/AR
 - Nav updated with Accessoires, Contact, FAQ links
 - Smooth scroll offset for fixed header (scroll-padding-top)
+- Contact form sends to hafidaaffaki1@gmail.com via mailto
 
 ### Image updates (June 25, 2026)
 - Earrings image replaced with user-provided photo → `assets/caftans/acc-earrings.jpg`
