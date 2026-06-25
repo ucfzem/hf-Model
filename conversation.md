@@ -83,6 +83,7 @@
 - Nav updated with Accessoires, Contact, FAQ links
 - Smooth scroll offset for fixed header (scroll-padding-top)
 - Contact form sends to hafidaaffaki1@gmail.com via mailto
+- Pinterest → WhatsApp icon with +212 641-904359 in footer
 
 ### Image updates (June 25, 2026)
 - Earrings image replaced with user-provided photo → `assets/caftans/acc-earrings.jpg`
