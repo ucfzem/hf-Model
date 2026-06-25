@@ -40,8 +40,7 @@
   - Canonical URL
   - hreflang tags for all languages
   - Open Graph (og:title, og:description, og:url, og:type)
-  - Google Search Console verification placeholder (`YOUR_VERIFICATION_CODE`)
-- Note: replace `YOUR_VERIFICATION_CODE` in `index.html` with real GSC verification code
+  - Google Search Console verification `<meta name="google-site-verification" content="0eXwLNTkh_ZGhquTMWXv5g-q5SCbH3s6iSBFhyxZaaY">`
 
 ### Logo update (June 25, 2026)
 - Old single `assets/logo.png` replaced with two theme-aware logos:
