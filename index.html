@@ -61,31 +61,28 @@
 
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            letter-spacing: 4px;
-            color: var(--charcoal);
+            display: flex;
+            align-items: center;
             text-decoration: none;
             position: relative;
         }
 
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background: var(--soft-gold);
-            transition: width 0.4s ease;
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: opacity 0.3s ease;
         }
 
 
-        .logo:hover::after {
-            width: 100%;
+        .footer-brand .logo-img {
+            filter: brightness(10);
+            opacity: 0.8;
+        }
+
+
+        .logo:hover .logo-img {
+            opacity: 0.8;
         }
 
 
@@ -1156,7 +1153,7 @@
     <!-- HEADER -->
     <header class="header" id="header">
         <div class="header-inner">
-            <a href="#" class="logo">H.A. Models</a>
+            <a href="#" class="logo"><img src="assets/logo.png" alt="H.A. Models" class="logo-img"></a>
             <nav>
                 <ul class="nav">
                     <li><a href="#collection" data-i18n="nav-collection">Collection</a></li>
@@ -1463,7 +1460,7 @@
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <a href="#" class="logo">H.A. Models</a>
+                <a href="#" class="logo"><img src="assets/logo.png" alt="H.A. Models" class="logo-img"></a>
                 <p data-i18n="footer-brand-desc">
                     Luxury Moroccan fashion house dedicated to preserving the art of traditional 
                     caftan and djellaba craftsmanship while embracing contemporary elegance.
