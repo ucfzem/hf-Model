@@ -2242,7 +2242,7 @@
             answer.classList.toggle('open');
         }
 
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const name = this.querySelector('[name="name"]').value.trim();
             const email = this.querySelector('[name="email"]').value.trim();
@@ -2250,14 +2250,25 @@
             if (!name || !email || !msg) return;
             const btn = this.querySelector('button');
             const orig = btn.textContent;
-            btn.textContent = '✓ ' + (translations[currentLang]?.['contact-send'] || 'Sent');
-            this.querySelector('[name="name"]').value = '';
-            this.querySelector('[name="email"]').value = '';
-            this.querySelector('[name="message"]').value = '';
-            const to = encodeURIComponent('hafidaaffaki1@gmail.com');
-            const su = encodeURIComponent('Contact H.A. Models - ' + name);
-            const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg);
-            window.location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + su + '&body=' + body;
+            btn.textContent = '⏳';
+            try {
+                const r = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message: msg }),
+                });
+                const d = await r.json();
+                if (d.success) {
+                    btn.textContent = '✓ ' + (translations[currentLang]?.['contact-send'] || 'Sent');
+                    this.querySelector('[name="name"]').value = '';
+                    this.querySelector('[name="email"]').value = '';
+                    this.querySelector('[name="message"]').value = '';
+                } else {
+                    btn.textContent = '✗ Error';
+                }
+            } catch {
+                btn.textContent = '✗ Error';
+            }
             setTimeout(() => { btn.textContent = orig; }, 3000);
         });
 
