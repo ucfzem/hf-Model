@@ -13,7 +13,10 @@
     h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #3C2A1E; margin-bottom: .25rem; }
     .sub { color: #A09080; font-size: .8rem; margin-bottom: 1.5rem; letter-spacing: 1px; }
 
-    /* ===== TOKEN BAR ===== */
+    .lang-bar { display: flex; gap: .5rem; margin-bottom: 1.5rem; }
+    .lang-bar button { background: none; border: 1px solid #E0D5C5; color: #A09080; padding: .3rem .8rem; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: .8rem; letter-spacing: 1.5px; text-transform: uppercase; }
+    .lang-bar button.active { border-color: #D4AF37; color: #B8860B; background: #fff; }
+
     .token-bar { background: #fff; border: 1px solid #E8DDB5; border-radius: 8px; padding: .8rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
     .token-bar label { font-size: .75rem; color: #8A7A6A; text-transform: uppercase; letter-spacing: 2px; }
     .token-bar input { flex: 1; min-width: 160px; background: #FDF8F0; border: 1px solid #E0D5C5; border-radius: 4px; padding: .45rem .6rem; font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; color: #3C2A1E; outline: none; }
@@ -28,7 +31,6 @@
 
     .row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
     .panel { flex: 1; min-width: 280px; background: #fff; border: 1px solid #F0E8D8; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 4px rgba(60,42,30,.04); }
-
     .panel-title { font-size: .7rem; color: #B8860B; letter-spacing: 2.5px; text-transform: uppercase; border-bottom: 1px solid #F0E8D8; padding-bottom: .5rem; margin-bottom: .75rem; }
 
     .bar-wrap { display: flex; align-items: center; gap: .5rem; margin: .25rem 0; font-size: .8rem; }
@@ -61,155 +63,248 @@
 
     .help-section { margin-top: 1.5rem; background: #fff; border: 1px solid #F0E8D8; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 4px rgba(60,42,30,.04); }
     .help-section summary { cursor: pointer; font-size: .7rem; color: #B8860B; letter-spacing: 2.5px; text-transform: uppercase; }
-    .help-lang { display: flex; gap: .5rem; margin: .8rem 0 .5rem; }
-    .help-lang button { background: none; border: 1px solid #E0D5C5; color: #A09080; padding: .2rem .6rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; }
-    .help-lang button.active { border-color: #D4AF37; color: #B8860B; background: #FDF8F0; }
-    .help-content { display: none; font-size: .82rem; color: #5A4A3A; line-height: 1.6; }
-    .help-content.active { display: block; }
-    .help-content h3 { font-size: .85rem; font-weight: 600; color: #3C2A1E; margin-top: 1rem; margin-bottom: .3rem; letter-spacing: .5px; }
-    .help-content h3:first-child { margin-top: 0; }
-    .help-content p { margin-bottom: .4rem; }
-    .help-content ul { margin: .3rem 0 .6rem 1.2rem; }
-    .help-content li { margin-bottom: .2rem; }
-    .help-content .label { color: #B8860B; font-weight: 500; }
-    .help-content code { font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; background: #FDF8F0; padding: .1rem .35rem; border-radius: 3px; color: #5A4A3A; border: 1px solid #F0E8D8; }
-    .help-content[dir=rtl] { text-align: right; }
-    .help-content[dir=rtl] ul { margin: .3rem 1.2rem .6rem 0; }
+    .help-section .content { margin-top: .8rem; font-size: .82rem; color: #5A4A3A; line-height: 1.6; }
+    .help-section .content h3 { font-size: .85rem; font-weight: 600; color: #3C2A1E; margin-top: 1rem; margin-bottom: .3rem; letter-spacing: .5px; }
+    .help-section .content h3:first-child { margin-top: 0; }
+    .help-section .content p { margin-bottom: .4rem; }
+    .help-section .content ul { margin: .3rem 0 .6rem 1.2rem; }
+    .help-section .content li { margin-bottom: .2rem; }
+    .help-section .content .label { color: #B8860B; font-weight: 500; }
+    .help-section .content code { font-family: 'SF Mono', 'Courier New', monospace; font-size: .75rem; background: #FDF8F0; padding: .1rem .35rem; border-radius: 3px; color: #5A4A3A; border: 1px solid #F0E8D8; }
+    .help-section .content[dir=rtl] { text-align: right; }
+    .help-section .content[dir=rtl] ul { margin: .3rem 1.2rem .6rem 0; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>◆ SPY</h1>
-    <p class="sub">H.A. Models · analytics &amp; visitor intelligence</p>
+    <p class="sub" id="subtitle">H.A. Models · analytics &amp; visitor intelligence</p>
 
-    <!-- ===== TOKEN BAR ===== -->
+    <div class="lang-bar">
+      <button data-lang="fr">FR</button>
+      <button data-lang="es">ES</button>
+      <button data-lang="ar">AR</button>
+    </div>
+
     <div class="token-bar">
-      <label>GitHub Token</label>
+      <label id="token-label">GitHub Token</label>
       <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
       <span id="token-status"></span>
       <button class="btn" id="token-save-btn" style="font-size:.7rem;padding:.3rem .7rem;">save</button>
     </div>
 
-    <div id="app"><div class="loading">loading…</div>    </div>
-
-    <!-- ===== HELP SECTION ===== -->
-    <details class="help-section">
-      <summary>▼ help · aide · ayuda · مساعدة</summary>
-      <div class="help-lang">
-        <button class="active" data-lang="fr">FR</button>
-        <button data-lang="es">ES</button>
-        <button data-lang="ar">AR</button>
-      </div>
-
-      <!-- FRENCH -->
-      <div class="help-content active" data-lang="fr">
-        <h3>Ce que signifient les chiffres</h3>
-        <ul>
-          <li><span class="label">visites (local)</span> — nombre total de chargements de page enregistrés dans le <em>localStorage</em> de votre navigateur. Chaque visiteur ne voit que ses propres statistiques.</li>
-          <li><span class="label">aujourd'hui</span> — visites depuis minuit (votre heure locale).</li>
-          <li><span class="label">temps moyen</span> — temps moyen passé sur cette page durant vos sessions.</li>
-          <li><span class="label">pages</span> — nombre de chemins de pages uniques que vous avez visités sur ce site.</li>
-          <li><span class="label">clics enregistrés</span> — total des clics sur les liens, boutons et autres éléments enregistrés depuis votre navigateur.</li>
-          <li><span class="label">pages les plus visitées</span> — les URL que vous avez le plus consultées, triées par nombre de vues avec un graphique à barres.</li>
-          <li><span class="label">éléments les plus cliqués</span> — les boutons/liens avec lesquels vous avez le plus interagi.</li>
-          <li><span class="label">visites récentes</span> — journal chronologique de vos pages vues avec la source (référent).</li>
-        </ul>
-        <p style="color:#B0A090;font-size:.75rem;">Toutes ces données vivent uniquement dans le localStorage de votre navigateur. Elles ne quittent jamais votre machine. Vous pouvez les effacer à tout moment avec le bouton «&nbsp;clear local&nbsp;».</p>
-
-        <h3>Token GitHub — à quoi ça sert</h3>
-        <p>Ce champ <strong>stocke</strong> un token d'accès personnel GitHub dans votre localStorage afin qu'un futur script puisse appeler l'API GitHub (ex&nbsp;: récupérer les infos du repo, les étoiles, les commits, les issues). Il <strong>n'est utilisé par rien pour le moment</strong> — c'est juste un endroit sûr pour le conserver.</p>
-        <p>Le token n'est jamais envoyé ailleurs sauf si vous construisez explicitement une fonctionnalité qui l'utilise. Il reste dans votre navigateur, sur votre machine.</p>
-
-        <h3>Quel type de token utiliser</h3>
-        <ul>
-          <li>Allez sur <a href="https://github.com/settings/tokens" target="_blank" style="color:#B8860B;">github.com/settings/tokens</a></li>
-          <li>Générez un <strong>token fin (fine-grained PAT)</strong> ou classique</li>
-          <li>Pour des données publiques en lecture seule, choisissez le scope <code>public_repo</code> (ou <code>metadata:read</code>)</li>
-          <li><strong>Sans expiration</strong> est acceptable pour cette page utilitaire personnelle. Pour plus de sécurité, utilisez un token fin limité à ce repo uniquement.</li>
-          <li>Collez-le dans le champ ci-dessus et cliquez sur <strong>save</strong> — il est stocké dans votre localStorage.</li>
-        </ul>
-        <p style="color:#B0A090;font-size:.75rem;">⚠️ Cette page est en <code>noindex</code>, mais toute personne ayant l'URL peut l'ouvrir. Traitez votre token en conséquence.</p>
-
-        <h3>Données serveur</h3>
-        <p>La section «&nbsp;server-side intelligence&nbsp;» affiche vos <strong>données visiteur</strong> (IP, pays, ville, navigateur, langue), les <strong>infos de déploiement</strong> (environnement, région) et les <strong>métadonnées git</strong> (SHA du commit, branche, message, repo). Ces données proviennent des en-têtes de requête Vercel — rien n'est stocké côté serveur.</p>
-      </div>
-
-      <!-- SPANISH -->
-      <div class="help-content" data-lang="es">
-        <h3>Qué significan los números</h3>
-        <ul>
-          <li><span class="label">visitas (local)</span> — total de cargas de página registradas en el <em>localStorage</em> de tu navegador. Cada visitante solo ve sus propias estadísticas.</li>
-          <li><span class="label">hoy</span> — visitas desde la medianoche (tu hora local).</li>
-          <li><span class="label">tiempo medio</span> — tiempo promedio en esta página durante tus sesiones.</li>
-          <li><span class="label">páginas</span> — rutas de página únicas que has visitado en este sitio.</li>
-          <li><span class="label">clics registrados</span> — total de clics en enlaces, botones y otros elementos registrados desde tu navegador.</li>
-          <li><span class="label">páginas más visitadas</span> — las URL que más has visto, ordenadas por recuento con gráfico de barras.</li>
-          <li><span class="label">elementos más clicados</span> — los botones/enlaces con los que más interactuaste.</li>
-          <li><span class="label">visitas recientes</span> — registro cronológico de tus páginas vistas con la fuente de referencia.</li>
-        </ul>
-        <p style="color:#B0A090;font-size:.75rem;">Todos estos datos viven solo en el localStorage de tu navegador. Nunca salen de tu máquina. Puedes borrarlos en cualquier momento con el botón «&nbsp;clear local&nbsp;».</p>
-
-        <h3>Token de GitHub — para qué sirve</h3>
-        <p>Este campo <strong>almacena</strong> un token de acceso personal de GitHub en tu localStorage para que un futuro script pueda llamar a la API de GitHub (ej&nbsp;: obtener info del repo, estrellas, commits, issues). <strong>No se usa para nada aún</strong> — es solo un lugar seguro para tenerlo.</p>
-        <p>El token nunca se envía a ningún lado a menos que construyas explícitamente una función que lo use. Permanece en tu navegador, en tu máquina.</p>
-
-        <h3>Qué tipo de token usar</h3>
-        <ul>
-          <li>Ve a <a href="https://github.com/settings/tokens" target="_blank" style="color:#B8860B;">github.com/settings/tokens</a></li>
-          <li>Genera un <strong>token fino (fine-grained PAT)</strong> o clásico</li>
-          <li>Para datos públicos de solo lectura, selecciona el alcance <code>public_repo</code> (o <code>metadata:read</code>)</li>
-          <li><strong>Sin expiración</strong> está bien para esta página personal. Para mayor seguridad, usa un token fino limitado solo a este repo.</li>
-          <li>Pégalo en el campo de arriba y haz clic en <strong>save</strong> — se guarda en tu localStorage.</li>
-        </ul>
-        <p style="color:#B0A090;font-size:.75rem;">⚠️ Esta página está en <code>noindex</code>, pero cualquiera con la URL puede abrirla. Trata tu token en consecuencia.</p>
-
-        <h3>Inteligencia del servidor</h3>
-        <p>La sección «&nbsp;server-side intelligence&nbsp;» muestra tus <strong>datos de visitante</strong> (IP, país, ciudad, navegador, idioma), <strong>información de despliegue</strong> (entorno, región) y <strong>metadatos de git</strong> (SHA del commit, rama, mensaje, repo). Estos datos vienen de las cabeceras de solicitud de Vercel — no se almacena nada en el servidor.</p>
-      </div>
-
-      <!-- ARABIC -->
-      <div class="help-content" data-lang="ar" dir="rtl">
-        <h3>ماذا تعني الأرقام</h3>
-        <ul>
-          <li><span class="label">الزيارات (محلي)</span> — إجمالي مرات تحميل الصفحة المسجلة في <em>localStorage</em> في متصفحك. كل زائر يرى إحصائياته الخاصة فقط.</li>
-          <li><span class="label">اليوم</span> — الزيارات منذ منتصف الليل (حسب توقيتك المحلي).</li>
-          <li><span class="label">متوسط الوقت</span> — متوسط الوقت الذي قضيته في هذه الصفحة خلال جلساتك.</li>
-          <li><span class="label">الصفحات</span> — عدد مسارات الصفحات الفريدة التي زرتها في هذا الموقع.</li>
-          <li><span class="label">النقرات المسجلة</span> — إجمالي النقرات على الروابط والأزرار والعناصر الأخرى المسجلة من متصفحك.</li>
-          <li><span class="label">الصفحات الأكثر زيارة</span> — عناوين URL التي شاهدتها أكثر، مرتبة حسب العدد مع رسم بياني.</li>
-          <li><span class="label">العناصر الأكثر نقراً</span> — الأزرار/الروابط التي تفاعلت معها أكثر.</li>
-          <li><span class="label">الزيارات الأخيرة</span> — سجل زمني لصفحاتك التي شاهدتها مع المصدر (المرجع).</li>
-        </ul>
-        <p style="color:#B0A090;font-size:.75rem;">جميع هذه البيانات تعيش فقط في localStorage في متصفحك. لا تغادر جهازك أبداً. يمكنك مسحها في أي وقت بزر «&nbsp;clear local&nbsp;».</p>
-
-        <h3>رمز GitHub — ما الغرض منه</h3>
-        <p>هذا الحقل <strong>يخزن</strong> رمز وصول شخصي من GitHub في localStorage الخاص بك ليتمكن سكريبت مستقبلي من استدعاء GitHub API (مثلاً: جلب معلومات المستودع، النجوم، الالتزامات، المشاكل). <strong>لا يُستخدم لأي شيء بعد</strong> — إنه مجرد مكان آمن للاحتفاظ به.</p>
-        <p>الرمز لا يُرسل إلى أي مكان أبداً ما لم تقم ببناء وظيفة تستخدمه بشكل صريح. يبقى في متصفحك، على جهازك.</p>
-
-        <h3>أي نوع من الرموز استخدام</h3>
-        <ul>
-          <li>اذهب إلى <a href="https://github.com/settings/tokens" target="_blank" style="color:#B8860B;">github.com/settings/tokens</a></li>
-          <li>قم بتوليد <strong>رمز دقيق (fine-grained PAT)</strong> أو كلاسيكي</li>
-          <li>للبيانات العامة للقراءة فقط، اختر نطاق <code>public_repo</code> (أو <code>metadata:read</code>)</li>
-          <li><strong>بدون انتهاء صلاحية</strong> جيد لهذه الصفحة الشخصية. لمزيد من الأمان، استخدم رمزاً دقيقاً مقتصراً على هذا المستودع فقط.</li>
-          <li>الصقه في الحقل أعلاه وانقر <strong>save</strong> — سيتم تخزينه في localStorage الخاص بك.</li>
-        </ul>
-        <p style="color:#B0A090;font-size:.75rem;">⚠️ هذه الصفحة في <code>noindex</code>، لكن أي شخص لديه الرابط يمكنه فتحها. تعامل مع رمزك وفقاً لذلك.</p>
-
-        <h3>بيانات الخادم</h3>
-        <p>قسم «&nbsp;server-side intelligence&nbsp;» يعرض <strong>بيانات الزائر</strong> (IP، البلد، المدينة، المتصفح، اللغة)، <strong>معلومات النشر</strong> (البيئة، المنطقة)، و <strong>بيانات git</strong> (SHA الالتزام، الفرع، الرسالة، المستودع). هذه البيانات تأتي من رؤوس طلبات Vercel — لا يتم تخزين أي شيء على الخادم.</p>
-      </div>
-    </details>
+    <div id="app"><div class="loading">loading…</div></div>
 
     <div class="footer">
       <span class="badge">● noindex</span>
-      <span>data in localStorage</span>
+      <span id="footer-text">data in localStorage</span>
     </div>
   </div>
 
   <script>
+    const LANG_KEY = 'ha-spy-lang';
     const STORAGE_KEY = 'ha-spy-data';
     const TOKEN_KEY = 'ha-github-token';
+
+    let currentLang = localStorage.getItem(LANG_KEY) || 'fr';
+
+    const T = {
+      fr: {
+        subtitle: 'H.A. Models · analytics &amp; intelligence visiteur',
+        token: 'Token GitHub',
+        tokenPlaceholder: 'ghp_xxxxxxxxxxxxxxxxxxxx',
+        saved: '✓ enregistré',
+        stored: 'stocké localement seulement',
+        save: 'sauver',
+        tokenHelp: 'stocké localement seulement',
+        visits: 'visites (local)',
+        today: 'aujourd\'hui',
+        avgTime: 'temps moyen',
+        pages: 'pages',
+        clicksTracked: 'clics enregistrés',
+        mostVisited: 'pages les plus visitées',
+        noData: 'aucune donnée pour l\'instant',
+        mostClicked: 'éléments les plus cliqués',
+        recentVisits: 'visites récentes',
+        direct: 'direct',
+        exportJSON: 'export JSON',
+        exportCSV: 'export CSV',
+        clearLocal: 'effacer local',
+        clearConfirm: 'Effacer toutes les données locales ?',
+        serverTitle: '▼ données serveur',
+        rawJSON: '▼ json brut',
+        footer: 'données en localStorage',
+        helpTitle: '▼ aide &amp; explication',
+        help: {
+          numbersTitle: 'Ce que signifient les chiffres',
+          numbers: [
+            ['visites (local)', 'nombre total de chargements de page enregistrés dans le localStorage de votre navigateur. Chaque visiteur ne voit que ses propres statistiques.'],
+            ['aujourd\'hui', 'visites depuis minuit (votre heure locale).'],
+            ['temps moyen', 'temps moyen passé sur cette page durant vos sessions.'],
+            ['pages', 'nombre de chemins de pages uniques que vous avez visités sur ce site.'],
+            ['clics enregistrés', 'total des clics sur les liens, boutons et autres éléments enregistrés depuis votre navigateur.'],
+            ['pages les plus visitées', 'les URL que vous avez le plus consultées, triées par nombre de vues avec un graphique à barres.'],
+            ['éléments les plus cliqués', 'les boutons/liens avec lesquels vous avez le plus interagi.'],
+            ['visites récentes', 'journal chronologique de vos pages vues avec la source (référent).']
+          ],
+          numbersFooter: 'Toutes ces données vivent uniquement dans le localStorage de votre navigateur. Elles ne quittent jamais votre machine. Vous pouvez les effacer à tout moment avec le bouton « effacer local ».',
+          tokenTitle: 'Token GitHub — à quoi ça sert',
+          tokenP1: 'Ce champ stocke un token d\'accès personnel GitHub dans votre localStorage afin qu\'un futur script puisse appeler l\'API GitHub (ex : récupérer les infos du repo, les étoiles, les commits, les issues). Il n\'est utilisé par rien pour le moment — c\'est juste un endroit sûr pour le conserver.',
+          tokenP2: 'Le token n\'est jamais envoyé ailleurs sauf si vous construisez explicitement une fonctionnalité qui l\'utilise. Il reste dans votre navigateur, sur votre machine.',
+          tokenHowTitle: 'Quel type de token utiliser',
+          tokenHow: [
+            'Allez sur github.com/settings/tokens',
+            'Générez un token fin (fine-grained PAT) ou classique',
+            'Pour des données publiques en lecture seule, choisissez le scope public_repo (ou metadata:read)',
+            'Sans expiration est acceptable pour cette page utilitaire personnelle. Pour plus de sécurité, utilisez un token fin limité à ce repo uniquement.',
+            'Collez-le dans le champ ci-dessus et cliquez sur sauver — il est stocké dans votre localStorage.'
+          ],
+          tokenWarning: '⚠️ Cette page est en noindex, mais toute personne ayant l\'URL peut l\'ouvrir. Traitez votre token en conséquence.',
+          serverTitle: 'Données serveur',
+          serverP: 'La section « données serveur » affiche vos données visiteur (IP, pays, ville, navigateur, langue), les infos de déploiement (environnement, région) et les métadonnées git (SHA du commit, branche, message, repo). Ces données proviennent des en-têtes de requête Vercel — rien n\'est stocké côté serveur.'
+        }
+      },
+      es: {
+        subtitle: 'H.A. Models · analytics &amp; inteligencia del visitante',
+        token: 'Token GitHub',
+        tokenPlaceholder: 'ghp_xxxxxxxxxxxxxxxxxxxx',
+        saved: '✓ guardado',
+        stored: 'almacenado localmente solamente',
+        save: 'guardar',
+        tokenHelp: 'almacenado localmente solamente',
+        visits: 'visitas (local)',
+        today: 'hoy',
+        avgTime: 'tiempo medio',
+        pages: 'páginas',
+        clicksTracked: 'clics registrados',
+        mostVisited: 'páginas más visitadas',
+        noData: 'sin datos aún',
+        mostClicked: 'elementos más clicados',
+        recentVisits: 'visitas recientes',
+        direct: 'directo',
+        exportJSON: 'exportar JSON',
+        exportCSV: 'exportar CSV',
+        clearLocal: 'borrar local',
+        clearConfirm: '¿Borrar todos los datos locales?',
+        serverTitle: '▼ datos del servidor',
+        rawJSON: '▼ json bruto',
+        footer: 'datos en localStorage',
+        helpTitle: '▼ ayuda &amp; explicación',
+        help: {
+          numbersTitle: 'Qué significan los números',
+          numbers: [
+            ['visitas (local)', 'total de cargas de página registradas en el localStorage de tu navegador. Cada visitante solo ve sus propias estadísticas.'],
+            ['hoy', 'visitas desde la medianoche (tu hora local).'],
+            ['tiempo medio', 'tiempo promedio en esta página durante tus sesiones.'],
+            ['páginas', 'rutas de página únicas que has visitado en este sitio.'],
+            ['clics registrados', 'total de clics en enlaces, botones y otros elementos registrados desde tu navegador.'],
+            ['páginas más visitadas', 'las URL que más has visto, ordenadas por recuento con gráfico de barras.'],
+            ['elementos más clicados', 'los botones/enlaces con los que más interactuaste.'],
+            ['visitas recientes', 'registro cronológico de tus páginas vistas con la fuente de referencia.']
+          ],
+          numbersFooter: 'Todos estos datos viven solo en el localStorage de tu navegador. Nunca salen de tu máquina. Puedes borrarlos en cualquier momento con el botón « borrar local ».',
+          tokenTitle: 'Token de GitHub — para qué sirve',
+          tokenP1: 'Este campo almacena un token de acceso personal de GitHub en tu localStorage para que un futuro script pueda llamar a la API de GitHub (ej : obtener info del repo, estrellas, commits, issues). No se usa para nada aún — es solo un lugar seguro para tenerlo.',
+          tokenP2: 'El token nunca se envía a ningún lado a menos que construyas explícitamente una función que lo use. Permanece en tu navegador, en tu máquina.',
+          tokenHowTitle: 'Qué tipo de token usar',
+          tokenHow: [
+            'Ve a github.com/settings/tokens',
+            'Genera un token fino (fine-grained PAT) o clásico',
+            'Para datos públicos de solo lectura, selecciona el alcance public_repo (o metadata:read)',
+            'Sin expiración está bien para esta página personal. Para mayor seguridad, usa un token fino limitado solo a este repo.',
+            'Pégalo en el campo de arriba y haz clic en guardar — se guarda en tu localStorage.'
+          ],
+          tokenWarning: '⚠️ Esta página está en noindex, pero cualquiera con la URL puede abrirla. Trata tu token en consecuencia.',
+          serverTitle: 'Inteligencia del servidor',
+          serverP: 'La sección « datos del servidor » muestra tus datos de visitante (IP, país, ciudad, navegador, idioma), información de despliegue (entorno, región) y metadatos de git (SHA del commit, rama, mensaje, repo). Estos datos vienen de las cabeceras de solicitud de Vercel — no se almacena nada en el servidor.'
+        }
+      },
+      ar: {
+        subtitle: 'H.A. Models · analytics &amp; معلومات الزائر',
+        token: 'رمز GitHub',
+        tokenPlaceholder: 'ghp_xxxxxxxxxxxxxxxxxxxx',
+        saved: '✓ تم الحفظ',
+        stored: 'مخزن محلياً فقط',
+        save: 'حفظ',
+        tokenHelp: 'مخزن محلياً فقط',
+        visits: 'الزيارات (محلي)',
+        today: 'اليوم',
+        avgTime: 'متوسط الوقت',
+        pages: 'الصفحات',
+        clicksTracked: 'النقرات المسجلة',
+        mostVisited: 'الصفحات الأكثر زيارة',
+        noData: 'لا توجد بيانات بعد',
+        mostClicked: 'العناصر الأكثر نقراً',
+        recentVisits: 'الزيارات الأخيرة',
+        direct: 'مباشر',
+        exportJSON: 'تصدير JSON',
+        exportCSV: 'تصدير CSV',
+        clearLocal: 'مسح المحلي',
+        clearConfirm: 'مسح جميع البيانات المحلية؟',
+        serverTitle: '▼ بيانات الخادم',
+        rawJSON: '▼ json خام',
+        footer: 'البيانات في localStorage',
+        helpTitle: '▼ مساعدة &amp; شرح',
+        help: {
+          numbersTitle: 'ماذا تعني الأرقام',
+          numbers: [
+            ['الزيارات (محلي)', 'إجمالي مرات تحميل الصفحة المسجلة في localStorage في متصفحك. كل زائر يرى إحصائياته الخاصة فقط.'],
+            ['اليوم', 'الزيارات منذ منتصف الليل (حسب توقيتك المحلي).'],
+            ['متوسط الوقت', 'متوسط الوقت الذي قضيته في هذه الصفحة خلال جلساتك.'],
+            ['الصفحات', 'عدد مسارات الصفحات الفريدة التي زرتها في هذا الموقع.'],
+            ['النقرات المسجلة', 'إجمالي النقرات على الروابط والأزرار والعناصر الأخرى المسجلة من متصفحك.'],
+            ['الصفحات الأكثر زيارة', 'عناوين URL التي شاهدتها أكثر، مرتبة حسب العدد مع رسم بياني.'],
+            ['العناصر الأكثر نقراً', 'الأزرار/الروابط التي تفاعلت معها أكثر.'],
+            ['الزيارات الأخيرة', 'سجل زمني لصفحاتك التي شاهدتها مع المصدر (المرجع).']
+          ],
+          numbersFooter: 'جميع هذه البيانات تعيش فقط في localStorage في متصفحك. لا تغادر جهازك أبداً. يمكنك مسحها في أي وقت بزر « مسح المحلي ».',
+          tokenTitle: 'رمز GitHub — ما الغرض منه',
+          tokenP1: 'هذا الحقل يخزن رمز وصول شخصي من GitHub في localStorage الخاص بك ليتمكن سكريبت مستقبلي من استدعاء GitHub API (مثلاً: جلب معلومات المستودع، النجوم، الالتزامات، المشاكل). لا يُستخدم لأي شيء بعد — إنه مجرد مكان آمن للاحتفاظ به.',
+          tokenP2: 'الرمز لا يُرسل إلى أي مكان أبداً ما لم تقم ببناء وظيفة تستخدمه بشكل صريح. يبقى في متصفحك، على جهازك.',
+          tokenHowTitle: 'أي نوع من الرموز استخدام',
+          tokenHow: [
+            'اذهب إلى github.com/settings/tokens',
+            'قم بتوليد رمز دقيق (fine-grained PAT) أو كلاسيكي',
+            'للبيانات العامة للقراءة فقط، اختر نطاق public_repo (أو metadata:read)',
+            'بدون انتهاء صلاحية جيد لهذه الصفحة الشخصية. لمزيد من الأمان، استخدم رمزاً دقيقاً مقتصراً على هذا المستودع فقط.',
+            'الصقه في الحقل أعلاه وانقر حفظ — سيتم تخزينه في localStorage الخاص بك.'
+          ],
+          tokenWarning: '⚠️ هذه الصفحة في noindex، لكن أي شخص لديه الرابط يمكنه فتحها. تعامل مع رمزك وفقاً لذلك.',
+          serverTitle: 'بيانات الخادم',
+          serverP: 'قسم « بيانات الخادم » يعرض بيانات الزائر (IP، البلد، المدينة، المتصفح، اللغة)، معلومات النشر (البيئة، المنطقة)، و بيانات git (SHA الالتزام، الفرع، الرسالة، المستودع). هذه البيانات تأتي من رؤوس طلبات Vercel — لا يتم تخزين أي شيء على الخادم.'
+        }
+      }
+    };
+
+    function getText(key) {
+      const keys = key.split('.');
+      let obj = T[currentLang];
+      for (const k of keys) {
+        if (obj && obj[k] !== undefined) obj = obj[k];
+        else return key;
+      }
+      return obj;
+    }
+
+    // ===== LANGUAGE SWITCHER =====
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem(LANG_KEY, lang);
+      document.querySelectorAll('.lang-bar button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('subtitle').innerHTML = getText('subtitle');
+      document.getElementById('token-label').textContent = getText('token');
+      document.getElementById('footer-text').textContent = getText('footer');
+      const inp = document.getElementById('token-input');
+      inp.placeholder = getText('tokenPlaceholder');
+      document.getElementById('token-save-btn').textContent = getText('save');
+      updateTokenUI();
+      if (window._lastData && window._lastServer) render(window._lastData, window._lastServer);
+    }
+
+    document.querySelectorAll('.lang-bar button').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.dataset.lang));
+    });
 
     // ===== TOKEN =====
     function loadToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
@@ -221,19 +316,16 @@
       const saved = loadToken();
       if (saved) {
         input.value = saved;
-        status.innerHTML = '<span class="saved">✓ saved</span>';
+        status.innerHTML = '<span class="saved">' + getText('saved') + '</span>';
       } else {
-        status.innerHTML = '<span class="tiny">stored locally only</span>';
+        status.innerHTML = '<span class="tiny">' + getText('stored') + '</span>';
       }
     }
 
     document.getElementById('token-save-btn').addEventListener('click', function() {
-      const val = document.getElementById('token-input').value.trim();
-      saveToken(val);
+      saveToken(document.getElementById('token-input').value.trim());
       updateTokenUI();
     });
-
-    updateTokenUI();
 
     // ===== ANALYTICS DATA =====
     function loadData() {
@@ -282,7 +374,27 @@
     // ===== RENDER =====
     function val(v) { return (v === null || v === undefined) ? '<span style="color:#C0B0A0">—</span>' : v; }
 
+    function renderHelp() {
+      const h = T[currentLang].help;
+      let html = '<details class="help-section"><summary>' + getText('helpTitle') + '</summary><div class="content"' + (currentLang === 'ar' ? ' dir="rtl"' : '') + '>';
+      html += '<h3>' + h.numbersTitle + '</h3><ul>';
+      h.numbers.forEach(n => { html += '<li><span class="label">' + n[0] + '</span> — ' + n[1] + '</li>'; });
+      html += '</ul>';
+      html += '<p style="color:#B0A090;font-size:.75rem;">' + h.numbersFooter + '</p>';
+      html += '<h3>' + h.tokenTitle + '</h3><p>' + h.tokenP1 + '</p><p>' + h.tokenP2 + '</p>';
+      html += '<h3>' + h.tokenHowTitle + '</h3><ul>';
+      h.tokenHow.forEach(item => { html += '<li>' + item + '</li>'; });
+      html += '</ul>';
+      html += '<p style="color:#B0A090;font-size:.75rem;">' + h.tokenWarning + '</p>';
+      html += '<h3>' + h.serverTitle + '</h3><p>' + h.serverP + '</p>';
+      html += '</div></details>';
+      return html;
+    }
+
     function render(data, server) {
+      window._lastData = data;
+      window._lastServer = server;
+
       const now = Date.now();
       const totalVisits = data.visits.length;
       const totalClicks = data.clicks.length;
@@ -298,77 +410,72 @@
 
       const pageRank = Object.entries(data.pages).sort((a, b) => b[1] - a[1]);
       const maxPage = pageRank.length ? pageRank[0][1] : 1;
-
       const clickMap = {};
       data.clicks.forEach(c => { clickMap[c.element] = (clickMap[c.element] || 0) + 1; });
       const clickRank = Object.entries(clickMap).sort((a, b) => b[1] - a[1]).slice(0, 15);
-
       const recent = data.visits.slice(-50).reverse();
+      const nd = getText('noData');
 
       let html = '';
-
       html += '<div class="grid">';
-      html += `<div class="stat"><div class="num">${totalVisits}</div><div class="lbl">visits (local)</div></div>`;
-      html += `<div class="stat"><div class="num">${todayVisits}</div><div class="lbl">today</div></div>`;
-      html += `<div class="stat"><div class="num">${avgTime > 0 ? Math.floor(avgTime / 60) + 'm ' + Math.floor(avgTime % 60) + 's' : '—'}</div><div class="lbl">avg time</div></div>`;
-      html += `<div class="stat"><div class="num">${uniquePages}</div><div class="lbl">pages</div></div>`;
-      html += `<div class="stat"><div class="num">${totalClicks}</div><div class="lbl">clicks tracked</div></div>`;
+      html += `<div class="stat"><div class="num">${totalVisits}</div><div class="lbl">${getText('visits')}</div></div>`;
+      html += `<div class="stat"><div class="num">${todayVisits}</div><div class="lbl">${getText('today')}</div></div>`;
+      html += `<div class="stat"><div class="num">${avgTime > 0 ? Math.floor(avgTime / 60) + 'm ' + Math.floor(avgTime % 60) + 's' : '—'}</div><div class="lbl">${getText('avgTime')}</div></div>`;
+      html += `<div class="stat"><div class="num">${uniquePages}</div><div class="lbl">${getText('pages')}</div></div>`;
+      html += `<div class="stat"><div class="num">${totalClicks}</div><div class="lbl">${getText('clicksTracked')}</div></div>`;
       html += '</div>';
 
       html += '<div class="row">';
-
-      html += '<div class="panel"><div class="panel-title">most visited pages</div>';
+      html += '<div class="panel"><div class="panel-title">' + getText('mostVisited') + '</div>';
       if (pageRank.length) {
         pageRank.slice(0, 10).forEach(([page, count]) => {
           const pct = Math.round((count / maxPage) * 100);
           html += `<div class="bar-wrap"><span class="bar-count">${count}</span><div class="bar" style="width:${pct}%"></div><span>${page}</span></div>`;
         });
-      } else {
-        html += '<span style="color:#C0B0A0">no data yet</span>';
-      }
+      } else { html += '<span style="color:#C0B0A0">' + nd + '</span>'; }
       html += '</div>';
 
-      html += '<div class="panel"><div class="panel-title">most clicked elements</div>';
+      html += '<div class="panel"><div class="panel-title">' + getText('mostClicked') + '</div>';
       if (clickRank.length) {
         clickRank.slice(0, 10).forEach(([el, count]) => {
           html += `<div class="click-row"><span class="el">${el}</span><span class="cnt">${count}</span></div>`;
         });
-      } else {
-        html += '<span style="color:#C0B0A0">no data yet</span>';
-      }
-      html += '</div>';
+      } else { html += '<span style="color:#C0B0A0">' + nd + '</span>'; }
+      html += '</div></div>';
 
-      html += '</div>';
-
-      html += '<div class="panel" style="margin-bottom:1rem"><div class="panel-title">recent visits</div>';
+      html += '<div class="panel" style="margin-bottom:1rem"><div class="panel-title">' + getText('recentVisits') + '</div>';
       if (recent.length) {
         recent.slice(0, 30).forEach(v => {
           const d = new Date(v.time);
-          const timeStr = d.toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
-          html += `<div class="visit-row"><span class="time">${timeStr}</span> · <span class="page">${v.page}</span>${v.ref !== 'direct' ? '<br><span class="ref">↳ ' + v.ref + '</span>' : '<br><span class="ref" style="color:#C0B0A0">direct</span>'}</div>`;
+          const timeStr = d.toLocaleString(currentLang === 'fr' ? 'fr-FR' : currentLang === 'es' ? 'es-ES' : 'ar-SA', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+          const directLabel = getText('direct');
+          html += `<div class="visit-row"><span class="time">${timeStr}</span> · <span class="page">${v.page}</span>${v.ref !== 'direct' ? '<br><span class="ref">↳ ' + v.ref + '</span>' : '<br><span class="ref" style="color:#C0B0A0">' + directLabel + '</span>'}</div>`;
         });
-      } else {
-        html += '<span style="color:#C0B0A0">no visits yet</span>';
-      }
+      } else { html += '<span style="color:#C0B0A0">' + nd + '</span>'; }
       html += '</div>';
 
       html += '<div class="actions">';
-      html += '<button class="btn" onclick="exportJSON()">export JSON</button>';
-      html += '<button class="btn" onclick="exportCSV()">export CSV</button>';
-      html += '<button class="btn danger" onclick="clearData()">clear local</button>';
+      html += '<button class="btn" onclick="exportJSON()">' + getText('exportJSON') + '</button>';
+      html += '<button class="btn" onclick="exportCSV()">' + getText('exportCSV') + '</button>';
+      html += '<button class="btn danger" onclick="clearData()">' + getText('clearLocal') + '</button>';
       html += '</div>';
 
       if (server) {
-        html += '<details class="server-tab"><summary>▼ server-side intelligence</summary>';
+        html += '<details class="server-tab"><summary>' + getText('serverTitle') + '</summary>';
         html += '<table style="width:100%;border-collapse:collapse;font-size:.78rem;">';
-        Object.entries(server.visitor || {}).forEach(([k, v]) => { html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`; });
-        Object.entries(server.deployment || {}).forEach(([k, v]) => { html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`; });
-        Object.entries(server.git || {}).forEach(([k, v]) => { html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`; });
+        const entries = [['visitor', server.visitor || {}], ['deployment', server.deployment || {}], ['git', server.git || {}]];
+        entries.forEach(([group, obj]) => {
+          Object.entries(obj).forEach(([k, v]) => {
+            html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${group}.${k}</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${val(v)}</td></tr>`;
+          });
+        });
         html += `<tr><td style="color:#8A7A6A;width:120px;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">timestamp</td><td style="color:#3C2A1E;padding:.25rem .15rem;border-bottom:1px solid #F5F0E8">${server.timestamp}</td></tr>`;
         html += '</table>';
-        html += '<details class="raw"><summary style="cursor:pointer;color:#A09080;font-size:.72rem;margin-top:.5rem;">▼ raw JSON</summary><pre>' + JSON.stringify(server, null, 2) + '</pre></details>';
+        html += '<details class="raw"><summary style="cursor:pointer;color:#A09080;font-size:.72rem;margin-top:.5rem;">' + getText('rawJSON') + '</summary><pre>' + JSON.stringify(server, null, 2) + '</pre></details>';
         html += '</details>';
       }
+
+      html += renderHelp();
 
       document.getElementById('app').innerHTML = html;
     }
@@ -388,24 +495,15 @@
     };
 
     window.clearData = function() {
-      if (confirm('Clear all local analytics data?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+      if (confirm(getText('clearConfirm'))) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
     };
 
+    // ===== INIT =====
+    setLang(currentLang);
     fetch('/api/status')
       .then(r => r.json())
       .then(server => render(loadData(), server))
       .catch(() => render(loadData(), null));
-
-    // ===== HELP LANGUAGE TABS =====
-    document.querySelectorAll('.help-lang button').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.help-lang button').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const lang = this.dataset.lang;
-        document.querySelectorAll('.help-content').forEach(c => c.classList.remove('active'));
-        document.querySelector(`.help-content[data-lang="${lang}"]`).classList.add('active');
-      });
-    });
   </script>
 </body>
 </html>
