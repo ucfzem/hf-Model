@@ -2242,15 +2242,36 @@
             answer.classList.toggle('open');
         }
 
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const name = this.querySelector('[name="name"]').value.trim();
             const email = this.querySelector('[name="email"]').value.trim();
             const msg = this.querySelector('[name="message"]').value.trim();
             if (!name || !email || !msg) return;
-            const subject = encodeURIComponent('Contact H.A. Models - ' + name);
-            const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg);
-            window.location.href = 'mailto:hafidaaffaki1@gmail.com?subject=' + subject + '&body=' + body;
+            const btn = this.querySelector('button');
+            const orig = btn.textContent;
+            btn.textContent = '⏳';
+            try {
+                const r = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message: msg }),
+                });
+                const d = await r.json();
+                if (d.success) {
+                    btn.textContent = '✓ ' + (translations[currentLang]?.['contact-send'] || 'Sent');
+                    this.querySelector('[name="name"]').value = '';
+                    this.querySelector('[name="email"]').value = '';
+                    this.querySelector('[name="message"]').value = '';
+                } else {
+                    btn.textContent = '✗ ' + (translations[currentLang]?.['contact-send'] || 'Error');
+                    alert('Error: ' + (d.error || 'Unknown'));
+                }
+            } catch {
+                btn.textContent = '✗ Error';
+                alert('Network error. Try again.');
+            }
+            setTimeout(() => { btn.textContent = orig; }, 3000);
         });
 
         // ===== SMOOTH SCROLL =====

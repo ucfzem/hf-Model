@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/api/status",
+      "source": "/api/(status|contact)",
       "headers": [
         { "key": "Cache-Control", "value": "no-store, max-age=0" }
       ]
