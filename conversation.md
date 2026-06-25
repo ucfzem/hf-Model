@@ -32,12 +32,25 @@
 - "Maison Zahra" → "H.A. Models" throughout the site
 - Title, logo, footer, and newsletter heading updated
 
+### SEO setup (June 25, 2026)
+- `robots.txt` — allows all crawlers, points to sitemap
+- `sitemap.xml` — single URL with xhtml:alternate for all 4 languages (fr, en, es, ar) + x-default
+- Updated HTML `<head>` with:
+  - Meta description
+  - Canonical URL
+  - hreflang tags for all languages
+  - Open Graph (og:title, og:description, og:url, og:type)
+  - Google Search Console verification placeholder (`YOUR_VERIFICATION_CODE`)
+- Note: replace `YOUR_VERIFICATION_CODE` in `index.html` with real GSC verification code
+
 ### Logo update (June 25, 2026)
 - Old single `assets/logo.png` replaced with two theme-aware logos:
   - `assets/logo-light.png` — shown in light mode
   - `assets/logo-dark.png` — shown in dark mode
 - `setTheme()` JS now switches both header and footer logo `src` on theme toggle
 - Both logos resized to 72px height with transparency preserved
+
+### Multilingual (4 languages)
 - Added language switcher in header with flags: 🇫🇷 🇬🇧 🇪🇸 🇲🇦
 - Arabic uses Moroccan flag
 - Full translations for all text in French, English, Spanish, Arabic
