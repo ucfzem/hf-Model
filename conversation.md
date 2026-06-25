@@ -39,3 +39,4 @@
 - RTL support for Arabic (`dir="rtl"`)
 - Language preference saved in localStorage
 - All text content translated: nav, hero, products, footer, badges, buttons
+- Updated location: Tangier (Tanger / Tánger / طنجة), year: 2026
