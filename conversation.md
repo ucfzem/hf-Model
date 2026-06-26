@@ -91,3 +91,25 @@
 
 ### Image updates (June 25, 2026)
 - Earrings image replaced with user-provided photo → `assets/caftans/acc-earrings.jpg`
+
+### GitHub Pages re-enabled (June 26, 2026)
+- GitHub Pages was returning 404 — site was disabled
+- Re-enabled via GitHub API (`POST /repos/ucfzem/hf-Model/pages`) on `main` branch, root `/`
+- Deployment status: `built` ✅
+- GitHub Pages URL: https://ucfzem.github.io/hf-Model/
+
+### Link audit — GitHub Pages (June 26, 2026)
+**Local assets (10/10 ✅):** logo-light.png, logo-dark.png, img-01 → img-08, acc-earrings.jpg
+**Project files (6/6 ✅):** status.html, api/status.js, api/contact.js, robots.txt, sitemap.xml
+**External resources (2/2 ✅):** Font Awesome CSS, Google Fonts
+**Social links (4/4 ✅):** Vercel, WhatsApp, Instagram, TikTok
+**Unsplash images (2/2 ✅):** Silk Evening Bag, Filigree Earrings
+**Section anchors (13/13 ✅):** #about, #accessories, #artisans, #careers, #collection, #contact, #faq, #mother-daughter, #press, #privacy, #shipping, #sizes, #sustainability
+**Nav anchors #caftans/#djellabas:** No HTML anchors exist, but JS handles this via `filterMap` → scrolls to #collection + activates product filter. Identical behavior on Vercel and GitHub Pages.
+**Result: Rien n'est cassé.**
+
+### Link audit — ucfzem.github.io root (June 26, 2026)
+**Internal pages (12/12 ✅):** guide, email-collector, blog, nanogen-app, cvforge, microinvoice, pristine, magic-eraser, rafeeq, Sandrawing, works, projets
+**External links (3/3 ✅):** Google Fonts, NanoLink, PromptGenius
+**Resources (2/2 ✅):** avatar.png, sw.js
+**Result: Rien n'est cassé.**
