@@ -1339,6 +1339,342 @@
         [dir="rtl"] .section-title {
             font-family: 'Amiri', 'Cormorant Garamond', serif;
         }
+
+        /* ===== SIZE GUIDE ===== */
+        .size-guide-container {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .sg-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--beige-dark);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        [data-theme="dark"] .sg-tabs { border-color: #333; }
+        .sg-tab-btn {
+            background: var(--warm-white);
+            border: none;
+            padding: 0.85rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(44,44,44,0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        [data-theme="dark"] .sg-tab-btn { background: #1a1a18; color: rgba(232,224,216,0.4); }
+        .sg-tab-btn:first-child { border-right: 1px solid var(--beige-dark); }
+        [data-theme="dark"] .sg-tab-btn:first-child { border-right-color: #333; }
+        .sg-tab-btn.active {
+            background: var(--charcoal);
+            color: white;
+        }
+        [data-theme="dark"] .sg-tab-btn.active { background: #E8E0D8; color: #1a1a18; }
+
+        .sg-panel { display: none; }
+        .sg-panel.active { display: block; }
+
+        .sg-finder-card {
+            background: var(--warm-white);
+            border: 1px solid var(--beige-dark);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        [data-theme="dark"] .sg-finder-card { background: #1a1a18; border-color: #333; }
+
+        .sg-measure-section {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--beige-dark);
+        }
+        [data-theme="dark"] .sg-measure-section { border-bottom-color: #333; }
+        .sg-measure-section:last-of-type { border-bottom: none; }
+
+        .sg-measure-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .sg-measure-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--beige);
+            border: 1px solid var(--beige-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--soft-gold);
+        }
+        [data-theme="dark"] .sg-measure-icon { background: #222; border-color: #333; }
+        .sg-measure-name {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(44,44,44,0.5);
+            font-weight: 500;
+        }
+        [data-theme="dark"] .sg-measure-name { color: rgba(232,224,216,0.5); }
+        .sg-measure-hint {
+            font-size: 0.75rem;
+            color: rgba(44,44,44,0.4);
+            margin-top: 0.15rem;
+        }
+        [data-theme="dark"] .sg-measure-hint { color: rgba(232,224,216,0.4); }
+
+        .sg-slider-wrap {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .sg-slider-wrap input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 2px;
+            background: var(--beige-dark);
+            border-radius: 1px;
+            outline: none;
+            cursor: pointer;
+        }
+        [data-theme="dark"] .sg-slider-wrap input[type="range"] { background: #333; }
+        .sg-slider-wrap input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--soft-gold);
+            border: 2px solid var(--warm-white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            cursor: grab;
+            transition: background 0.15s;
+        }
+        .sg-slider-wrap input[type="range"]::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            background: var(--charcoal);
+        }
+        .sg-slider-value {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-top: 0.6rem;
+            line-height: 1;
+        }
+        [data-theme="dark"] .sg-slider-value { color: #E8E0D8; }
+        .sg-slider-value span {
+            font-size: 0.9rem;
+            color: rgba(44,44,44,0.4);
+            font-family: 'Montserrat', sans-serif;
+        }
+        [data-theme="dark"] .sg-slider-value span { color: rgba(232,224,216,0.4); }
+
+        .sg-result-box {
+            margin: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--beige);
+            border: 1px solid var(--beige-dark);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s;
+        }
+        [data-theme="dark"] .sg-result-box { background: #222; border-color: #333; }
+        .sg-result-box.match {
+            background: #f0f6f2;
+            border-color: #c5ddd0;
+        }
+        [data-theme="dark"] .sg-result-box.match { background: #1a2e22; border-color: #2a5a3a; }
+        .sg-result-size {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 300;
+            color: var(--charcoal);
+            line-height: 1;
+            min-width: 3rem;
+        }
+        [data-theme="dark"] .sg-result-size { color: #E8E0D8; }
+        .sg-result-size.highlight { color: var(--soft-gold); }
+        .sg-result-info { flex: 1; }
+        .sg-result-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(44,44,44,0.5);
+            margin-bottom: 0.25rem;
+        }
+        [data-theme="dark"] .sg-result-label { color: rgba(232,224,216,0.5); }
+        .sg-result-text {
+            font-size: 0.82rem;
+            color: var(--charcoal);
+            line-height: 1.45;
+        }
+        [data-theme="dark"] .sg-result-text { color: #E8E0D8; }
+        .sg-result-between {
+            font-size: 0.75rem;
+            color: var(--soft-gold);
+            margin-top: 0.2rem;
+            font-style: italic;
+        }
+
+        .sg-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--beige-dark);
+            border-radius: 4px;
+            background: var(--warm-white);
+        }
+        [data-theme="dark"] .sg-table-wrap { background: #1a1a18; border-color: #333; }
+        .sg-table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+        .sg-table-wrap thead {
+            background: var(--charcoal);
+            color: white;
+        }
+        [data-theme="dark"] .sg-table-wrap thead { background: #E8E0D8; color: #1a1a18; }
+        .sg-table-wrap thead th {
+            padding: 0.85rem 1rem;
+            font-weight: 400;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .sg-table-wrap thead th:first-child { text-align: left; }
+        .sg-table-wrap tbody tr {
+            border-bottom: 1px solid var(--beige-dark);
+            transition: background 0.15s;
+        }
+        [data-theme="dark"] .sg-table-wrap tbody tr { border-bottom-color: #333; }
+        .sg-table-wrap tbody tr:last-child { border-bottom: none; }
+        .sg-table-wrap tbody tr:hover { background: var(--beige); }
+        [data-theme="dark"] .sg-table-wrap tbody tr:hover { background: #222; }
+        .sg-table-wrap tbody tr.highlighted {
+            background: #f0f6f2 !important;
+            position: relative;
+        }
+        [data-theme="dark"] .sg-table-wrap tbody tr.highlighted { background: #1a2e22 !important; }
+        .sg-table-wrap tbody tr.highlighted td:first-child {
+            border-left: 3px solid var(--soft-gold);
+        }
+        .sg-table-wrap td {
+            padding: 0.85rem 1rem;
+            text-align: center;
+            color: rgba(44,44,44,0.5);
+        }
+        [data-theme="dark"] .sg-table-wrap td { color: rgba(232,224,216,0.5); }
+        .sg-table-wrap td:first-child {
+            text-align: left;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            white-space: nowrap;
+        }
+        [data-theme="dark"] .sg-table-wrap td:first-child { color: #E8E0D8; }
+        .sg-table-wrap .td-range { font-size: 0.75rem; }
+        .sg-size-badge {
+            display: inline-block;
+            background: var(--beige);
+            border: 1px solid var(--beige-dark);
+            border-radius: 20px;
+            padding: 0.1rem 0.6rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            color: rgba(44,44,44,0.5);
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+        [data-theme="dark"] .sg-size-badge { background: #222; border-color: #333; color: rgba(232,224,216,0.5); }
+        .sg-table-wrap .highlighted .sg-size-badge {
+            background: #e4f0ea;
+            border-color: #c5ddd0;
+            color: var(--soft-gold);
+        }
+
+        .sg-tips {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: var(--warm-white);
+            border: 1px solid var(--beige-dark);
+            border-radius: 4px;
+        }
+        [data-theme="dark"] .sg-tips { background: #1a1a18; border-color: #333; }
+        .sg-tips-title {
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            margin-bottom: 0.85rem;
+        }
+        .sg-tips-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+        .sg-tips-list li {
+            display: flex;
+            gap: 0.6rem;
+            font-size: 0.78rem;
+            color: rgba(44,44,44,0.6);
+            line-height: 1.45;
+        }
+        [data-theme="dark"] .sg-tips-list li { color: rgba(232,224,216,0.6); }
+        .sg-tips-list li::before {
+            content: '—';
+            color: var(--soft-gold-light);
+            flex-shrink: 0;
+        }
+
+        .sg-contact-strip {
+            margin-top: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: var(--charcoal);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        [data-theme="dark"] .sg-contact-strip { background: #E8E0D8; }
+        .sg-contact-text {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.4;
+        }
+        [data-theme="dark"] .sg-contact-text { color: rgba(26,26,24,0.65); }
+        .sg-contact-text strong {
+            display: block;
+            color: white;
+            font-weight: 400;
+            margin-bottom: 0.15rem;
+        }
+        [data-theme="dark"] .sg-contact-text strong { color: #1a1a18; }
+        .sg-contact-btn {
+            background: var(--soft-gold);
+            color: white;
+            border: none;
+            padding: 0.55rem 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .sg-contact-btn:hover { background: var(--soft-gold-light); }
     </style>
 </head>
 <body>
@@ -1802,11 +2138,110 @@
 
 
     <!-- SIZE GUIDE -->
-    <section class="content-section reveal" id="sizes">
-        <p class="section-label" data-i18n="sizes-label">Size Guide</p>
-        <h2 class="section-title" data-i18n="sizes-title">Size Guide</h2>
-        <div class="divider"></div>
-        <p class="section-desc" data-i18n="sizes-desc"></p>
+    <section class="collection-intro" id="sizes">
+        <p class="section-label reveal" data-i18n="sizes-label">Size Guide</p>
+        <h2 class="section-title reveal" data-i18n="sizes-title">Guide des <em style="color:var(--soft-gold);font-style:italic">Tailles</em></h2>
+        <div class="divider reveal"></div>
+        <p class="section-desc reveal" data-i18n="sizes-sub">Trouvez votre taille en quelques secondes</p>
+
+        <div class="size-guide-container reveal">
+            <div class="sg-tabs">
+                <button class="sg-tab-btn active" onclick="sgSwitchTab('finder')" data-i18n="sg-tab-finder">Trouver ma taille</button>
+                <button class="sg-tab-btn" onclick="sgSwitchTab('table')" data-i18n="sg-tab-table">Tableau complet</button>
+            </div>
+
+            <div id="sg-panel-finder" class="sg-panel active">
+                <div class="sg-finder-card">
+                    <div class="sg-measure-section">
+                        <div class="sg-measure-label">
+                            <div class="sg-measure-icon">①</div>
+                            <div>
+                                <div class="sg-measure-name" data-i18n="sg-bust">Tour de poitrine</div>
+                                <div class="sg-measure-hint" data-i18n="sg-bust-hint">Sous les bras, au point le plus fort</div>
+                            </div>
+                        </div>
+                        <div class="sg-slider-wrap">
+                            <input type="range" id="sg-poitrine" min="76" max="104" value="88" oninput="sgUpdateResult()">
+                            <div class="sg-slider-value" id="sg-val-poitrine">88 <span>cm</span></div>
+                        </div>
+                    </div>
+                    <div class="sg-measure-section">
+                        <div class="sg-measure-label">
+                            <div class="sg-measure-icon">②</div>
+                            <div>
+                                <div class="sg-measure-name" data-i18n="sg-waist">Tour de taille</div>
+                                <div class="sg-measure-hint" data-i18n="sg-waist-hint">À l'endroit le plus étroit, naturellement</div>
+                            </div>
+                        </div>
+                        <div class="sg-slider-wrap">
+                            <input type="range" id="sg-taille" min="58" max="86" value="70" oninput="sgUpdateResult()">
+                            <div class="sg-slider-value" id="sg-val-taille">70 <span>cm</span></div>
+                        </div>
+                    </div>
+                    <div class="sg-measure-section">
+                        <div class="sg-measure-label">
+                            <div class="sg-measure-icon">③</div>
+                            <div>
+                                <div class="sg-measure-name" data-i18n="sg-hips">Tour de hanches</div>
+                                <div class="sg-measure-hint" data-i18n="sg-hips-hint">Au point le plus large des hanches</div>
+                            </div>
+                        </div>
+                        <div class="sg-slider-wrap">
+                            <input type="range" id="sg-hanches" min="84" max="112" value="96" oninput="sgUpdateResult()">
+                            <div class="sg-slider-value" id="sg-val-hanches">96 <span>cm</span></div>
+                        </div>
+                    </div>
+                    <div class="sg-result-box" id="sg-result-box">
+                        <div class="sg-result-size" id="sg-result-size">M</div>
+                        <div class="sg-result-info">
+                            <div class="sg-result-label" data-i18n="sg-rec-label">Taille recommandée</div>
+                            <div class="sg-result-text" id="sg-result-text" data-i18n="sg-rec-text">Correspond à vos 3 mensurations</div>
+                            <div class="sg-result-between" id="sg-result-between"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sg-tips">
+                    <div class="sg-tips-title" data-i18n="sg-tips-title">Conseils de mesure</div>
+                    <ul class="sg-tips-list">
+                        <li data-i18n="sg-tip1">Prenez vos mesures sur un sous-vêtement ajusté, pas sur vos vêtements.</li>
+                        <li data-i18n="sg-tip2">Gardez le mètre-ruban horizontal et parallèle au sol, sans serrer.</li>
+                        <li data-i18n="sg-tip3">En cas de doute entre deux tailles, choisissez la plus grande pour plus de confort.</li>
+                        <li data-i18n="sg-tip4">Les coupes près du corps peuvent nécessiter une taille au-dessus.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="sg-panel-table" class="sg-panel">
+                <div class="sg-table-wrap">
+                    <table id="sg-size-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="sg-th-size">Taille</th>
+                                <th data-i18n="sg-th-bust">Poitrine</th>
+                                <th data-i18n="sg-th-waist">Taille</th>
+                                <th data-i18n="sg-th-hips">Hanches</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-size="XS"><td>XS <span class="sg-size-badge">34</span></td><td class="td-range">80 – 84</td><td class="td-range">62 – 66</td><td class="td-range">88 – 92</td></tr>
+                            <tr data-size="S"><td>S <span class="sg-size-badge">36</span></td><td class="td-range">84 – 88</td><td class="td-range">66 – 70</td><td class="td-range">92 – 96</td></tr>
+                            <tr data-size="M"><td>M <span class="sg-size-badge">38</span></td><td class="td-range">88 – 92</td><td class="td-range">70 – 74</td><td class="td-range">96 – 100</td></tr>
+                            <tr data-size="L"><td>L <span class="sg-size-badge">40</span></td><td class="td-range">92 – 96</td><td class="td-range">74 – 78</td><td class="td-range">100 – 104</td></tr>
+                            <tr data-size="XL"><td>XL <span class="sg-size-badge">42</span></td><td class="td-range">96 – 100</td><td class="td-range">78 – 82</td><td class="td-range">104 – 108</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="sg-contact-strip">
+                <div class="sg-contact-text">
+                    <strong data-i18n="sg-contact-title">Morphologie atypique ?</strong>
+                    <span data-i18n="sg-contact-desc">Nos couturières s'adaptent à vos mesures.</span>
+                </div>
+                <a href="#contact" class="sg-contact-btn" data-i18n="sg-contact-btn">Nous contacter</a>
+            </div>
+        </div>
     </section>
 
 
@@ -1946,8 +2381,20 @@
                 'careers-label': 'Carrières', 'careers-title': 'Rejoignez l\'Équipe', 'careers-desc': 'Passionné(e) par la mode marocaine ? Envoyez votre CV et lettre de motivation à carrières@hamodels.ma. Nous recrutons dans nos ateliers à Tanger.',
                 'shipping-label': 'Livraison & Retours', 'shipping-title': 'Livraison & Retours',
                 'shipping-desc': 'Livraison au Maroc : 3 à 5 jours ouvrés (50 MAD). International : 7 à 14 jours (à partir de 200 MAD). Retours sous 14 jours, remboursement intégral. Les articles doivent être dans leur état d\'origine, non portés.',
-                'sizes-label': 'Guide des Tailles', 'sizes-title': 'Guide des Tailles',
-                'sizes-desc': 'XS (34) : poitrine 80-84 cm, taille 62-66 cm, hanches 88-92 cm. S (36) : 84-88 cm, 66-70 cm, 92-96 cm. M (38) : 88-92 cm, 70-74 cm, 96-100 cm. L (40) : 92-96 cm, 74-78 cm, 100-104 cm. XL (42) : 96-100 cm, 78-82 cm, 104-108 cm. Pour les mesures personnalisées, contactez-nous.',
+                'sizes-label': 'Guide des Tailles', 'sizes-title': 'Guide des <em style="color:var(--soft-gold);font-style:italic">Tailles</em>',
+                'sizes-sub': 'Trouvez votre taille en quelques secondes',
+                'sg-tab-finder': 'Trouver ma taille', 'sg-tab-table': 'Tableau complet',
+                'sg-bust': 'Tour de poitrine', 'sg-bust-hint': 'Sous les bras, au point le plus fort',
+                'sg-waist': 'Tour de taille', 'sg-waist-hint': "À l'endroit le plus étroit, naturellement",
+                'sg-hips': 'Tour de hanches', 'sg-hips-hint': 'Au point le plus large des hanches',
+                'sg-rec-label': 'Taille recommandée',
+                'sg-tips-title': 'Conseils de mesure',
+                'sg-tip1': 'Prenez vos mesures sur un sous-vêtement ajusté, pas sur vos vêtements.',
+                'sg-tip2': 'Gardez le mètre-ruban horizontal et parallèle au sol, sans serrer.',
+                'sg-tip3': 'En cas de doute entre deux tailles, choisissez la plus grande pour plus de confort.',
+                'sg-tip4': 'Les coupes près du corps peuvent nécessiter une taille au-dessus.',
+                'sg-th-size': 'Taille', 'sg-th-bust': 'Poitrine', 'sg-th-waist': 'Taille', 'sg-th-hips': 'Hanches',
+                'sg-contact-title': 'Morphologie atypique ?', 'sg-contact-desc': "Nos couturières s'adaptent à vos mesures.", 'sg-contact-btn': 'Nous contacter',
                 'privacy-label': 'Politique de Confidentialité', 'privacy-title': 'Politique de Confidentialité',
                 'privacy-desc': 'Vos données personnelles (nom, email) sont collectées uniquement pour traiter vos commandes et vous envoyer notre newsletter si vous y consentez. Elles ne sont jamais partagées avec des tiers. Vous pouvez demander leur suppression à tout moment.'
             },
@@ -2007,7 +2454,19 @@
                 'shipping-label': 'Shipping & Returns', 'shipping-title': 'Shipping & Returns',
                 'shipping-desc': 'Morocco delivery: 3-5 business days (50 MAD). International: 7-14 days (from 200 MAD). Returns within 14 days, full refund. Items must be unworn, in original condition.',
                 'sizes-label': 'Size Guide', 'sizes-title': 'Size Guide',
-                'sizes-desc': 'XS (34): bust 80-84 cm, waist 62-66 cm, hips 88-92 cm. S (36): 84-88 cm, 66-70 cm, 92-96 cm. M (38): 88-92 cm, 70-74 cm, 96-100 cm. L (40): 92-96 cm, 74-78 cm, 100-104 cm. XL (42): 96-100 cm, 78-82 cm, 104-108 cm. For custom sizing, contact us.',
+                'sizes-sub': 'Find your size in seconds',
+                'sg-tab-finder': 'Find my size', 'sg-tab-table': 'Full chart',
+                'sg-bust': 'Bust', 'sg-bust-hint': 'Under the arms, at the fullest point',
+                'sg-waist': 'Waist', 'sg-waist-hint': 'At the narrowest point, naturally',
+                'sg-hips': 'Hips', 'sg-hips-hint': 'At the widest point of the hips',
+                'sg-rec-label': 'Recommended size',
+                'sg-tips-title': 'Measuring tips',
+                'sg-tip1': 'Measure over fitted undergarments, not over clothes.',
+                'sg-tip2': 'Keep the tape horizontal and parallel to the floor, without pulling tight.',
+                'sg-tip3': 'When in doubt between two sizes, go for the larger size for more comfort.',
+                'sg-tip4': 'Fitted styles may require sizing up.',
+                'sg-th-size': 'Size', 'sg-th-bust': 'Bust', 'sg-th-waist': 'Waist', 'sg-th-hips': 'Hips',
+                'sg-contact-title': 'Unique proportions?', 'sg-contact-desc': 'Our seamstresses adapt to your measurements.', 'sg-contact-btn': 'Contact us',
                 'privacy-label': 'Privacy Policy', 'privacy-title': 'Privacy Policy',
                 'privacy-desc': 'Your personal data (name, email) is collected only to process your orders and send you our newsletter if you consent. It is never shared with third parties. You may request deletion at any time.'
             },
@@ -2067,7 +2526,19 @@
                 'shipping-label': 'Envíos & Devoluciones', 'shipping-title': 'Envíos & Devoluciones',
                 'shipping-desc': 'Entrega en Marruecos: 3-5 días hábiles (50 MAD). Internacional: 7-14 días (desde 200 MAD). Devoluciones en 14 días, reembolso completo. Las prendas deben estar sin usar, en su estado original.',
                 'sizes-label': 'Guía de Tallas', 'sizes-title': 'Guía de Tallas',
-                'sizes-desc': 'XS (34): pecho 80-84 cm, cintura 62-66 cm, cadera 88-92 cm. S (36): 84-88 cm, 66-70 cm, 92-96 cm. M (38): 88-92 cm, 70-74 cm, 96-100 cm. L (40): 92-96 cm, 74-78 cm, 100-104 cm. XL (42): 96-100 cm, 78-82 cm, 104-108 cm. Para tallas personalizadas, contáctanos.',
+                'sizes-sub': 'Encuentra tu talla en segundos',
+                'sg-tab-finder': 'Encontrar mi talla', 'sg-tab-table': 'Tabla completa',
+                'sg-bust': 'Pecho', 'sg-bust-hint': 'Bajo los brazos, en el punto más lleno',
+                'sg-waist': 'Cintura', 'sg-waist-hint': 'En el punto más estrecho, naturalmente',
+                'sg-hips': 'Caderas', 'sg-hips-hint': 'En el punto más ancho de las caderas',
+                'sg-rec-label': 'Talla recomendada',
+                'sg-tips-title': 'Consejos de medida',
+                'sg-tip1': 'Mida sobre ropa interior ajustada, no sobre sus prendas.',
+                'sg-tip2': 'Mantenga la cinta horizontal y paralela al suelo, sin apretar.',
+                'sg-tip3': 'En caso de duda entre dos tallas, elija la mayor para mayor comodidad.',
+                'sg-tip4': 'Los ajustes ceñidos pueden requerir una talla más.',
+                'sg-th-size': 'Talla', 'sg-th-bust': 'Pecho', 'sg-th-waist': 'Cintura', 'sg-th-hips': 'Caderas',
+                'sg-contact-title': '¿Proporciones únicas?', 'sg-contact-desc': 'Nuestras costureras se adaptan a sus medidas.', 'sg-contact-btn': 'Contáctenos',
                 'privacy-label': 'Política de Privacidad', 'privacy-title': 'Política de Privacidad',
                 'privacy-desc': 'Tus datos personales (nombre, email) se recogen solo para procesar tus pedidos y enviarte nuestra newsletter si consientes. Nunca se comparten con terceros. Puedes solicitar su eliminación en cualquier momento.'
             },
@@ -2127,7 +2598,19 @@
                 'shipping-label': 'الشحن والإرجاع', 'shipping-title': 'الشحن والإرجاع',
                 'shipping-desc': 'التوصيل في المغرب: 3-5 أيام عمل (50 درهماً). دولي: 7-14 يوماً (من 200 درهم). الإرجاع خلال 14 يوماً، استرداد كامل. يجب أن تكون القطع بحالتها الأصلية غير مستعملة.',
                 'sizes-label': 'دليل المقاسات', 'sizes-title': 'دليل المقاسات',
-                'sizes-desc': 'XS (34): الصدر 80-84 سم، الخصر 62-66 سم، الورك 88-92 سم. S (36): 84-88 سم، 66-70 سم، 92-96 سم. M (38): 88-92 سم، 70-74 سم، 96-100 سم. L (40): 92-96 سم، 74-78 سم، 100-104 سم. XL (42): 96-100 سم، 78-82 سم، 104-108 سم. للمقاسات المخصصة، اتصل بنا.',
+                'sizes-sub': 'اكتشف مقاسك في ثوانٍ',
+                'sg-tab-finder': 'اكتشف مقاسي', 'sg-tab-table': 'الجدول الكامل',
+                'sg-bust': 'الصدر', 'sg-bust-hint': 'تحت الذراعين، في النقطة الأكثر امتلاءً',
+                'sg-waist': 'الخصر', 'sg-waist-hint': 'في النقطة الأضيق، بشكل طبيعي',
+                'sg-hips': 'الأرداف', 'sg-hips-hint': 'في النقطة الأعرض من الأرداف',
+                'sg-rec-label': 'المقاس الموصى به',
+                'sg-tips-title': 'نصائح القياس',
+                'sg-tip1': 'قِس فوق الملابس الداخلية المحكمة، وليس فوق ملابسك.',
+                'sg-tip2': 'أبقِ الشريط أفقياً ومتوازياً مع الأرض، دون شد.',
+                'sg-tip3': 'في حالة الشك بين مقاسين، اختر الأكبر لمزيد من الراحة.',
+                'sg-tip4': 'القصات المحكمة قد تتطلب مقاساً أكبر.',
+                'sg-th-size': 'المقاس', 'sg-th-bust': 'الصدر', 'sg-th-waist': 'الخصر', 'sg-th-hips': 'الأرداف',
+                'sg-contact-title': 'أشكال غير معتادة؟', 'sg-contact-desc': 'خياطاتنا تكيّفن مع مقاساتك.', 'sg-contact-btn': 'اتصل بنا',
                 'privacy-label': 'سياسة الخصوصية', 'privacy-title': 'سياسة الخصوصية',
                 'privacy-desc': 'بياناتك الشخصية (الاسم، البريد الإلكتروني) تُجمع فقط لمعالجة طلباتك وإرسال نشرتنا الإخبارية بموافقتك. لا تتم مشاركتها مع أطراف ثالثة. يمكنك طلب حذفها في أي وقت.'
             }
@@ -2359,6 +2842,93 @@
             const current = document.documentElement.getAttribute('data-theme');
             setTheme(current === 'dark' ? 'light' : 'dark');
         });
+    </script>
+
+    <script>
+    /* ===== SIZE GUIDE FINDER ===== */
+    const sgSizes = [
+        { name: 'XS', poitrine: [80, 84], taille: [62, 66], hanches: [88, 92] },
+        { name: 'S',  poitrine: [84, 88], taille: [66, 70], hanches: [92, 96] },
+        { name: 'M',  poitrine: [88, 92], taille: [70, 74], hanches: [96, 100] },
+        { name: 'L',  poitrine: [92, 96], taille: [74, 78], hanches: [100, 104] },
+        { name: 'XL', poitrine: [96, 100], taille: [78, 82], hanches: [104, 108] }
+    ];
+
+    function sgInRange(range, val) { return val >= range[0] && val <= range[1]; }
+
+    function sgScoreSize(s, p, t, h) {
+        let score = 0;
+        if (sgInRange(s.poitrine, p)) score++;
+        if (sgInRange(s.taille, t)) score++;
+        if (sgInRange(s.hanches, h)) score++;
+        return score;
+    }
+
+    function sgUpdateResult() {
+        const p = +document.getElementById('sg-poitrine').value;
+        const t = +document.getElementById('sg-taille').value;
+        const h = +document.getElementById('sg-hanches').value;
+
+        document.getElementById('sg-val-poitrine').innerHTML = p + ' <span>cm</span>';
+        document.getElementById('sg-val-taille').innerHTML = t + ' <span>cm</span>';
+        document.getElementById('sg-val-hanches').innerHTML = h + ' <span>cm</span>';
+
+        const scores = sgSizes.map(s => ({ name: s.name, score: sgScoreSize(s, p, t, h) }));
+        const best = scores.reduce((a, b) => b.score > a.score ? b : a);
+
+        const box = document.getElementById('sg-result-box');
+        const sEl = document.getElementById('sg-result-size');
+        const tEl = document.getElementById('sg-result-text');
+        const bEl = document.getElementById('sg-result-between');
+
+        sEl.textContent = best.name;
+
+        if (best.score === 3) {
+            box.className = 'sg-result-box match';
+            sEl.className = 'sg-result-size highlight';
+            tEl.textContent = currentLang === 'fr' ? 'Correspond parfaitement à vos 3 mensurations.' :
+                              currentLang === 'en' ? 'Perfectly matches your 3 measurements.' :
+                              currentLang === 'es' ? 'Se corresponde perfectamente con sus 3 medidas.' :
+                              'يطابق تمامًا 3 مقاساتك.';
+            bEl.textContent = '';
+        } else if (best.score === 2) {
+            box.className = 'sg-result-box';
+            sEl.className = 'sg-result-size';
+            tEl.textContent = currentLang === 'fr' ? 'Correspond à 2 de vos 3 mensurations.' :
+                              currentLang === 'en' ? 'Matches 2 of your 3 measurements.' :
+                              currentLang === 'es' ? 'Se corresponde con 2 de sus 3 medidas.' :
+                              'يطابق 2 من أصل 3 مقاسات.';
+            bEl.textContent = currentLang === 'fr' ? 'En cas de doute, préférez la taille supérieure.' :
+                              currentLang === 'en' ? 'When in doubt, go for the larger size.' :
+                              currentLang === 'es' ? 'En caso de duda, elija la talla superior.' :
+                              'في حالة الشك، اختر المقاس الأكبر.';
+        } else {
+            box.className = 'sg-result-box';
+            sEl.className = 'sg-result-size';
+            tEl.textContent = currentLang === 'fr' ? 'Correspondance partielle — vos mesures sont atypiques.' :
+                              currentLang === 'en' ? 'Partial match — your measurements are uncommon.' :
+                              currentLang === 'es' ? 'Coincidencia parcial — sus medidas son inusuales.' :
+                              'مطابقة جزئية — مقاساتك غير معتادة.';
+            bEl.textContent = currentLang === 'fr' ? 'Contactez-nous pour un conseil personnalisé.' :
+                              currentLang === 'en' ? 'Contact us for personalized advice.' :
+                              currentLang === 'es' ? 'Contáctenos para asesoramiento personalizado.' :
+                              'اتصل بنا للحصول على نصيحة مخصصة.';
+        }
+
+        document.querySelectorAll('#sg-size-table tbody tr').forEach(row => {
+            row.classList.toggle('highlighted', row.dataset.size === best.name);
+        });
+    }
+
+    function sgSwitchTab(tab) {
+        document.querySelectorAll('.sg-tab-btn').forEach((btn, i) => {
+            btn.classList.toggle('active', (i === 0) === (tab === 'finder'));
+        });
+        document.getElementById('sg-panel-finder').classList.toggle('active', tab === 'finder');
+        document.getElementById('sg-panel-table').classList.toggle('active', tab === 'table');
+    }
+
+    sgUpdateResult();
     </script>
 </body>
 </html>
