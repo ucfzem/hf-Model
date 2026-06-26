@@ -2667,6 +2667,8 @@
             });
 
             localStorage.setItem('hf-model-lang', lang);
+
+            if (typeof sgSetLang === 'function') sgSetLang(lang);
         }
 
         document.querySelectorAll('.lang-btn').forEach(btn => {
