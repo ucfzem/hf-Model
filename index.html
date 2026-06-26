@@ -2161,7 +2161,7 @@
                             </div>
                         </div>
                         <div class="sg-slider-wrap">
-                            <input type="range" id="sg-poitrine" min="76" max="104" value="88" oninput="sgUpdateResult()">
+                            <input type="range" id="sg-poitrine" oninput="sgUpdateResult()">
                             <div class="sg-slider-value" id="sg-val-poitrine">88 <span>cm</span></div>
                         </div>
                     </div>
@@ -2174,7 +2174,7 @@
                             </div>
                         </div>
                         <div class="sg-slider-wrap">
-                            <input type="range" id="sg-taille" min="58" max="86" value="70" oninput="sgUpdateResult()">
+                            <input type="range" id="sg-taille" oninput="sgUpdateResult()">
                             <div class="sg-slider-value" id="sg-val-taille">70 <span>cm</span></div>
                         </div>
                     </div>
@@ -2187,7 +2187,7 @@
                             </div>
                         </div>
                         <div class="sg-slider-wrap">
-                            <input type="range" id="sg-hanches" min="84" max="112" value="96" oninput="sgUpdateResult()">
+                            <input type="range" id="sg-hanches" oninput="sgUpdateResult()">
                             <div class="sg-slider-value" id="sg-val-hanches">96 <span>cm</span></div>
                         </div>
                     </div>
@@ -2213,25 +2213,7 @@
             </div>
 
             <div id="sg-panel-table" class="sg-panel">
-                <div class="sg-table-wrap">
-                    <table id="sg-size-table">
-                        <thead>
-                            <tr>
-                                <th data-i18n="sg-th-size">Taille</th>
-                                <th data-i18n="sg-th-bust">Poitrine</th>
-                                <th data-i18n="sg-th-waist">Taille</th>
-                                <th data-i18n="sg-th-hips">Hanches</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-size="XS"><td>XS <span class="sg-size-badge">34</span></td><td class="td-range">80 – 84</td><td class="td-range">62 – 66</td><td class="td-range">88 – 92</td></tr>
-                            <tr data-size="S"><td>S <span class="sg-size-badge">36</span></td><td class="td-range">84 – 88</td><td class="td-range">66 – 70</td><td class="td-range">92 – 96</td></tr>
-                            <tr data-size="M"><td>M <span class="sg-size-badge">38</span></td><td class="td-range">88 – 92</td><td class="td-range">70 – 74</td><td class="td-range">96 – 100</td></tr>
-                            <tr data-size="L"><td>L <span class="sg-size-badge">40</span></td><td class="td-range">92 – 96</td><td class="td-range">74 – 78</td><td class="td-range">100 – 104</td></tr>
-                            <tr data-size="XL"><td>XL <span class="sg-size-badge">42</span></td><td class="td-range">96 – 100</td><td class="td-range">78 – 82</td><td class="td-range">104 – 108</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div class="sg-table-wrap" id="sg-table-wrap"></div>
             </div>
 
             <div class="sg-contact-strip">
@@ -2845,25 +2827,57 @@
     </script>
 
     <script>
-    /* ===== SIZE GUIDE FINDER ===== */
-    const sgSizes = [
-        { name: 'XS', poitrine: [80, 84], taille: [62, 66], hanches: [88, 92] },
-        { name: 'S',  poitrine: [84, 88], taille: [66, 70], hanches: [92, 96] },
-        { name: 'M',  poitrine: [88, 92], taille: [70, 74], hanches: [96, 100] },
-        { name: 'L',  poitrine: [92, 96], taille: [74, 78], hanches: [100, 104] },
-        { name: 'XL', poitrine: [96, 100], taille: [78, 82], hanches: [104, 108] }
+    /* ===== SIZE GUIDE — SINGLE SOURCE OF TRUTH ===== */
+    const SG_SIZES = [
+        { name: 'XS', eu: 34, poitrine: [80, 84], taille: [62, 66], hanches: [88, 92] },
+        { name: 'S',  eu: 36, poitrine: [84, 88], taille: [66, 70], hanches: [92, 96] },
+        { name: 'M',  eu: 38, poitrine: [88, 92], taille: [70, 74], hanches: [96, 100] },
+        { name: 'L',  eu: 40, poitrine: [92, 96], taille: [74, 78], hanches: [100, 104] },
+        { name: 'XL', eu: 42, poitrine: [96, 100], taille: [78, 82], hanches: [104, 108] }
     ];
 
-    function sgInRange(range, val) { return val >= range[0] && val <= range[1]; }
+    /* Derived slider bounds — computed once from SIZES */
+    const sgBounds = {
+        poitrine: [Math.min(...SG_SIZES.map(s => s.poitrine[0])) - 4, Math.max(...SG_SIZES.map(s => s.poitrine[1])) + 4],
+        taille:   [Math.min(...SG_SIZES.map(s => s.taille[0])) - 4,   Math.max(...SG_SIZES.map(s => s.taille[1])) + 4],
+        hanches:  [Math.min(...SG_SIZES.map(s => s.hanches[0])) - 4,  Math.max(...SG_SIZES.map(s => s.hanches[1])) + 4]
+    };
 
-    function sgScoreSize(s, p, t, h) {
-        let score = 0;
-        if (sgInRange(s.poitrine, p)) score++;
-        if (sgInRange(s.taille, t)) score++;
-        if (sgInRange(s.hanches, h)) score++;
-        return score;
+    /* Init sliders from derived bounds */
+    ['poitrine', 'taille', 'hanches'].forEach(dim => {
+        const el = document.getElementById('sg-' + dim);
+        el.min = sgBounds[dim][0];
+        el.max = sgBounds[dim][1];
+        el.value = Math.round((sgBounds[dim][0] + sgBounds[dim][1]) / 2);
+    });
+
+    /* Render table from SIZES */
+    function sgRenderTable(highlightName) {
+        const rows = SG_SIZES.map(s => {
+            const hl = s.name === highlightName ? ' highlighted' : '';
+            return '<tr data-size="' + s.name + '" class="' + hl + '">' +
+                '<td>' + s.name + ' <span class="sg-size-badge">' + s.eu + '</span></td>' +
+                '<td class="td-range">' + s.poitrine[0] + ' – ' + s.poitrine[1] + '</td>' +
+                '<td class="td-range">' + s.taille[0] + ' – ' + s.taille[1] + '</td>' +
+                '<td class="td-range">' + s.hanches[0] + ' – ' + s.hanches[1] + '</td></tr>';
+        }).join('');
+
+        document.getElementById('sg-table-wrap').innerHTML =
+            '<table id="sg-size-table"><thead><tr>' +
+            '<th>' + (currentLang === 'fr' ? 'Taille' : currentLang === 'en' ? 'Size' : currentLang === 'es' ? 'Talla' : 'المقاس') + '</th>' +
+            '<th>' + (currentLang === 'fr' ? 'Poitrine' : currentLang === 'en' ? 'Bust' : currentLang === 'es' ? 'Pecho' : 'الصدر') + '</th>' +
+            '<th>' + (currentLang === 'fr' ? 'Taille' : currentLang === 'en' ? 'Waist' : currentLang === 'es' ? 'Cintura' : 'الخصر') + '</th>' +
+            '<th>' + (currentLang === 'fr' ? 'Hanches' : currentLang === 'en' ? 'Hips' : currentLang === 'es' ? 'Caderas' : 'الأرداف') + '</th>' +
+            '</tr></thead><tbody>' + rows + '</tbody></table>';
     }
 
+    /* Scoring */
+    function sgInRange(range, val) { return val >= range[0] && val <= range[1]; }
+    function sgScoreSize(s, p, t, h) {
+        return [sgInRange(s.poitrine, p), sgInRange(s.taille, t), sgInRange(s.hanches, h)].filter(Boolean).length;
+    }
+
+    /* Update result */
     function sgUpdateResult() {
         const p = +document.getElementById('sg-poitrine').value;
         const t = +document.getElementById('sg-taille').value;
@@ -2873,8 +2887,8 @@
         document.getElementById('sg-val-taille').innerHTML = t + ' <span>cm</span>';
         document.getElementById('sg-val-hanches').innerHTML = h + ' <span>cm</span>';
 
-        const scores = sgSizes.map(s => ({ name: s.name, score: sgScoreSize(s, p, t, h) }));
-        const best = scores.reduce((a, b) => b.score > a.score ? b : a);
+        const scored = SG_SIZES.map(s => ({ name: s.name, score: sgScoreSize(s, p, t, h) }));
+        const best = scored.reduce((a, b) => b.score > a.score ? b : a);
 
         const box = document.getElementById('sg-result-box');
         const sEl = document.getElementById('sg-result-size');
@@ -2883,43 +2897,33 @@
 
         sEl.textContent = best.name;
 
+        const t3 = { fr: 'Correspond parfaitement à vos 3 mensurations.', en: 'Perfectly matches your 3 measurements.', es: 'Se corresponde perfectamente con sus 3 medidas.', ar: 'يطابق تمامًا 3 مقاساتك.' };
+        const t2 = { fr: 'Correspond à 2 de vos 3 mensurations.', en: 'Matches 2 of your 3 measurements.', es: 'Se corresponde con 2 de sus 3 medidas.', ar: 'يطابق 2 من أصل 3 مقاسات.' };
+        const t2b = { fr: 'En cas de doute, préférez la taille supérieure.', en: 'When in doubt, go for the larger size.', es: 'En caso de duda, elija la talla superior.', ar: 'في حالة الشك، اختر المقاس الأكبر.' };
+        const t1 = { fr: 'Correspondance partielle — vos mesures sont atypiques.', en: 'Partial match — your measurements are uncommon.', es: 'Coincidencia parcial — sus medidas son inusuales.', ar: 'مطابقة جزئية — مقاساتك غير معتادة.' };
+        const t1b = { fr: 'Contactez-nous pour un conseil personnalisé.', en: 'Contact us for personalized advice.', es: 'Contáctenos para asesoramiento personalizado.', ar: 'اتصل بنا للحصول على نصيحة مخصصة.' };
+
         if (best.score === 3) {
             box.className = 'sg-result-box match';
             sEl.className = 'sg-result-size highlight';
-            tEl.textContent = currentLang === 'fr' ? 'Correspond parfaitement à vos 3 mensurations.' :
-                              currentLang === 'en' ? 'Perfectly matches your 3 measurements.' :
-                              currentLang === 'es' ? 'Se corresponde perfectamente con sus 3 medidas.' :
-                              'يطابق تمامًا 3 مقاساتك.';
+            tEl.textContent = t3[currentLang] || t3.fr;
             bEl.textContent = '';
         } else if (best.score === 2) {
             box.className = 'sg-result-box';
             sEl.className = 'sg-result-size';
-            tEl.textContent = currentLang === 'fr' ? 'Correspond à 2 de vos 3 mensurations.' :
-                              currentLang === 'en' ? 'Matches 2 of your 3 measurements.' :
-                              currentLang === 'es' ? 'Se corresponde con 2 de sus 3 medidas.' :
-                              'يطابق 2 من أصل 3 مقاسات.';
-            bEl.textContent = currentLang === 'fr' ? 'En cas de doute, préférez la taille supérieure.' :
-                              currentLang === 'en' ? 'When in doubt, go for the larger size.' :
-                              currentLang === 'es' ? 'En caso de duda, elija la talla superior.' :
-                              'في حالة الشك، اختر المقاس الأكبر.';
+            tEl.textContent = t2[currentLang] || t2.fr;
+            bEl.textContent = t2b[currentLang] || t2b.fr;
         } else {
             box.className = 'sg-result-box';
             sEl.className = 'sg-result-size';
-            tEl.textContent = currentLang === 'fr' ? 'Correspondance partielle — vos mesures sont atypiques.' :
-                              currentLang === 'en' ? 'Partial match — your measurements are uncommon.' :
-                              currentLang === 'es' ? 'Coincidencia parcial — sus medidas son inusuales.' :
-                              'مطابقة جزئية — مقاساتك غير معتادة.';
-            bEl.textContent = currentLang === 'fr' ? 'Contactez-nous pour un conseil personnalisé.' :
-                              currentLang === 'en' ? 'Contact us for personalized advice.' :
-                              currentLang === 'es' ? 'Contáctenos para asesoramiento personalizado.' :
-                              'اتصل بنا للحصول على نصيحة مخصصة.';
+            tEl.textContent = t1[currentLang] || t1.fr;
+            bEl.textContent = t1b[currentLang] || t1b.fr;
         }
 
-        document.querySelectorAll('#sg-size-table tbody tr').forEach(row => {
-            row.classList.toggle('highlighted', row.dataset.size === best.name);
-        });
+        sgRenderTable(best.name);
     }
 
+    /* Tabs */
     function sgSwitchTab(tab) {
         document.querySelectorAll('.sg-tab-btn').forEach((btn, i) => {
             btn.classList.toggle('active', (i === 0) === (tab === 'finder'));
@@ -2928,6 +2932,7 @@
         document.getElementById('sg-panel-table').classList.toggle('active', tab === 'table');
     }
 
+    sgRenderTable(null);
     sgUpdateResult();
     </script>
 </body>
