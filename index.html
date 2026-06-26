@@ -3012,6 +3012,7 @@
 
     function sgApplyLang(lang) {
         const t = SG_I18N[lang];
+        if (!t) return;
         document.getElementById('sg-i18n-tab-finder').textContent = t.tabFinder;
         document.getElementById('sg-i18n-tab-table').textContent = t.tabTable;
         document.getElementById('sg-i18n-contact-title').textContent = t.contactTitle;
@@ -3070,6 +3071,7 @@
     }
 
     function sgSetLang(lang) {
+        if (!SG_I18N[lang]) return;
         sgCurrentLang = lang;
         sgApplyLang(lang);
         sgUpdateResult();
@@ -3083,9 +3085,13 @@
         document.getElementById('sg-panel-table').classList.toggle('active', tab === 'table');
     }
 
-    sgInitSliders();
-    sgApplyLang(sgCurrentLang);
-    sgUpdateResult();
+    (function boot() {
+        var hostLang = document.documentElement.lang;
+        sgCurrentLang = SG_I18N[hostLang] ? hostLang : 'fr';
+        sgInitSliders();
+        sgApplyLang(sgCurrentLang);
+        sgUpdateResult();
+    })();
     </script>
 </body>
 </html>
