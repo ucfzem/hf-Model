@@ -121,6 +121,27 @@
 - **Translations:** FR/EN/ES/AR including all slider labels, tips, and result messages
 - Deployed to GitHub Pages and Vercel
 
+### Size guide refactor — Single Source of Truth (June 26, 2026)
+- `SG_SIZES` array is now the only place to define measurements
+- Table renders from `SG_SIZES` (no hardcoded HTML rows)
+- Slider min/max derived from `SG_SIZES` (no hardcoded attributes)
+- EU size numbers stored in `SG_SIZES` data
+- Adding XXS or XXL = one line in `SG_SIZES`, everything adapts
+
+### Size guide SG_I18N — Lang Switcher (June 26, 2026)
+- Translations moved to `SG_I18N` object (zero ternaries in functions)
+- Lang switcher in size guide section (FR/EN/ES/AR buttons)
+- RTL support for Arabic via `dir: 'rtl'` in translation object
+- Connected to global `switchLang()` — size guide follows site language
+- Guard clauses for unknown languages
+- Boot function reads initial lang from `<html lang="">`
+- Table headers translated via `SG_I18N[lang].tableHeaders`
+
+### Pochette Brodée image (June 26, 2026)
+- Replaced Unsplash placeholder for Embroidered Clutch with user photo
+- Image: `assets/caftans/pochette-brodee.jpg` (714 KB, 2048x2048)
+- Updated in both Vercel and GitHub Pages
+
 ### Link audit — ucfzem.github.io root (June 26, 2026)
 **Internal pages (12/12 ✅):** guide, email-collector, blog, nanogen-app, cvforge, microinvoice, pristine, magic-eraser, rafeeq, Sandrawing, works, projets
 **External links (3/3 ✅):** Google Fonts, NanoLink, PromptGenius
