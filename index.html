@@ -1675,6 +1675,45 @@
             text-decoration: none;
         }
         .sg-contact-btn:hover { background: var(--soft-gold-light); }
+
+        /* Size guide lang switcher */
+        .sg-lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+        .sg-lang-btn {
+            background: none;
+            border: 1px solid var(--beige-dark);
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: rgba(44,44,44,0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        [data-theme="dark"] .sg-lang-btn { border-color: #333; color: rgba(232,224,216,0.4); }
+        .sg-lang-btn.active, .sg-lang-btn:hover {
+            background: var(--charcoal);
+            border-color: var(--charcoal);
+            color: white;
+        }
+        [data-theme="dark"] .sg-lang-btn.active, [data-theme="dark"] .sg-lang-btn:hover {
+            background: #E8E0D8;
+            border-color: #E8E0D8;
+            color: #1a1a18;
+        }
+
+        /* RTL support for size guide */
+        [dir="rtl"] .sg-measure-label { flex-direction: row-reverse; }
+        [dir="rtl"] .sg-table-wrap td:first-child { text-align: right; border-left: none; }
+        [dir="rtl"] .sg-table-wrap tbody tr.highlighted td:first-child { border-right: 3px solid var(--soft-gold); border-left: none; }
+        [dir="rtl"] .sg-table-wrap thead th:first-child { text-align: right; }
+        [dir="rtl"] .sg-contact-strip { flex-direction: row-reverse; }
+        [dir="rtl"] .sg-tips-list li { flex-direction: row-reverse; }
     </style>
 </head>
 <body>
@@ -2145,9 +2184,16 @@
         <p class="section-desc reveal" data-i18n="sizes-sub">Trouvez votre taille en quelques secondes</p>
 
         <div class="size-guide-container reveal">
+            <div class="sg-lang-switcher">
+                <button class="sg-lang-btn active" data-lang="fr" onclick="sgSetLang('fr')">FR</button>
+                <button class="sg-lang-btn" data-lang="en" onclick="sgSetLang('en')">EN</button>
+                <button class="sg-lang-btn" data-lang="sp" onclick="sgSetLang('sp')">ES</button>
+                <button class="sg-lang-btn" data-lang="ar" onclick="sgSetLang('ar')">AR</button>
+            </div>
+
             <div class="sg-tabs">
-                <button class="sg-tab-btn active" onclick="sgSwitchTab('finder')" data-i18n="sg-tab-finder">Trouver ma taille</button>
-                <button class="sg-tab-btn" onclick="sgSwitchTab('table')" data-i18n="sg-tab-table">Tableau complet</button>
+                <button class="sg-tab-btn active" onclick="sgSwitchTab('finder')" id="sg-i18n-tab-finder"></button>
+                <button class="sg-tab-btn" onclick="sgSwitchTab('table')" id="sg-i18n-tab-table"></button>
             </div>
 
             <div id="sg-panel-finder" class="sg-panel active">
@@ -2156,59 +2202,54 @@
                         <div class="sg-measure-label">
                             <div class="sg-measure-icon">①</div>
                             <div>
-                                <div class="sg-measure-name" data-i18n="sg-bust">Tour de poitrine</div>
-                                <div class="sg-measure-hint" data-i18n="sg-bust-hint">Sous les bras, au point le plus fort</div>
+                                <div class="sg-measure-name" id="sg-i18n-label-poitrine"></div>
+                                <div class="sg-measure-hint" id="sg-i18n-hint-poitrine"></div>
                             </div>
                         </div>
                         <div class="sg-slider-wrap">
                             <input type="range" id="sg-poitrine" oninput="sgUpdateResult()">
-                            <div class="sg-slider-value" id="sg-val-poitrine">88 <span>cm</span></div>
+                            <div class="sg-slider-value" id="sg-val-poitrine"></div>
                         </div>
                     </div>
                     <div class="sg-measure-section">
                         <div class="sg-measure-label">
                             <div class="sg-measure-icon">②</div>
                             <div>
-                                <div class="sg-measure-name" data-i18n="sg-waist">Tour de taille</div>
-                                <div class="sg-measure-hint" data-i18n="sg-waist-hint">À l'endroit le plus étroit, naturellement</div>
+                                <div class="sg-measure-name" id="sg-i18n-label-taille"></div>
+                                <div class="sg-measure-hint" id="sg-i18n-hint-taille"></div>
                             </div>
                         </div>
                         <div class="sg-slider-wrap">
                             <input type="range" id="sg-taille" oninput="sgUpdateResult()">
-                            <div class="sg-slider-value" id="sg-val-taille">70 <span>cm</span></div>
+                            <div class="sg-slider-value" id="sg-val-taille"></div>
                         </div>
                     </div>
                     <div class="sg-measure-section">
                         <div class="sg-measure-label">
                             <div class="sg-measure-icon">③</div>
                             <div>
-                                <div class="sg-measure-name" data-i18n="sg-hips">Tour de hanches</div>
-                                <div class="sg-measure-hint" data-i18n="sg-hips-hint">Au point le plus large des hanches</div>
+                                <div class="sg-measure-name" id="sg-i18n-label-hanches"></div>
+                                <div class="sg-measure-hint" id="sg-i18n-hint-hanches"></div>
                             </div>
                         </div>
                         <div class="sg-slider-wrap">
                             <input type="range" id="sg-hanches" oninput="sgUpdateResult()">
-                            <div class="sg-slider-value" id="sg-val-hanches">96 <span>cm</span></div>
+                            <div class="sg-slider-value" id="sg-val-hanches"></div>
                         </div>
                     </div>
                     <div class="sg-result-box" id="sg-result-box">
-                        <div class="sg-result-size" id="sg-result-size">M</div>
+                        <div class="sg-result-size" id="sg-result-size"></div>
                         <div class="sg-result-info">
-                            <div class="sg-result-label" data-i18n="sg-rec-label">Taille recommandée</div>
-                            <div class="sg-result-text" id="sg-result-text" data-i18n="sg-rec-text">Correspond à vos 3 mensurations</div>
+                            <div class="sg-result-label" id="sg-i18n-result-label"></div>
+                            <div class="sg-result-text" id="sg-result-text"></div>
                             <div class="sg-result-between" id="sg-result-between"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="sg-tips">
-                    <div class="sg-tips-title" data-i18n="sg-tips-title">Conseils de mesure</div>
-                    <ul class="sg-tips-list">
-                        <li data-i18n="sg-tip1">Prenez vos mesures sur un sous-vêtement ajusté, pas sur vos vêtements.</li>
-                        <li data-i18n="sg-tip2">Gardez le mètre-ruban horizontal et parallèle au sol, sans serrer.</li>
-                        <li data-i18n="sg-tip3">En cas de doute entre deux tailles, choisissez la plus grande pour plus de confort.</li>
-                        <li data-i18n="sg-tip4">Les coupes près du corps peuvent nécessiter une taille au-dessus.</li>
-                    </ul>
+                    <div class="sg-tips-title" id="sg-i18n-tips-title"></div>
+                    <ul class="sg-tips-list" id="sg-i18n-tips-list"></ul>
                 </div>
             </div>
 
@@ -2218,10 +2259,10 @@
 
             <div class="sg-contact-strip">
                 <div class="sg-contact-text">
-                    <strong data-i18n="sg-contact-title">Morphologie atypique ?</strong>
-                    <span data-i18n="sg-contact-desc">Nos couturières s'adaptent à vos mesures.</span>
+                    <strong id="sg-i18n-contact-title"></strong>
+                    <span id="sg-i18n-contact-body"></span>
                 </div>
-                <a href="#contact" class="sg-contact-btn" data-i18n="sg-contact-btn">Nous contacter</a>
+                <a href="#contact" class="sg-contact-btn" id="sg-i18n-contact-btn"></a>
             </div>
         </div>
     </section>
@@ -2836,23 +2877,158 @@
         { name: 'XL', eu: 42, poitrine: [96, 100], taille: [78, 82], hanches: [104, 108] }
     ];
 
-    /* Derived slider bounds — computed once from SIZES */
-    const sgBounds = {
-        poitrine: [Math.min(...SG_SIZES.map(s => s.poitrine[0])) - 4, Math.max(...SG_SIZES.map(s => s.poitrine[1])) + 4],
-        taille:   [Math.min(...SG_SIZES.map(s => s.taille[0])) - 4,   Math.max(...SG_SIZES.map(s => s.taille[1])) + 4],
-        hanches:  [Math.min(...SG_SIZES.map(s => s.hanches[0])) - 4,  Math.max(...SG_SIZES.map(s => s.hanches[1])) + 4]
+    const SG_I18N = {
+        fr: {
+            eyebrow: 'Votre silhouette, votre taille',
+            title: 'Guide des <em>Tailles</em>',
+            subtitle: 'Trouvez votre taille en quelques secondes',
+            tabFinder: 'Trouver ma taille',
+            tabTable: 'Tableau complet',
+            contactTitle: 'Morphologie atypique ?',
+            contactBody: 'Nos couturières s\'adaptent à vos mesures.',
+            contactBtn: 'Nous contacter',
+            dims: {
+                poitrine: { label: 'Tour de poitrine', hint: 'Sous les bras, au point le plus fort' },
+                taille: { label: 'Tour de taille', hint: 'À l\'endroit le plus étroit, naturellement' },
+                hanches: { label: 'Tour de hanches', hint: 'Au point le plus large des hanches' }
+            },
+            resultLabel: 'Taille recommandée',
+            score3: { main: 'Correspond parfaitement à vos 3 mensurations.', sub: '' },
+            score2: { main: 'Correspond à 2 de vos 3 mensurations.', sub: 'En cas de doute, préférez la taille supérieure.' },
+            score1: { main: 'Correspondance partielle — vos mesures sont atypiques.', sub: 'Contactez-nous pour un conseil personnalisé.' },
+            tableHeaders: ['Taille', 'Poitrine', 'Taille', 'Hanches'],
+            tipsTitle: 'Conseils de mesure',
+            tips: [
+                'Prenez vos mesures sur un sous-vêtement ajusté, pas sur vos vêtements.',
+                'Gardez le mètre-ruban horizontal et parallèle au sol, sans serrer.',
+                'En cas de doute entre deux tailles, choisissez la plus grande pour plus de confort.',
+                'Les coupes près du corps peuvent nécessiter une taille au-dessus.'
+            ]
+        },
+        en: {
+            eyebrow: 'Your silhouette, your size',
+            title: 'Size <em>Guide</em>',
+            subtitle: 'Find your size in seconds',
+            tabFinder: 'Find my size',
+            tabTable: 'Full chart',
+            contactTitle: 'Atypical measurements?',
+            contactBody: 'Our seamstresses adapt to your measurements.',
+            contactBtn: 'Contact us',
+            dims: {
+                poitrine: { label: 'Bust', hint: 'Around the fullest part of your chest' },
+                taille: { label: 'Waist', hint: 'At the narrowest point, naturally' },
+                hanches: { label: 'Hips', hint: 'Around the widest part of your hips' }
+            },
+            resultLabel: 'Recommended size',
+            score3: { main: 'Matches all 3 of your measurements perfectly.', sub: '' },
+            score2: { main: 'Matches 2 of your 3 measurements.', sub: 'When in doubt, choose the larger size.' },
+            score1: { main: 'Partial match — your measurements are atypical.', sub: 'Contact us for personalised advice.' },
+            tableHeaders: ['Size', 'Bust', 'Waist', 'Hips'],
+            tipsTitle: 'Measuring tips',
+            tips: [
+                'Take measurements over fitted underwear, not clothing.',
+                'Keep the tape horizontal and level, without pulling tight.',
+                'When between sizes, go up for comfort.',
+                'Fitted styles may require sizing up.'
+            ]
+        },
+        sp: {
+            eyebrow: 'Tu silueta, tu talla',
+            title: 'Guía de <em>Tallas</em>',
+            subtitle: 'Encuentra tu talla en segundos',
+            tabFinder: 'Encontrar mi talla',
+            tabTable: 'Tabla completa',
+            contactTitle: '¿Proporciones únicas?',
+            contactBody: 'Nuestras costureras se adaptan a sus medidas.',
+            contactBtn: 'Contáctenos',
+            dims: {
+                poitrine: { label: 'Pecho', hint: 'En el punto más lleno del pecho' },
+                taille: { label: 'Cintura', hint: 'En el punto más estrecho, naturalmente' },
+                hanches: { label: 'Caderas', hint: 'En el punto más ancho de las caderas' }
+            },
+            resultLabel: 'Talla recomendada',
+            score3: { main: 'Se corresponde perfectamente con sus 3 medidas.', sub: '' },
+            score2: { main: 'Se corresponde con 2 de sus 3 medidas.', sub: 'En caso de duda, elija la talla superior.' },
+            score1: { main: 'Coincidencia parcial — sus medidas son inusuales.', sub: 'Contáctenos para asesoramiento personalizado.' },
+            tableHeaders: ['Talla', 'Pecho', 'Cintura', 'Caderas'],
+            tipsTitle: 'Consejos de medida',
+            tips: [
+                'Mida sobre ropa interior ajustada, no sobre sus prendas.',
+                'Mantenga la cinta horizontal y paralela al suelo, sin apretar.',
+                'En caso de duda entre dos tallas, elija la mayor para mayor comodidad.',
+                'Los ajustes ceñidos pueden requerir una talla más.'
+            ]
+        },
+        ar: {
+            eyebrow: 'قياساتك، مقاسك',
+            title: 'دليل <em>المقاسات</em>',
+            subtitle: 'اعثر على مقاسك في ثوانٍ',
+            tabFinder: 'اعثر على مقاسي',
+            tabTable: 'الجدول الكامل',
+            contactTitle: 'قياسات غير معيارية؟',
+            contactBody: 'تتكيف خياطاتنا مع قياساتك الخاصة.',
+            contactBtn: 'تواصل معنا',
+            dims: {
+                poitrine: { label: 'محيط الصدر', hint: 'عند أوسع نقطة في الصدر' },
+                taille: { label: 'محيط الخصر', hint: 'عند أضيق نقطة بشكل طبيعي' },
+                hanches: { label: 'محيط الوركين', hint: 'عند أوسع نقطة في الوركين' }
+            },
+            resultLabel: 'المقاس الموصى به',
+            score3: { main: 'يتطابق تمامًا مع قياساتك الثلاثة.', sub: '' },
+            score2: { main: 'يتطابق مع قياسين من أصل ثلاثة.', sub: 'عند الشك، اختر المقاس الأكبر.' },
+            score1: { main: 'تطابق جزئي — قياساتك غير معيارية.', sub: 'تواصل معنا للحصول على نصيحة شخصية.' },
+            tableHeaders: ['المقاس', 'الصدر', 'الخصر', 'الوركين'],
+            tipsTitle: 'نصائح القياس',
+            tips: [
+                'خذ قياساتك فوق ملابس داخلية محكمة، وليس فوق ملابسك.',
+                'أبقِ الشريط أفقيًا ومتوازيًا مع الأرض دون شد.',
+                'عند التردد بين مقاسين، اختر الأكبر للراحة.',
+                'القصات الضيقة قد تتطلب مقاسًا أكبر.'
+            ],
+            dir: 'rtl'
+        }
     };
 
-    /* Init sliders from derived bounds */
-    ['poitrine', 'taille', 'hanches'].forEach(dim => {
-        const el = document.getElementById('sg-' + dim);
-        el.min = sgBounds[dim][0];
-        el.max = sgBounds[dim][1];
-        el.value = Math.round((sgBounds[dim][0] + sgBounds[dim][1]) / 2);
-    });
+    let sgCurrentLang = 'fr';
 
-    /* Render table from SIZES */
+    const SG_BOUNDS = ['poitrine', 'taille', 'hanches'].reduce((acc, dim) => {
+        acc[dim] = [
+            Math.min(...SG_SIZES.map(s => s[dim][0])) - 4,
+            Math.max(...SG_SIZES.map(s => s[dim][1])) + 4
+        ];
+        return acc;
+    }, {});
+
+    function sgInitSliders() {
+        ['poitrine', 'taille', 'hanches'].forEach(dim => {
+            const el = document.getElementById('sg-' + dim);
+            el.min = SG_BOUNDS[dim][0];
+            el.max = SG_BOUNDS[dim][1];
+            el.value = Math.round((SG_BOUNDS[dim][0] + SG_BOUNDS[dim][1]) / 2);
+        });
+    }
+
+    function sgApplyLang(lang) {
+        const t = SG_I18N[lang];
+        document.getElementById('sg-i18n-tab-finder').textContent = t.tabFinder;
+        document.getElementById('sg-i18n-tab-table').textContent = t.tabTable;
+        document.getElementById('sg-i18n-contact-title').textContent = t.contactTitle;
+        document.getElementById('sg-i18n-contact-body').textContent = t.contactBody;
+        document.getElementById('sg-i18n-contact-btn').textContent = t.contactBtn;
+        document.getElementById('sg-i18n-result-label').textContent = t.resultLabel;
+        document.getElementById('sg-i18n-tips-title').textContent = t.tipsTitle;
+        ['poitrine', 'taille', 'hanches'].forEach(dim => {
+            document.getElementById('sg-i18n-label-' + dim).textContent = t.dims[dim].label;
+            document.getElementById('sg-i18n-hint-' + dim).textContent = t.dims[dim].hint;
+        });
+        document.getElementById('sg-i18n-tips-list').innerHTML = t.tips.map(tip => '<li>' + tip + '</li>').join('');
+        document.querySelectorAll('.sg-lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+    }
+
     function sgRenderTable(highlightName) {
+        const t = SG_I18N[sgCurrentLang];
         const rows = SG_SIZES.map(s => {
             const hl = s.name === highlightName ? ' highlighted' : '';
             return '<tr data-size="' + s.name + '" class="' + hl + '">' +
@@ -2861,69 +3037,42 @@
                 '<td class="td-range">' + s.taille[0] + ' – ' + s.taille[1] + '</td>' +
                 '<td class="td-range">' + s.hanches[0] + ' – ' + s.hanches[1] + '</td></tr>';
         }).join('');
-
         document.getElementById('sg-table-wrap').innerHTML =
             '<table id="sg-size-table"><thead><tr>' +
-            '<th>' + (currentLang === 'fr' ? 'Taille' : currentLang === 'en' ? 'Size' : currentLang === 'es' ? 'Talla' : 'المقاس') + '</th>' +
-            '<th>' + (currentLang === 'fr' ? 'Poitrine' : currentLang === 'en' ? 'Bust' : currentLang === 'es' ? 'Pecho' : 'الصدر') + '</th>' +
-            '<th>' + (currentLang === 'fr' ? 'Taille' : currentLang === 'en' ? 'Waist' : currentLang === 'es' ? 'Cintura' : 'الخصر') + '</th>' +
-            '<th>' + (currentLang === 'fr' ? 'Hanches' : currentLang === 'en' ? 'Hips' : currentLang === 'es' ? 'Caderas' : 'الأرداف') + '</th>' +
+            '<th>' + t.tableHeaders[0] + '</th><th>' + t.tableHeaders[1] + '</th>' +
+            '<th>' + t.tableHeaders[2] + '</th><th>' + t.tableHeaders[3] + '</th>' +
             '</tr></thead><tbody>' + rows + '</tbody></table>';
     }
 
-    /* Scoring */
     function sgInRange(range, val) { return val >= range[0] && val <= range[1]; }
     function sgScoreSize(s, p, t, h) {
         return [sgInRange(s.poitrine, p), sgInRange(s.taille, t), sgInRange(s.hanches, h)].filter(Boolean).length;
     }
 
-    /* Update result */
     function sgUpdateResult() {
         const p = +document.getElementById('sg-poitrine').value;
         const t = +document.getElementById('sg-taille').value;
         const h = +document.getElementById('sg-hanches').value;
-
         document.getElementById('sg-val-poitrine').innerHTML = p + ' <span>cm</span>';
         document.getElementById('sg-val-taille').innerHTML = t + ' <span>cm</span>';
         document.getElementById('sg-val-hanches').innerHTML = h + ' <span>cm</span>';
-
-        const scored = SG_SIZES.map(s => ({ name: s.name, score: sgScoreSize(s, p, t, h) }));
-        const best = scored.reduce((a, b) => b.score > a.score ? b : a);
-
-        const box = document.getElementById('sg-result-box');
-        const sEl = document.getElementById('sg-result-size');
-        const tEl = document.getElementById('sg-result-text');
-        const bEl = document.getElementById('sg-result-between');
-
-        sEl.textContent = best.name;
-
-        const t3 = { fr: 'Correspond parfaitement à vos 3 mensurations.', en: 'Perfectly matches your 3 measurements.', es: 'Se corresponde perfectamente con sus 3 medidas.', ar: 'يطابق تمامًا 3 مقاساتك.' };
-        const t2 = { fr: 'Correspond à 2 de vos 3 mensurations.', en: 'Matches 2 of your 3 measurements.', es: 'Se corresponde con 2 de sus 3 medidas.', ar: 'يطابق 2 من أصل 3 مقاسات.' };
-        const t2b = { fr: 'En cas de doute, préférez la taille supérieure.', en: 'When in doubt, go for the larger size.', es: 'En caso de duda, elija la talla superior.', ar: 'في حالة الشك، اختر المقاس الأكبر.' };
-        const t1 = { fr: 'Correspondance partielle — vos mesures sont atypiques.', en: 'Partial match — your measurements are uncommon.', es: 'Coincidencia parcial — sus medidas son inusuales.', ar: 'مطابقة جزئية — مقاساتك غير معتادة.' };
-        const t1b = { fr: 'Contactez-nous pour un conseil personnalisé.', en: 'Contact us for personalized advice.', es: 'Contáctenos para asesoramiento personalizado.', ar: 'اتصل بنا للحصول على نصيحة مخصصة.' };
-
-        if (best.score === 3) {
-            box.className = 'sg-result-box match';
-            sEl.className = 'sg-result-size highlight';
-            tEl.textContent = t3[currentLang] || t3.fr;
-            bEl.textContent = '';
-        } else if (best.score === 2) {
-            box.className = 'sg-result-box';
-            sEl.className = 'sg-result-size';
-            tEl.textContent = t2[currentLang] || t2.fr;
-            bEl.textContent = t2b[currentLang] || t2b.fr;
-        } else {
-            box.className = 'sg-result-box';
-            sEl.className = 'sg-result-size';
-            tEl.textContent = t1[currentLang] || t1.fr;
-            bEl.textContent = t1b[currentLang] || t1b.fr;
-        }
-
+        const best = SG_SIZES.map(s => ({ name: s.name, score: sgScoreSize(s, p, t, h) })).reduce((a, b) => b.score > a.score ? b : a);
+        const msgs = SG_I18N[sgCurrentLang];
+        const key = best.score === 3 ? 'score3' : best.score === 2 ? 'score2' : 'score1';
+        document.getElementById('sg-result-box').className = 'sg-result-box' + (best.score === 3 ? ' match' : '');
+        document.getElementById('sg-result-size').className = 'sg-result-size' + (best.score === 3 ? ' highlight' : '');
+        document.getElementById('sg-result-size').textContent = best.name;
+        document.getElementById('sg-result-text').textContent = msgs[key].main;
+        document.getElementById('sg-result-between').textContent = msgs[key].sub;
         sgRenderTable(best.name);
     }
 
-    /* Tabs */
+    function sgSetLang(lang) {
+        sgCurrentLang = lang;
+        sgApplyLang(lang);
+        sgUpdateResult();
+    }
+
     function sgSwitchTab(tab) {
         document.querySelectorAll('.sg-tab-btn').forEach((btn, i) => {
             btn.classList.toggle('active', (i === 0) === (tab === 'finder'));
@@ -2932,7 +3081,8 @@
         document.getElementById('sg-panel-table').classList.toggle('active', tab === 'table');
     }
 
-    sgRenderTable(null);
+    sgInitSliders();
+    sgApplyLang(sgCurrentLang);
     sgUpdateResult();
     </script>
 </body>
