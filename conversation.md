@@ -108,6 +108,19 @@
 **Nav anchors #caftans/#djellabas:** No HTML anchors exist, but JS handles this via `filterMap` → scrolls to #collection + activates product filter. Identical behavior on Vercel and GitHub Pages.
 **Result: Rien n'est cassé.**
 
+### Interactive size guide (June 26, 2026)
+- Replaced static text size guide with interactive component
+- **Features:**
+  - "Find my size" tab: 3 sliders (bust/waist/hips) with real-time recommendation
+  - Smart scoring system: matches 3/3, 2/3, or 1/3 measurements
+  - "Full chart" tab: table with highlighted recommended size
+  - Auto-advice: recommends sizing up when between sizes
+  - Contact strip for custom sizing
+- **Theme:** Adapted to site colors, light/dark mode support
+- **Fonts:** Cormorant Garamond (headings) + Montserrat (body)
+- **Translations:** FR/EN/ES/AR including all slider labels, tips, and result messages
+- Deployed to GitHub Pages and Vercel
+
 ### Link audit — ucfzem.github.io root (June 26, 2026)
 **Internal pages (12/12 ✅):** guide, email-collector, blog, nanogen-app, cvforge, microinvoice, pristine, magic-eraser, rafeeq, Sandrawing, works, projets
 **External links (3/3 ✅):** Google Fonts, NanoLink, PromptGenius
