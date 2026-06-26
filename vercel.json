@@ -1,5 +1,9 @@
 {
   "cleanUrls": true,
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": ".",
   "headers": [
     {
       "source": "/api/(status|contact)",
